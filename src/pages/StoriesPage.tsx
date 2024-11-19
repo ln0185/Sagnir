@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch"
-import { Categories } from "../components/Categories/Categories";
 import { StoriesHeader } from "../components/StoriesHeader/StoriesHeader";
+import { Categories } from "../components/Categories/Categories";
 
 export const StoriesPage = () => {
   const [categories, setCategories] = useState([]);
   const [icelandicCategoryNames, setIcelandicCategoryNames] = useState([]);
+  const [clickedCategory, setClickedCategory] = useState<string>('');
+
   const { data, isLoading, error } = useFetch("http://localhost:8080/");
 
   console.log(data);
@@ -36,11 +38,15 @@ export const StoriesPage = () => {
 
     setIcelandicCategoryNames(icelandicCategories);
   }, [categories])
+
+  useEffect(() => {
+    //This will be used for fetching stories from the categories
+  }, [clickedCategory])
   
   return (
     <div>
       <StoriesHeader />
-      {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames}/> : null}
+      {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames} setClickedCategory={setClickedCategory}/> : null}
     </div>
   )
 }
