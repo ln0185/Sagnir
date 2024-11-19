@@ -14,7 +14,7 @@ export const StoriesPage = () => {
       storyCategories.push(data[0], data[1], data[4], data[5]);
     }
     setCategories(storyCategories);
-  }, [])
+  }, [data])
 
   useEffect(() => {
     console.log("Categories", categories);
@@ -22,7 +22,7 @@ export const StoriesPage = () => {
   
   return (
     <div>
-      {categories && !isLoading && !error ? <Categories data={categories}/> : null}
+      {categories.length > 0 && !isLoading && !error ? <Categories data={categories}/> : null}
     </div>
   )
 }
