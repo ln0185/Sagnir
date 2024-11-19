@@ -4,13 +4,13 @@ type CategoriesType = {
 
 export const Categories = ({data}: CategoriesType) => {
   return (
-    <div>
-    <ul>
-        {data.map((item) => {
-            return (
-                <li key={item}>{item}</li>
-            )
-        })}
+    <div className="flex">
+    <ul className="flex flex-row">
+      {data.length > 0 ? data.map((item) => {
+        return (
+          <li className="flex-align" key={item}>{item}</li>
+        )
+      }) : null}
     </ul>
     </div>
   )
