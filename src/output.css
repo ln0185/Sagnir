@@ -558,6 +558,64 @@ video {
   display: flex;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .flex-row {
   flex-direction: row;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
 }
