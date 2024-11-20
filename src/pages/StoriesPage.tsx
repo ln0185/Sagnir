@@ -12,8 +12,6 @@ export const StoriesPage = () => {
 
   const { data, isLoading, error } = useFetch("http://localhost:8080/");
 
-  console.log(data);
-
   useEffect(() => {
     const storyCategories = [];
     if (data) {
@@ -24,7 +22,6 @@ export const StoriesPage = () => {
 
   useEffect(() => {
     const icelandicNamesArray = [...categories];
-    console.log("Icelandic", icelandicNamesArray);
 
     const categoryObjects = icelandicNamesArray.reduce((acc, item, index) => {
       acc[`category_${index}`] = item;
@@ -45,15 +42,12 @@ export const StoriesPage = () => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
       const res = await fetch(`http://localhost:8080/${clickedCategory}`);
       const data = await res.json();
+      console.log(data);
       setSelectedStories(data);
     }
     
     getClickedCategoryStories(clickedCategory);
   }, [clickedCategory])
-
-  useEffect(() => {
-    console.log(selectedStories);
-  }, [selectedStories])
   
   return (
     <div>

@@ -9,6 +9,10 @@ export const Categories = ({data, setClickedCategory}: CategoriesType) => {
 
   const handleCategory = (clickedCategory: string) => {
 
+    if (clickedCategory === "Allt") {
+      clickedCategory = "all"
+    }
+
     if (clickedCategory === "Tröll") {
       clickedCategory = "troll"
     }
@@ -24,9 +28,7 @@ export const Categories = ({data, setClickedCategory}: CategoriesType) => {
     if (clickedCategory === "Helgisögur") {
       clickedCategory = "ur-efra-og-nedra-helgisogur"
     }
-
-    console.log(clickedCategory);
-
+    
     setClickedCategory(clickedCategory)
   }
 
