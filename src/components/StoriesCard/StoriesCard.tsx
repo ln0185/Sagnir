@@ -1,10 +1,24 @@
-type StoriesCardType = {
-    name: string,
-    stories: string[]
+interface StoriesCardInterface {
+  name: string,
+  stories: string[]
 }
 
-export const StoriesCard = ({data} : StoriesCardType) => {
+type StoriesCardType = {
+  data: StoriesCardInterface
+}
+
+export const StoriesCard = ({data}: StoriesCardType) => {
   return (
-    <figure>StoriesCard</figure>
+    <>
+    {data.stories?.map((item) => {
+      return (
+        <figure key={item}>
+          <header>
+            <h2>{item}</h2>
+          </header>
+        </figure>
+      )
+    })}
+    </>
   )
 }

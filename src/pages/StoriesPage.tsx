@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch"
 import { StoriesHeader } from "../components/StoriesHeader/StoriesHeader";
 import { Categories } from "../components/Categories/Categories";
+import { StoriesCard } from "../components/StoriesCard/StoriesCard";
 
 export const StoriesPage = () => {
   const [categories, setCategories] = useState([]);
   const [icelandicCategoryNames, setIcelandicCategoryNames] = useState([]);
   const [clickedCategory, setClickedCategory] = useState<string>('');
+  const [selectedStories, setSelectedStories] = useState();
 
   const { data, isLoading, error } = useFetch("http://localhost:8080/");
 
@@ -40,13 +42,24 @@ export const StoriesPage = () => {
   }, [categories])
 
   useEffect(() => {
-    //This will be used for fetching stories from the categories
+    const getClickedCategoryStories = async (clickedCategory: string) => {
+      const res = await fetch(`http://localhost:8080/${clickedCategory}`);
+      const data = await res.json();
+      setSelectedStories(data);
+    }
+    
+    getClickedCategoryStories(clickedCategory);
   }, [clickedCategory])
+
+  useEffect(() => {
+    console.log(selectedStories);
+  }, [selectedStories])
   
   return (
     <div>
       <StoriesHeader />
       {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames} setClickedCategory={setClickedCategory}/> : null}
+      {selectedStories ? <StoriesCard data={selectedStories}/> : null}
     </div>
   )
 }
