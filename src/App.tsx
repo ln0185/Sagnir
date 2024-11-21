@@ -1,23 +1,26 @@
-import NavBar from "./assets/components/Navbar";
-import imagePath from "./assets/resources/book dark mode.svg";
-import "./index.css";
-import "./output.css";
-import { StoriesPage } from "./pages/StoriesPage";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { QuizPage } from "./pages/QuizPage";
 
 function App() {
-  let items = ["Home", "Product", "Service"];
   return (
-    <>
-      <StoriesPage />
-
-      <div>
-        <NavBar
-          brandName="My Brand"
-          imageSrcPath={imagePath}
-          navItems={items}
-        />
+    <Router>
+      {/* Temporary Navigation */}
+      <div className="p-4 bg-gray-800 text-white">
+        <Link to="/" className="mr-4">
+          Home
+        </Link>
+        <Link to="/quiz">Quiz</Link>
       </div>
-    </>
+
+      {/* Routes */}
+      <Routes>
+        <Route
+          path="/"
+          element={<div className="text-center p-6">Home Page</div>}
+        />
+        <Route path="/quiz" element={<QuizPage />} />
+      </Routes>
+    </Router>
   );
 }
 
