@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import "./output.css";
 import { StoriesPage } from "./pages/StoriesPage";
+import { Searchbar } from "./components/SearchStory/Searchbar";
 import { MapPage } from "./pages/MapPage";
 import { QuizPage } from "./pages/QuizPage";
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<StoriesPage />} />
           <Route path="/stories" element={<StoriesPage />} />
+          <Route path="/search" element={<Searchbar />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>

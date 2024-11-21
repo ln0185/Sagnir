@@ -26,7 +26,9 @@ const Navbar: React.FC = () => {
 
         {/* Search Icon */}
         <li>
-          <img src={SearchIcon} alt="Search" className="h-8 w-8" />
+          <Link to="/search">
+            <img src={SearchIcon} alt="Search" className="h-8 w-8" />
+          </Link>
         </li>
 
         {/* Location Icon */}
