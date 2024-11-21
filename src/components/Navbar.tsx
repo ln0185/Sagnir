@@ -30,7 +30,6 @@ const Navbar: React.FC = () => {
             <img src={SearchIcon} alt="Search" className="h-8 w-8" />
           </Link>
         </li>
-
         {/* Location Icon */}
         <li onClick={() => setActive("MapPage")}>
           <Link to="/map">
