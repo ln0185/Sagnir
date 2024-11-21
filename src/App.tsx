@@ -1,26 +1,24 @@
-import React from "react";
-import MapPage from "../src/assets/pages/MapPage"; // Adjust the path if necessary
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import "./index.css"
-import "./output.css"
-import { StoriesPage } from './assets/pages/StoriesPage'
+import NavBar from "./assets/components/Navbar";
+import imagePath from "./assets/resources/book dark mode.svg";
+import "./index.css";
+import "./output.css";
+import { StoriesPage } from "./assets/pages/StoriesPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-const App: React.FC = () => {
+  let items = ["Home", "Product", "Service"];
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <MapPage />
-    </div>
-  );
-};
     <>
-     <StoriesPage />
+      <StoriesPage />
+
+      <div>
+        <NavBar
+          brandName="My Brand"
+          imageSrcPath={imagePath}
+          navItems={items}
+        />
+      </div>
     </>
-  )
+  );
 }
 
 export default App;
