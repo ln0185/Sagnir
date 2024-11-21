@@ -3,6 +3,7 @@ import { useFetch } from "../hooks/useFetch"
 import { StoriesHeader } from "../components/StoriesHeader/StoriesHeader";
 import { Categories } from "../components/Categories/Categories";
 import { StoriesCard } from "../components/StoriesCard/StoriesCard";
+import { Searchbar } from "../components/SearchStory/Searchbar";
 
 export const StoriesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -54,6 +55,7 @@ export const StoriesPage = () => {
       <StoriesHeader />
       {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames} setClickedCategory={setClickedCategory}/> : null}
       {selectedStories ? <StoriesCard data={selectedStories}/> : null}
+     <Searchbar />
     </div>
   )
 }
