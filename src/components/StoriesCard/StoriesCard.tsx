@@ -8,17 +8,22 @@ type StoriesCardType = {
 }
 
 export const StoriesCard = ({data}: StoriesCardType) => {
+  let stories;
+  console.log(data);
+  // if (data) {
+  //   stories = Object.keys(data?.stories);
+  // }
   return (
     <>
-    {data.stories?.map((item) => {
-      return (
-        <figure key={item}>
-          <header>
-            <h2>{item}</h2>
-          </header>
-        </figure>
-      )
-    })}
+        {/* {stories?.slice(0, 3).map((item) => {
+          return (
+            <figure>
+              <header>
+                <h2>{item.slice(1)}</h2>
+              </header>
+            </figure>
+          )
+        })} */}
     </>
   )
 }
