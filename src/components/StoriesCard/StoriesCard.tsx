@@ -10,20 +10,20 @@ type StoriesCardType = {
 export const StoriesCard = ({data}: StoriesCardType) => {
   let stories;
   console.log(data);
-  // if (data) {
-  //   stories = Object.keys(data?.stories);
-  // }
+  if (data) {
+    stories = Object.keys(data?.stories || data);
+  }
   return (
     <>
-        {/* {stories?.slice(0, 3).map((item) => {
+        {stories?.slice(0, 3).map((item) => {
           return (
-            <figure>
+            <figure key={item}>
               <header>
                 <h2>{item.slice(1)}</h2>
               </header>
             </figure>
           )
-        })} */}
+        })}
     </>
   )
 }

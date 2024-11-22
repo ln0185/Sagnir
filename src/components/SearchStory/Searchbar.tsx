@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { SearchedStories } from "../SearchedStories/SearchedStories";
 
 interface StoriesInterface {
     category: string, 
@@ -9,7 +10,7 @@ export const Searchbar = () => {
     const [searchedStory, setSearchedStory] = useState<string>("");
     const [searchResult, setSearchResult] = useState("");
     const [allStories, setAllStories] = useState([]);
-    const [searchedStories, setSearchedStories] = useState();
+    const [searchedStories, setSearchedStories] = useState([]);
 
     useEffect(() => {
         const searchDelayDebounce = setTimeout(() => {
@@ -45,20 +46,28 @@ export const Searchbar = () => {
             }
 
             let stories = filteredStories(item, searchResult);
+
+            if (stories.length <= 0) {
+                stories.push("No stories found");
+            }
             
             setSearchedStories(stories);
         })
-    }, [allStories])
+    }, [allStories, searchResult])
 
     useEffect(() => {
-        console.log(searchedStories);
+        console.log("Changed searched items", searchedStories);
+        
     }, [searchedStories])
 
   return (
     <>
         {isSearchOpen ? <> <div className="bg-slate-900 flex items-center mx-7">
             <input className="border-solid border-2 border-indigo-600" onChange={(e) => setSearchedStory(e.target.value)} type="text" name="searchbar" id="searchbar"/>
-            <p>{searchResult}</p>
+            <div>
+                <p>Search Result:</p>
+                {searchedStories ? <SearchedStories data={searchedStories}/> : null}
+            </div>
         </div></>
         
          : null}
