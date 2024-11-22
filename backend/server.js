@@ -5,7 +5,7 @@ app.use(cors())
 
 app.get("/", (req, res) =>  {
     const getData = async () => {
-        const response = await fetch("https://thjodsogur.vegur.is/thjodsogur");
+        const response = await fetch("https://thjodsogur-api.deno.dev/api/");
         const data = await response.json();
         console.log(data);
         res.json( data);
@@ -18,7 +18,7 @@ app.get("/", (req, res) =>  {
 app.get("/troll", (req, res) => {
     const getData = async () => {
         try {
-        const response = await fetch("https://thjodsogur.vegur.is/thjodsogur/troll");
+        const response = await fetch("https://thjodsogur-api.deno.dev/api/troll");
         if (!response.ok) {
             console.error("Failed to fetch");
         }
@@ -36,7 +36,7 @@ app.get("/troll", (req, res) => {
 app.get("/draugar", (req, res) => {
     const getData = async () => {
         try {
-            const response = await fetch("https://thjodsogur.vegur.is/thjodsogur/draugar");
+            const response = await fetch("https://thjodsogur-api.deno.dev/api/draug");
             if (!response.ok) {
                 console.error("Failed to fetch");
             }
@@ -54,7 +54,7 @@ app.get("/draugar", (req, res) => {
 app.get("/alfar-og-huldufolk", (req, res) => {
     const getData = async () => {
         try {
-            const response = await fetch("https://thjodsogur.vegur.is/thjodsogur/alfar-og-huldufolk");
+            const response = await fetch("https://thjodsogur-api.deno.dev/api/alfa");
             if (!response.ok) {
                 console.error("Failed to fetch");
             }
@@ -72,7 +72,7 @@ app.get("/alfar-og-huldufolk", (req, res) => {
 app.get("/ur-efra-og-nedra-helgisogur", (req, res) => {
     const getData = async () => {
         try {
-            const response = await fetch("https://thjodsogur.vegur.is/thjodsogur/ur-efra-og-nedra-helgisogur");
+            const response = await fetch("https://thjodsogur-api.deno.dev/api/efra");
             if (!response.ok) {
                 console.error("Failed to fetch");
             }
@@ -91,10 +91,10 @@ app.get("/all", (req, res) => {
     const getData = async () => {
         try {
             const [response1, response2, response3, response4] = await Promise.all([
-                fetch("https://thjodsogur.vegur.is/thjodsogur/troll"),
-                fetch("https://thjodsogur.vegur.is/thjodsogur/draugar"),
-                fetch("https://thjodsogur.vegur.is/thjodsogur/alfar-og-huldufolk"),
-                fetch("https://thjodsogur.vegur.is/thjodsogur/ur-efra-og-nedra-helgisogur")
+                fetch("https://thjodsogur-api.deno.dev/api/troll"),
+                fetch("https://thjodsogur-api.deno.dev/api/draug"),
+                fetch("https://thjodsogur-api.deno.dev/api/alfa"),
+                fetch("https://thjodsogur-api.deno.dev/api/efra")
             ]);
 
             const [data1, data2, data3, data4] = await Promise.all([
@@ -115,7 +115,7 @@ app.get("/all", (req, res) => {
         }
         catch (error) {
             console.error(error);
-            
+
         }
     }
 
