@@ -19,7 +19,7 @@ export const StoriesCard = ({data}: StoriesCardType) => {
           return (
             <figure key={item}>
               <header>
-                <h2>{item.slice(1)}</h2>
+                <h2>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
               </header>
             </figure>
           )

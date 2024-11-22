@@ -13,6 +13,10 @@ export const Searchbar = () => {
     const [searchedStories, setSearchedStories] = useState([]);
 
     useEffect(() => {
+        setSearchedStory("");
+    }, [])
+
+    useEffect(() => {
         const searchDelayDebounce = setTimeout(() => {
             console.log(searchedStory);
             if (searchedStory != "") {
@@ -54,11 +58,6 @@ export const Searchbar = () => {
             setSearchedStories(stories);
         })
     }, [allStories, searchResult])
-
-    useEffect(() => {
-        console.log("Changed searched items", searchedStories);
-        
-    }, [searchedStories])
 
   return (
     <>
