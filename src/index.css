@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "PPFragment-GlareRegular";
+    src: "../../src/assets/font/PPFragment-GlareRegular";
+  }
+
+  @font-face {
+    font-family: "PPFragment-SerifExtraBold";
+    src: "../../src/assets/font/PPFragment-SerifExtraBold";
+  }
+}

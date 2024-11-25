@@ -7,6 +7,7 @@ export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [isQuizCompleted, setIsQuizCompleted] = useState(false); // For modal
 
   const questions = [
     {
@@ -51,8 +52,8 @@ export const QuizPage = () => {
     {
       questionNumber: 4,
       totalQuestions: 5,
-      questionText: "Af hverju segir Djákninn á Myrká Garún en ekki Guðrún?",
-      imageSrc: "/src/assets/resources/MyrkaQuiz.svg",
+      questionText: "Hví segir Djákninn á Myrká Garún en ekki Guðrún?",
+      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
       options: [
         { label: "A", text: "Hún hét Garún" },
         { label: "B", text: "Hann gat ekki sagt guð" },
@@ -91,14 +92,18 @@ export const QuizPage = () => {
       setSelectedAnswer(null);
       setIsAnswered(false);
     } else {
-      alert("You’ve completed the quiz!");
+      setIsQuizCompleted(true);
     }
   };
 
+  const closeModal = () => {
+    setIsQuizCompleted(false);
+  };
+
   return (
-    <div className="flex flex-col items-left justify-between bg-black text-[#F1ECDE] h-screen">
+    <div className="flex flex-col items-left justify-between bg-sagnir-100 text-sagnir-200 h-screen">
       {/* Progress Bar */}
-      <div className="flex-none px-8">
+      <div className="flex-none mx-8 mt-12 mb-6">
         <ProgressBar
           questionNumber={currentQuestion.questionNumber}
           totalQuestions={currentQuestion.totalQuestions}
@@ -106,21 +111,21 @@ export const QuizPage = () => {
       </div>
 
       {/* Question Text */}
-      <h2 className="pt-5 px-8 font-glare text-3xl text-[#F1ECDE] text-left">
+      <h2 className="mx-8 font-glare text-4xl text-sagnir-200 text-left">
         {currentQuestion.questionText}
       </h2>
 
       {/* Dynamic Image */}
       <div className="w-full">
         <img
-          src={currentQuestion.imageSrc} // Use dynamic image source
+          src={currentQuestion.imageSrc}
           alt={`Question ${currentQuestion.questionNumber}`}
           className="w-full h-full object-cover"
         />
       </div>
 
       {/* Options */}
-      <div className="w-full mb-20 px-8 grid grid-cols-1 gap-4">
+      <div className="w-full px-8 mb-16 mt-5 grid grid-cols-1 gap-4">
         {currentQuestion.options.map((option) => (
           <QuizOption
             key={option.label}
@@ -140,15 +145,30 @@ export const QuizPage = () => {
           />
         ))}
       </div>
-
       {/* Next Arrow Button */}
       {isAnswered && (
-        <div className="absolute mb-10 bottom-12 right-6">
+        <div className="absolute bottom-16 right-6">
           <ArrowButton onClick={handleNextQuestion} />
         </div>
       )}
       {/* Reserve Space for Navbar */}
-      <div className="h-16"></div>
+      <div className="h-14"></div>
+
+      {/* Modal for Quiz Completion */}
+      {isQuizCompleted && (
+        <div className="fixed inset-0 flex items-center justify-center bg-sagnir-100 bg-opacity-50">
+          <div className="bg-sagnir-200 text-sagnir-100 rounded-lg p-8 shadow-lg w-80 text-center">
+            <h2 className="font-glare text-2xl mb-4">Allt búið í dag!</h2>
+            <p className="font-glare text-lg mb-6">Vel gert meistari</p>
+            <button
+              onClick={closeModal}
+              className="font-glare px-4 py-2 bg-sagnir-100 text-sagnir-200 rounded-lg"
+            >
+              Loka
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
