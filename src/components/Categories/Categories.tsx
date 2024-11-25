@@ -22,12 +22,14 @@ export const Categories = ({data, setClickedCategory}: CategoriesType) => {
     }
 
     if (clickedCategory === "Álfar og huldufólk") {
-      clickedCategory = "alfar-og-huldufolk";
+      clickedCategory = "alfa";
     }
 
     if (clickedCategory === "Helgisögur") {
       clickedCategory = "ur-efra-og-nedra-helgisogur"
     }
+
+    console.log("Category test", clickedCategory);
     
     setClickedCategory(clickedCategory)
   }
