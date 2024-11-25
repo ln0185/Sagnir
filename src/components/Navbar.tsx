@@ -11,7 +11,7 @@ import QuizIconActive from "../assets/resources/quiz icon active dark mode.svg";
 const Navbar: React.FC = () => {
   const [active, setActive] = useState<string>("StoriesPage");
   return (
-    <nav className="w-full h-22 bg-black fixed bottom-0">
+    <nav className="w-full bg-black fixed bottom-0">
       <ul className="flex justify-around items-center py-4">
         {/* Stories Icon */}
         <li onClick={() => setActive("StoriesPage")}>
