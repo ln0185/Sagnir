@@ -2,12 +2,12 @@ import React from "react";
 
 interface QuizOptionProps {
   label: string; // "A", "B", "C", "D"
-  text: string; // Answer text
-  isSelected: boolean; // Whether this option is selected
-  isCorrect: boolean; // Whether this is the correct option
-  isIncorrect: boolean; // Whether this option is the wrong selection
-  showCorrectAnswer: boolean; // Highlight correct answer
-  onClick: () => void; // Function for handling clicks
+  text: string;
+  isSelected: boolean;
+  isCorrect: boolean;
+  isIncorrect: boolean;
+  showCorrectAnswer: boolean;
+  onClick: () => void;
 }
 
 const QuizOption: React.FC<QuizOptionProps> = ({
@@ -21,7 +21,7 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 }) => {
   return (
     <button
-      className={`w-full py-4 px-9 flex items-center text-left border rounded-lg transition ${
+      className={`w-full py-3 px-6 flex items-center text-left border rounded-lg transition ${
         showCorrectAnswer
           ? "bg-[#F1ECDE] border-[#F1ECDE] text-black" // Highlight correct answer
           : isIncorrect
@@ -36,7 +36,7 @@ const QuizOption: React.FC<QuizOptionProps> = ({
     >
       {/* Option Label */}
       <span
-        className={`font-glare text-lg mr-12 ${
+        className={`font-glare text-xl ${
           showCorrectAnswer || (isSelected && isCorrect)
             ? "text-black"
             : "text-[#F1ECDE]"
@@ -45,9 +45,12 @@ const QuizOption: React.FC<QuizOptionProps> = ({
         {label}
       </span>
 
+      {/* Vertical Line */}
+      <div className="w-px h-9 bg-[#F1ECDE] mx-4"></div>
+
       {/* Option Text */}
       <span
-        className={`font-glare text-lg ${
+        className={`font-glare text-xl ${
           showCorrectAnswer || (isSelected && isCorrect)
             ? "text-black"
             : "text-[#F1ECDE]"
