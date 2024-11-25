@@ -1,3 +1,5 @@
+import { FeaturedStories } from "./FeaturedStories";
+
 interface StoriesCardInterface {
   name: string;
   stories: string[];
@@ -7,7 +9,7 @@ type StoriesCardType = {
   data: StoriesCardInterface;
 };
 
-export const StoriesCard = ({data}: StoriesCardType) => {
+export const StoriesCard = ({ data }: StoriesCardType) => {
   let stories;
   console.log(data);
   if (data) {
@@ -15,15 +17,15 @@ export const StoriesCard = ({data}: StoriesCardType) => {
   }
   return (
     <>
-        {stories?.slice(0, 3).map((item) => {
-          return (
-            <figure key={item}>
-              <header>
-                <h2>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
-              </header>
-            </figure>
-          )
-        })}
+      {stories?.slice(0, 3).map((item) => {
+        return (
+          <figure key={item}>
+            <header>
+              <FeaturedStories item={item}></FeaturedStories>
+            </header>
+          </figure>
+        );
+      })}
     </>
   );
 };
