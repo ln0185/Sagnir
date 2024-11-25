@@ -651,6 +651,10 @@ video {
   width: 19rem !important;
 }
 
+.\!w-auto {
+  width: auto !important;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -752,10 +756,6 @@ video {
   border-radius: 0.5rem;
 }
 
-.\!border {
-  border-width: 1px !important;
-}
-
 .border {
   border-width: 1px;
 }
@@ -768,7 +768,7 @@ video {
   border-style: solid;
 }
 
-.\!border-\[\#f0ecdd\] {
+.\!border-sagnir-200 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(240 236 221 / var(--tw-border-opacity, 1)) !important;
 }
@@ -793,9 +793,9 @@ video {
   border-color: rgb(79 70 229 / var(--tw-border-opacity, 1));
 }
 
-.\!bg-black {
+.\!bg-sagnir-100 {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+  background-color: rgb(26 22 22 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .bg-\[\#F1ECDE\] {
@@ -829,6 +829,10 @@ video {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.\!p-0\.5 {
+  padding: 0.125rem !important;
 }
 
 .\!p-2 {
@@ -875,8 +879,12 @@ video {
   text-align: left;
 }
 
-.font-glare {
-  font-family: PPFragment-GlareRegular, sans-serif;
+.\!font-glare {
+  font-family: PPFragment-GlareRegular, sans-serif !important;
+}
+
+.\!font-serifExtra {
+  font-family: PPFragment-SerifExtrabold, serif !important;
 }
 
 .font-sans {
@@ -888,9 +896,9 @@ video {
   line-height: 1.75rem !important;
 }
 
-.\!text-xs {
-  font-size: 0.75rem !important;
-  line-height: 1rem !important;
+.\!text-xl {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
 }
 
 .text-4xl {
@@ -908,22 +916,9 @@ video {
   line-height: 1.75rem;
 }
 
-.\!font-medium {
-  font-weight: 500 !important;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.\!text-gray-200 {
+.\!text-sagnir-200 {
   --tw-text-opacity: 1 !important;
-  color: rgb(229 231 235 / var(--tw-text-opacity, 1)) !important;
-}
-
-.\!text-gray-300 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1)) !important;
+  color: rgb(240 236 221 / var(--tw-text-opacity, 1)) !important;
 }
 
 .text-\[\#F1ECDE\] {
@@ -934,11 +929,6 @@ video {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
-}
-
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .\!shadow-none {
