@@ -24,14 +24,14 @@ export const QuizPage = () => {
     {
       questionNumber: 2,
       totalQuestions: 5,
-      questionText: "Hvað heitir stærsta foss á Íslandi?",
+      questionText: "Hvað á grýla mörg börn?",
       options: [
-        { label: "A", text: "Gullfoss" },
-        { label: "B", text: "Skógafoss" },
-        { label: "C", text: "Seljalandsfoss" },
-        { label: "D", text: "Dettifoss" },
+        { label: "A", text: "Þrjátíu" },
+        { label: "B", text: "Fimm" },
+        { label: "C", text: "Þrettán" },
+        { label: "D", text: "Tuttugu" },
       ],
-      correctAnswer: "Dettifoss",
+      correctAnswer: "Tuttugu",
     },
     {
       questionNumber: 3,

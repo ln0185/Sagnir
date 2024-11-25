@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react"
+import { SearchedStories } from "../SearchedStories/SearchedStories";
+
+interface StoriesInterface {
+    category: string, 
+}
 
 export const Searchbar = () => {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
     const [searchedStory, setSearchedStory] = useState<string>("");
     const [searchResult, setSearchResult] = useState("");
     const [allStories, setAllStories] = useState([]);
+    const [searchedStories, setSearchedStories] = useState([]);
+
+    useEffect(() => {
+        setSearchedStory("");
+    }, [])
 
     useEffect(() => {
         const searchDelayDebounce = setTimeout(() => {
             console.log(searchedStory);
-            setSearchResult(searchedStory.toLowerCase());
+            if (searchedStory != "") {
+                setSearchResult(searchedStory.toLowerCase());
+            }
         }, 1500)
 
         return () => clearTimeout(searchDelayDebounce)
@@ -19,11 +31,10 @@ export const Searchbar = () => {
         const getStoriesData = async () => {
             const res = await fetch("http://localhost:8080/all");
             const data = await res.json();
-            console.log(data);
-            const stories = data?.map((item) => {
-                return item?.stories?.stories?.map((item) => {
-                    return item;
-                })
+            console.log("Stories Array", data);
+            const stories = data?.map((item: StoriesInterface) => {
+                let allStories = item.stories;
+                return Object.keys(allStories.stories);
             })
             setAllStories(stories);
         }
@@ -34,20 +45,28 @@ export const Searchbar = () => {
 
     useEffect(() => {
         allStories.map((item) => {
-            const filteredStories = (arr, query) => {
+            const filteredStories = (arr, query: string) => {
                 return arr.filter((el) => el.includes(query));
             }
 
-            console.log(filteredStories(item, searchResult));
+            let stories = filteredStories(item, searchResult);
+
+            if (stories.length <= 0) {
+                stories.push("No stories found");
+            }
             
+            setSearchedStories(stories);
         })
-    }, [allStories])
+    }, [allStories, searchResult])
 
   return (
     <>
         {isSearchOpen ? <> <div className="bg-slate-900 flex items-center mx-7">
             <input className="border-solid border-2 border-indigo-600" onChange={(e) => setSearchedStory(e.target.value)} type="text" name="searchbar" id="searchbar"/>
-            <p>{searchResult}</p>
+            <div>
+                <p>Search Result:</p>
+                {searchedStories ? <SearchedStories data={searchedStories}/> : null}
+            </div>
         </div></>
         
          : null}
