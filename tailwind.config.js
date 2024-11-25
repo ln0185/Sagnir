@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  darkMode: 'class', // Enable class-based dark mode
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        glare: ["PPFragment-GlareRegular", "sans-serif"],
+        serifExtra: ["PPFragment-SerifExtrabold", "serif"],
+      },
+    },
   },
   plugins: [],
-}
-
+};

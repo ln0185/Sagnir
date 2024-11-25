@@ -14,23 +14,24 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const progress = (questionNumber / totalQuestions) * 100;
 
   return (
-    <div className="w-full text-center">
+    <div className="w-full px-8 pt-9">
+      {/* Top Section: Question Count */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="font-glare text-[#F1ECDE] text-base">{`Question ${questionNumber}/${totalQuestions}`}</span>
+      </div>
+
       {/* Progress Bar */}
-      <div className="flex items-center justify-between text-sm mb-2">
-        <span className="text-amber-100">{`Question ${questionNumber}/${totalQuestions}`}</span>
-        <div className="w-full mx-4 h-2 bg-gray-700 rounded overflow-hidden">
-          <div
-            className="h-full bg-amber-100"
-            style={{ width: `${progress}%` }} // Dynamic progress width
-          ></div>
-        </div>
-        <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
-          <span className="block w-3 h-3 bg-amber-100 rounded-full"></span>
-        </div>
+      <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
+        <div
+          className="h-full bg-[#F1ECDE]"
+          style={{ width: `${progress}%` }} // Dynamic progress width
+        ></div>
       </div>
 
       {/* Question Text */}
-      <h2 className="text-2xl font-serif text-amber-100">{questionText}</h2>
+      <h2 className="pt-8 font-glare text-4xl text-[#F1ECDE] text-left">
+        {questionText}
+      </h2>
     </div>
   );
 };

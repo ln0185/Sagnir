@@ -21,25 +21,25 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 }) => {
   return (
     <button
-      className={`w-full py-3 px-4 flex items-center text-left border rounded-lg transition ${
+      className={`w-full py-4 px-9 flex items-center text-left border rounded-lg transition ${
         showCorrectAnswer
-          ? "bg-amber-100 border-black text-black" // Highlight correct answer
+          ? "bg-[#F1ECDE] border-[#F1ECDE] text-black" // Highlight correct answer
           : isIncorrect
-          ? "bg-black border-amber-100 text-amber-100" // Highlight wrong answer
+          ? "bg-black border-[#F1ECDE] text-[#F1ECDE]" // Highlight wrong answer
           : isSelected
           ? isCorrect
-            ? "bg-black border-amber-100 text-black" // Selected and correct (text turns black)
-            : "bg-black border-gray-700 text-amber-100" // Selected but not correct
-          : "bg-black border-amber-100 hover:bg-gray-700" // Default state
+            ? "bg-black border-[#F1ECDE] text-black" // Selected and correct (text turns black)
+            : "bg-black border-gray-700 text-[#F1ECDE]" // Selected but not correct
+          : "bg-black border-[#F1ECDE] hover:bg-gray-700" // Default state
       }`}
       onClick={onClick}
     >
       {/* Option Label */}
       <span
-        className={`font-bold text-lg mr-4 ${
+        className={`font-glare text-lg mr-12 ${
           showCorrectAnswer || (isSelected && isCorrect)
             ? "text-black"
-            : "text-amber-100"
+            : "text-[#F1ECDE]"
         }`}
       >
         {label}
@@ -47,18 +47,39 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 
       {/* Option Text */}
       <span
-        className={`text-sm ${
+        className={`font-glare text-lg ${
           showCorrectAnswer || (isSelected && isCorrect)
             ? "text-black"
-            : "text-amber-100"
+            : "text-[#F1ECDE]"
         }`}
       >
         {text}
       </span>
 
       {/* Icons for Correct/Incorrect */}
-      {isIncorrect && <span className="ml-auto text-amber-100">✗</span>}
-      {showCorrectAnswer && <span className="ml-auto text-black">✓</span>}
+      {isIncorrect && (
+        <span className="font-sans ml-auto text-[#F1ECDE]">✗</span>
+      )}
+      {showCorrectAnswer && (
+        <span className="ml-auto">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-black"
+          >
+            <path
+              d="M19 7L9.66667 16L5 11.5"
+              stroke="#1A1616"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      )}
     </button>
   );
 };

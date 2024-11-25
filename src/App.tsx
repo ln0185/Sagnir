@@ -1,26 +1,28 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import NavBar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./index.css";
+import "./output.css";
+import { StoriesPage } from "./pages/StoriesPage";
+import { Searchbar } from "./components/SearchStory/Searchbar";
+import { MapPage } from "./pages/MapPage";
 import { QuizPage } from "./pages/QuizPage";
 
 function App() {
   return (
-    <Router>
-      {/* Temporary Navigation */}
-      <div className="p-4 bg-gray-800 text-white">
-        <Link to="/" className="mr-4">
-          Home
-        </Link>
-        <Link to="/quiz">Quiz</Link>
-      </div>
-
-      {/* Routes */}
-      <Routes>
-        <Route
-          path="/"
-          element={<div className="text-center p-6">Home Page</div>}
-        />
-        <Route path="/quiz" element={<QuizPage />} />
-      </Routes>
-    </Router>
+    <div className="h-full relative">
+      <Router>
+        {/* Routes for different pages */}
+        <Routes>
+          <Route path="/" element={<StoriesPage />} />
+          <Route path="/stories" element={<StoriesPage />} />
+          <Route path="/search" element={<Searchbar />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+        </Routes>
+        {/* Fixed Navbar */}
+        <NavBar />
+      </Router>
+    </div>
   );
 }
 
