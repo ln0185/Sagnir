@@ -7,18 +7,22 @@ type StoriesCardType = {
   data: StoriesCardInterface;
 };
 
-export const StoriesCard = ({ data }: StoriesCardType) => {
+export const StoriesCard = ({data}: StoriesCardType) => {
+  let stories;
+  console.log(data);
+  if (data) {
+    stories = Object.keys(data?.stories || data);
+  }
   return (
     <>
-      {data.stories &&
-        Object.values(data.stories).map((item) => {
+        {stories?.slice(0, 3).map((item) => {
           return (
             <figure key={item}>
               <header>
-                <h2>{item}</h2>
+                <h2>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
               </header>
             </figure>
-          );
+          )
         })}
     </>
   );
