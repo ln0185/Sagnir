@@ -6,8 +6,8 @@ import { StoriesCard } from "../components/StoriesCard/StoriesCard";
 import { Searchbar } from "../components/SearchStory/Searchbar";
 
 export const StoriesPage = () => {
-  const [categories, setCategories] = useState([]);
-  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<string[]>([]);
   const [clickedCategory, setClickedCategory] = useState<string>('');
   const [selectedStories, setSelectedStories] = useState();
 
@@ -24,11 +24,11 @@ export const StoriesPage = () => {
   useEffect(() => {
     const icelandicNamesArray = [...categories];
 
-    const categoryObjects = icelandicNamesArray.reduce((acc, item, index) => {
+    const categoryObjects = icelandicNamesArray.reduce((acc: Record<string, string>, item, index) => {
       acc[`category_${index}`] = item;
       return acc;
     }, {});
-    
+
     categoryObjects.category_0 = "Álfar og huldufólk";
     categoryObjects.category_1 = "Draugar";
     categoryObjects.category_2 = "Tröll";
@@ -46,10 +46,10 @@ export const StoriesPage = () => {
       console.log(data);
       setSelectedStories(data);
     }
-    
+
     getClickedCategoryStories(clickedCategory);
   }, [clickedCategory])
-  
+
   return (
     <div>
       <StoriesHeader />
