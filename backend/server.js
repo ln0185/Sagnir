@@ -135,7 +135,7 @@ app.get("/all", (req, res) => {
         }
         catch (error) {
             console.error(error);
-            
+
         }
     }
 

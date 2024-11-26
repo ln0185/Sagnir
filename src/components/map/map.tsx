@@ -164,10 +164,12 @@ const Map: React.FC = () => {
             <Popup className="custom-popup">
               <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none !m-1">
                 <h2 className="!text-xl !font-serifExtra">{marker.title}</h2>
-                <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
+                <h3 className="!text-sagnir-200 !text-md !font-glare !inline-block">
                   {marker.category}
                 </h3>
-                <p className="text-sagnir-200">{marker.description}</p>
+                <p className="!text-sagnir-200 !font-glare">
+                  {marker.description}
+                </p>
               </div>
             </Popup>
           </Marker>
@@ -178,7 +180,7 @@ const Map: React.FC = () => {
             <Popup className="custom-popup">
               <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-auto !h-auto !p-0.5 !shadow-none">
                 <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
-                  Þú ert her!
+                  Þú ert her !
                 </h3>
               </div>
             </Popup>

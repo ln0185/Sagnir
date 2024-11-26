@@ -1,0 +1,19 @@
+.custom-popup .leaflet-popup-content-wrapper {
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid #f0ecdd !important; /* Adjusted thickness */
+  border-radius: 0px !important;
+  width: 19rem !important;
+  padding: 5px !important;
+  box-shadow: none !important; /* Remove shadow */
+}
+
+.custom-popup .leaflet-popup-tip {
+  background-color: black !important;
+  border: 1px solid #f0ecdd !important; /* Adjusted thickness */
+  box-shadow: none !important;
+}
+
+.custom-popup .leaflet-popup-close-button {
+  color: white !important;
+}
