@@ -5,26 +5,37 @@ import { Categories } from "../components/Categories/Categories";
 import { StoriesCard } from "../components/StoriesCard/StoriesCard";
 import { Searchbar } from "../components/SearchStory/Searchbar";
 
-export const StoriesPage = () => {
-  const [categories, setCategories] = useState([]);
-  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState([]);
-  const [clickedCategory, setClickedCategory] = useState<string>('');
-  const [selectedStories, setSelectedStories] = useState();
+interface StoryInterface {
+  [key: string]: string;
+}
 
-  const { data, isLoading, error } = useFetch("http://localhost:8080/");
+interface StoriesCategoryArrayInterface {
+  category: string,
+  stories: StoryInterface
+}
+
+export const StoriesPage = () => {
+  const [categories, setCategories] = useState<StoriesCategoryArrayInterface[]>([]);
+  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<string[]>([]);
+  const [clickedCategory, setClickedCategory] = useState<string>('');
+  const [selectedStories, setSelectedStories] = useState<StoryInterface | null>();
+
+  const { data, isLoading, error } = useFetch<StoriesCategoryArrayInterface[]>("http://localhost:8080/");
 
   useEffect(() => {
-    const storyCategories = [];
+    const storyCategories: StoriesCategoryArrayInterface[] = [];
     if (data) {
       storyCategories.push(data[0], data[1], data[4], data[5]);
+      
     }
     setCategories(storyCategories);
   }, [data])
 
   useEffect(() => {
     const icelandicNamesArray = [...categories];
+    console.log("Story categories", categories);
 
-    const categoryObjects = icelandicNamesArray.reduce((acc, item, index) => {
+    const categoryObjects = icelandicNamesArray.reduce((acc: Record<string, string>, item, index) => {
       acc[`category_${index}`] = item;
       return acc;
     }, {});
@@ -42,7 +53,7 @@ export const StoriesPage = () => {
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
       const res = await fetch(`http://localhost:8080/${clickedCategory}`);
-      const data = await res.json();
+      const data: StoryInterface = await res.json();
       console.log(data);
       setSelectedStories(data);
     }
