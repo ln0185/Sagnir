@@ -5,18 +5,28 @@ import { Categories } from "../components/Categories/Categories";
 import { StoriesCard } from "../components/StoriesCard/StoriesCard";
 import { Searchbar } from "../components/SearchStory/Searchbar";
 
+interface StoryInterface {
+  [key: string]: string;
+}
+
+interface StoriesCategoryArrayInterface {
+  category: string,
+  stories: StoryInterface
+}
+
 export const StoriesPage = () => {
-  const [categories, setCategories] = useState([]);
-  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState([]);
+  const [categories, setCategories] = useState<StoriesCategoryArrayInterface[]>([]);
+  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<string[]>([]);
   const [clickedCategory, setClickedCategory] = useState<string>('');
-  const [selectedStories, setSelectedStories] = useState();
+  const [selectedStories, setSelectedStories] = useState<StoryInterface | null>();
 
   const { data, isLoading, error } = useFetch("http://localhost:8080/");
 
   useEffect(() => {
-    const storyCategories = [];
+    const storyCategories: StoriesCategoryArrayInterface[] = [];
     if (data) {
       storyCategories.push(data[0], data[1], data[4], data[5]);
+      
     }
     setCategories(storyCategories);
   }, [data])
@@ -24,8 +34,10 @@ export const StoriesPage = () => {
   useEffect(() => {
     const icelandicNamesArray = [...categories];
 
-    const categoryObjects = icelandicNamesArray.reduce((acc, item, index) => {
-      acc[`category_${index}`] = item;
+    const categoryObjects = icelandicNamesArray.reduce((acc: Record<string, string>, item, index) => {
+      if (item && item.category) {
+        acc[`category_${index}`] = item.category;
+      }
       return acc;
     }, {});
     
@@ -42,8 +54,7 @@ export const StoriesPage = () => {
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
       const res = await fetch(`http://localhost:8080/${clickedCategory}`);
-      const data = await res.json();
-      console.log(data);
+      const data: StoryInterface = await res.json();
       setSelectedStories(data);
     }
     
