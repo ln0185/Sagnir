@@ -9,7 +9,6 @@ export const useFetch = (url: string) => {
             return data;
         },
         staleTime: 600 * 10,
-        cacheTime: 3000 * 10,
         retry: 1
     })
 

@@ -127,7 +127,7 @@ const Map: React.FC = () => {
 
   //fetching stories
   let navigate = useNavigate();
-  function handleStoryClick(item: string, category) {
+  function handleStoryClick(item: string, category: string) {
     if (category === "Huldufólk") {
       category = "alfa";
     }
