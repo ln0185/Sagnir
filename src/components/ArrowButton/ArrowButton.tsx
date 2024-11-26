@@ -8,7 +8,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="w-10 h-10 flex items-center justify-center bg-transparent border-amber-100 rounded-full hover:bg-amber-100 hover:text-black transition"
+      className="w-8 h-20 flex items-center justify-center bg-transparent rounded-full hover:text-black transition"
     >
       <svg
         width="38"
