@@ -1,5 +1,5 @@
 import { FeaturedStories } from "./FeaturedStories";
-import { NavigateOptions, useNavigate } from "react-router-dom";
+import { NavigateOptions } from "react-router-dom";
 
 interface StoriesCardInterface {
   name: string;
@@ -17,54 +17,18 @@ export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
   if (data) {
     stories = Object.keys(data?.stories || data);
   }
-
-  let navigate = useNavigate();
-
-  const handleStoryClick = (e: string, categoryName: string) => {
-    if (categoryName === "Allt") {
-      categoryName = "all"
-    }
-
-    if (categoryName === "Tröll") {
-      categoryName = "troll"
-    }
-
-    if (categoryName === "Draugar") {
-      categoryName = "draugar"
-    }
-
-    if (categoryName === "alfar-og-huldufolk") {
-      categoryName = "alfa";
-    }
-
-    if (categoryName === "Helgisögur") {
-      categoryName = "ur-efra-og-nedra-helgisogur"
-    }
-
-    // console.log(console.log("Category name", categoryName));
-    navigate(`/stories/${categoryName}/${e}`);
-  }
-
+  
   return (
     <>
       {stories?.slice(0, 3).map((item) => {
         return (
           <figure key={item}>
             <header>
-              <FeaturedStories item={item}></FeaturedStories>
+              <FeaturedStories item={item} categoryName={categoryName}></FeaturedStories>
             </header>
           </figure>
         );
       })}
-         {stories?.slice(0, 3).map((item) => {
-          return (
-            <figure key={item}>
-              <header>
-                <h2 onClick={(e) => handleStoryClick(e.target.innerText, categoryName)}>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
-              </header>
-            </figure>
-          )
-        })}
     </>
   );
 };
