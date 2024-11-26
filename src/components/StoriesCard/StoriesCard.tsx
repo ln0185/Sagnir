@@ -1,14 +1,15 @@
+import { FeaturedStories } from "./FeaturedStories";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 
 interface StoriesCardInterface {
-  name: string,
-  stories: string[]
+  name: string;
+  stories: string[];
 }
 
 type StoriesCardType = {
-  data: StoriesCardInterface
+  data: StoriesCardInterface;
   categoryName: string | NavigateOptions,
-}
+};
 
 export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
   let stories;
@@ -46,7 +47,16 @@ export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
 
   return (
     <>
-        {stories?.slice(0, 3).map((item) => {
+      {stories?.slice(0, 3).map((item) => {
+        return (
+          <figure key={item}>
+            <header>
+              <FeaturedStories item={item}></FeaturedStories>
+            </header>
+          </figure>
+        );
+      })}
+<!--         {stories?.slice(0, 3).map((item) => {
           return (
             <figure key={item}>
               <header>
@@ -54,7 +64,7 @@ export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
               </header>
             </figure>
           )
-        })}
+        })} -->
     </>
-  )
-}
+  );
+};
