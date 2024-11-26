@@ -1,11 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "../index.css";
-import "../output.css";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import "../output.css"; // Assuming this file exists
-import "../index.css"; // Assuming this file exists
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
@@ -15,6 +11,12 @@ const customIcon = new L.Icon({
   popupAnchor: [0, -32], // Popup positioning relative to the icon
 });
 
+// Geolocation Custom Icon
+const geolocationIcon = L.icon({
+  iconUrl: "/geolocation.svg",
+  iconSize: [30, 30],
+  iconAnchor: [15, 0],
+});
 // MarkerData interface for typing the markers
 interface MarkerData {
   id: number;
@@ -117,6 +119,29 @@ const markers: MarkerData[] = [
 ];
 
 const Map: React.FC = () => {
+  const [userPosition, setUserPosition] = useState<[number, number] | null>(
+    null
+  );
+
+  // Geolocation logic
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserPosition([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        },
+        (error) => {
+          console.error("Error obtaining geolocation:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   return (
     <div className="relative w-full h-full">
       <MapContainer
@@ -137,16 +162,30 @@ const Map: React.FC = () => {
             icon={customIcon} // Use the custom icon for each marker
           >
             <Popup className="custom-popup">
-              <div className="!bg-black !text-gray-300 !border !border-[#f0ecdd] !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none !m-1">
-                <h2 className="!text-lg font-semibold">{marker.title}</h2>
-                <h3 className="!text-gray-200 !text-xs !font-medium !inline-block">
+              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none !m-1">
+                <h2 className="!text-xl !font-serifExtra">{marker.title}</h2>
+                <h3 className="!text-sagnir-200 !text-md !font-glare !inline-block">
                   {marker.category}
                 </h3>
-                <p className="text-gray-300">{marker.description}</p>
+                <p className="!text-sagnir-200 !font-glare">
+                  {marker.description}
+                </p>
               </div>
             </Popup>
           </Marker>
         ))}
+        {/* User's Geolocation Marker */}
+        {userPosition && (
+          <Marker position={userPosition} icon={geolocationIcon}>
+            <Popup className="custom-popup">
+              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-auto !h-auto !p-0.5 !shadow-none">
+                <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
+                  Þú ert her !
+                </h3>
+              </div>
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
     </div>
   );

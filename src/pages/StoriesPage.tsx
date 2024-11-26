@@ -54,7 +54,7 @@ export const StoriesPage = () => {
     <div>
       <StoriesHeader />
       {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames} setClickedCategory={setClickedCategory}/> : null}
-      {selectedStories ? <StoriesCard data={selectedStories}/> : null}
+      {selectedStories ? <StoriesCard data={selectedStories} categoryName={clickedCategory}/> : null}
      <Searchbar />
     </div>
   )

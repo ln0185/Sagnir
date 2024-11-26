@@ -1,7 +1,4 @@
-import Map from "../components/map";
-import "../index.css";
-import "../output.css";
-
+import Map from "../components/map/map";
 export const MapPage = () => {
   return (
     <div className="fixed inset-0">

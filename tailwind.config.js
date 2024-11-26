@@ -1,13 +1,20 @@
-module.exports = {
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors: {
-      sagnir: {
-        100: "#1A1616",
-        200: "#F0ECDD",
+    extend: {
+      colors: {
+        sagnir: {
+          100: "#1A1616",
+          200: "#F0ECDD",
+          300: "#3B332B",
+        },
+      },
+      fontFamily: {
+        glare: ["PPFragment-GlareRegular", "sans-serif"],
+        serifExtra: ["PPFragment-SerifExtrabold", "serif"],
       },
     },
-    extend: {},
   },
   plugins: [],
 };

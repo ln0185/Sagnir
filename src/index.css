@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "PPFragment-GlareRegular";
+    src: url("/font/PPFragment-GlareRegular.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "PPFragment-SerifExtraBold";
+    src: url("/font/PPFragment-SerifExtraBold.otf") format("opentype");
+  }
+}

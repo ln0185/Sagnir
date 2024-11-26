@@ -51,7 +51,7 @@ app.get("/draugar", (req, res) => {
     getData();
 })
 
-app.get("/alfar-og-huldufolk", (req, res) => {
+app.get("/alfa", (req, res) => {
     const getData = async () => {
         try {
             const response = await fetch("https://thjodsogur-api.deno.dev/api/alfa");
@@ -73,6 +73,26 @@ app.get("/ur-efra-og-nedra-helgisogur", (req, res) => {
     const getData = async () => {
         try {
             const response = await fetch("https://thjodsogur-api.deno.dev/api/efra");
+            if (!response.ok) {
+                console.error("Failed to fetch");
+            }
+            const data = await response.json();
+            res.json(data);
+            return data;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    getData();
+})
+
+app.get("/:categoryName/:storyName", (req, res) => {
+    const { categoryName, storyName } = req.params;
+
+    const getData = async () => {
+        try {
+            const response = await fetch(`https://thjodsogur-api.deno.dev/api/${categoryName}/${storyName}`);
             if (!response.ok) {
                 console.error("Failed to fetch");
             }
