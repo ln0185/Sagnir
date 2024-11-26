@@ -11,7 +11,7 @@ export const SingleStoryPage = () => {
   const goback = () => {}
 
   return (
-    <div className="bg-100">
+    <div className="bg-sagnir-100">
       <ArrowButton onClick={() => goback()}></ArrowButton>
 
 
@@ -28,7 +28,7 @@ export const SingleStoryPage = () => {
 
         {/* Story Title */}
         <h2
-          className="font-serifExtra text-36 sagnir-200">{data?.title }
+          className="font-serifExtra text-36 text-sagnir-200">{data?.title }
         </h2>
 
         {/* Listen Button */}
@@ -42,7 +42,7 @@ export const SingleStoryPage = () => {
       
         {/* Story body */}
         <p
-          className="font-glare text-16 sagnir-200">{data?.body}
+          className="font-glare text-16 text-sagnir-200">{data?.body}
         </p>
 
       </div>
