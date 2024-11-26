@@ -1,3 +1,3 @@
 /// <reference types="vite/client" />
 
-declare module "*.woff2";
+declare module "*.oft";
