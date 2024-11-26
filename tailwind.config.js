@@ -7,6 +7,7 @@ export default {
         sagnir: {
           100: "#1A1616",
           200: "#F0ECDD",
+          300: "#3B332B",
         },
       },
       fontFamily: {
