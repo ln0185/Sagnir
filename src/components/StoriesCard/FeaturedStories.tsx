@@ -1,4 +1,4 @@
-import photo from "../../../public/images/huldu1 1.png";
+import photo from "../../../src/assets/resources/huldu1 1.png";
 
 function getRandomPhoto() {
   return photo;
