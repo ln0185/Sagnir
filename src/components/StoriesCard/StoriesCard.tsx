@@ -56,7 +56,7 @@ export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
           </figure>
         );
       })}
-<!--         {stories?.slice(0, 3).map((item) => {
+         {stories?.slice(0, 3).map((item) => {
           return (
             <figure key={item}>
               <header>
@@ -64,7 +64,7 @@ export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
               </header>
             </figure>
           )
-        })} -->
+        })}
     </>
   );
 };
