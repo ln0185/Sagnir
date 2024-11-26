@@ -132,15 +132,15 @@ const Map: React.FC = () => {
       category = "alfa";
     }
     if (category === "Helgisögur") {
-      category = "ur-efra-og-nedra-helgisogur";
+      category = "efra";
     }
     if (category === "Draugar") {
-      category = "draugar";
+      category = "draug";
     }
     if (category === "Tröll") {
       category = "troll";
     }
-    let StoryTitle = item.toLowerCase;
+    let StoryTitle = item.toLowerCase();
     navigate(`/stories/${category}/${StoryTitle}`);
   }
 
@@ -185,23 +185,24 @@ const Map: React.FC = () => {
             <Popup className="custom-popup">
               <div
                 onClick={() => handleStoryClick(marker.title, marker.category)}
-                className="!border-sagnir-200 !bg-sagnir-100 !text-sagnir-200 !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none"
+                className="!bg-sagnir-100 !text-sagnir-200 !rounded-none !w-[18rem] !h-auto !shadow-none m-1 p-2"
               >
-                <h2 className="!bg-sagnir-100 !text-xl !font-serifExtra">
+                <h2 className="!bg-sagnir-100 !text-xl !font-serifExtra p-1 m-1">
                   {marker.title}
                 </h2>
-                <h3 className="!bg-sagnir-100 !text-sagnir-200 !text-md !font-glare !inline-block">
+                <h3 className="!bg-sagnir-100 !text-sagnir-200 !text-md !font-glare !inline-block p-1 m-1">
                   {marker.category}
                 </h3>
-                <p className=" !bg-sagnir-100 !text-sagnir-200 !font-glare">
+                <p className=" !bg-sagnir-100 !text-sagnir-200 !font-glare !p-1 m-1">
                   {marker.description}
                 </p>
                 <button
+                  className="!text-sagnir-200 !font-glare !text-sm m-1"
                   onClick={() =>
                     handleStoryClick(marker.title, marker.category)
                   }
                 >
-                  Read More
+                  Read More &#8594;
                 </button>
               </div>
             </Popup>
@@ -211,8 +212,8 @@ const Map: React.FC = () => {
         {userPosition && (
           <Marker position={userPosition} icon={geolocationIcon}>
             <Popup className="custom-popup">
-              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-auto !h-auto !p-0.5 !shadow-none">
-                <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
+              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[10rem] !h-auto !p-0.5 !shadow-none">
+                <h3 className="!text-sagnir-200 !text-xl text-center !font-glare !inline-block">
                   Þú ert her !
                 </h3>
               </div>
