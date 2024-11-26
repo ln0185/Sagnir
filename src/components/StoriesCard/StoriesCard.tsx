@@ -2,8 +2,7 @@ import { FeaturedStories } from "./FeaturedStories";
 import { NavigateOptions } from "react-router-dom";
 
 interface StoriesCardInterface {
-  name: string;
-  stories: string[];
+  [key: string]: string;
 }
 
 type StoriesCardType = {
