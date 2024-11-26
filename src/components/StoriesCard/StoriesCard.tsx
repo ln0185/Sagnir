@@ -1,9 +1,8 @@
 import { FeaturedStories } from "./FeaturedStories";
-import { NavigateOptions, useNavigate } from "react-router-dom";
+import { NavigateOptions } from "react-router-dom";
 
 interface StoriesCardInterface {
-  name: string;
-  stories: string[];
+  [key: string]: string;
 }
 
 type StoriesCardType = {
@@ -47,15 +46,6 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   return (
     <>
-      {stories?.slice(0, 3).map((item) => {
-        return (
-          <figure key={item}>
-            <header>
-              <FeaturedStories item={item}></FeaturedStories>
-            </header>
-          </figure>
-        );
-      })}
       {stories?.slice(0, 3).map((item) => {
         return (
           <figure key={item}>
