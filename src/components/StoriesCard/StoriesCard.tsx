@@ -1,5 +1,5 @@
 import { FeaturedStories } from "./FeaturedStories";
-import { NavigateOptions } from "react-router-dom";
+import { NavigateOptions, useNavigate } from "react-router-dom";
 
 interface StoriesCardInterface {
   [key: string]: string;
