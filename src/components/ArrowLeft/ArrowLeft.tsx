@@ -6,13 +6,17 @@ interface ArrowLeftProps {
 
 const ArrowLeft: React.FC<ArrowLeftProps> = ({ onClick }) => {
   return (
-    <button
-      onClick={onClick}
-      className="w-8 h-20 flex items-center justify-center bg-transparent rounded-full hover:text-black transition"
-    >
-      <img src="/src/assets/resources/arrow-left-dark-mode.svg">
-      </img>
-    </button>
+    <div className="pt-8 pb-6 pl-9">
+      <button
+        onClick={onClick}
+        className="w-38 h-21 flex items-center justify-center bg-transparent rounded-full hover:text-black transition"
+        >
+        <img
+          src="/src/assets/resources/arrow left dm.svg"
+          className="w-38 h-21">
+        </img>
+      </button>
+    </div>
   );
 };
 

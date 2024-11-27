@@ -24,7 +24,7 @@ export const SingleStoryPage = () => {
         <img
           src="/images/huldufolk 1.png"
           alt="Huldufolk"
-          className="w-full h-full">
+          className="w-full h-full p-5">
         </img>
 
 
