@@ -7,7 +7,7 @@ export const SingleStoryPage = () => {
   const { storyName, categoryName } = useParams();
 
   const { data, isLoading, error } = useFetch(
-    `https://m4groupproject.onrender.comgit /${categoryName}/${storyName}`
+    `https://m4groupproject.onrender.com/${categoryName}/${storyName}`
   );
 
   console.log(data);
@@ -22,9 +22,8 @@ export const SingleStoryPage = () => {
         <img
           src="/images/huldufolk 1.png"
           alt="Huldufolk"
-          className="w-full h-full p-5">
-        </img>
-
+          className="w-full h-full p-5"
+        ></img>
 
         {/* Story Title */}
         <h2 className="font-serifExtra text-36 text-sagnir-200 p-8">
