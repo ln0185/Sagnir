@@ -7,7 +7,7 @@ export const SingleStoryPage = () => {
   const { storyName, categoryName } = useParams();
 
   const { data, isLoading, error } = useFetch(
-    `https://m4groupproject.onrender.com/${categoryName}/${storyName}`
+    `https://m4groupproject.onrender.comgit /${categoryName}/${storyName}`
   );
 
   console.log(data);
