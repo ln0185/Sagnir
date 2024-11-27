@@ -62,15 +62,21 @@ export const StoriesPage = () => {
 
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
-      const res = await fetch(
-        `https://m4groupproject.onrender.com/${clickedCategory}`
-      );
-      const data = await res.json();
-      console.log(data);
-      setSelectedStories(data);
+      try {
+        const res = await fetch(
+          `https://m4groupproject.onrender.com/${clickedCategory}`
+        );
+        const data: StoryInterface = await res.json();
+        console.log(data);
+        setSelectedStories(data);
+      } catch (error) {
+        console.error("Error fetching category stories:", error);
+      }
     };
 
-    getClickedCategoryStories(clickedCategory);
+    if (clickedCategory) {
+      getClickedCategoryStories(clickedCategory);
+    }
   }, [clickedCategory]);
 
   return (
