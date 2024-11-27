@@ -21,6 +21,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   const handleStoryClick = (e: string, categoryName: string) => {
 
+    //The new category sorting for single story page
     const categoryNavigations: Record<string, string> = {
       Allt: "all",
       Tröll: "troll",
@@ -29,48 +30,31 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       Helgisögur: "ur-efra-og-nedra-helgisogur",
     };
 
+    //The new category story sorting for single story page
     const storyNavigations: Record<string, string> = {
+      //alfa
       "Að hverjum andskotanum ertu að leita?": "leita",
       "Arnljótur huldumaður": "arnljot",
       "Álfadrottning í álögum": "alfa-dr",
+
+      //draugar
+      "Ábæjar-Skotta": "skotta3",
+      "Átján draugar úr Blöndu": "18draug",
+      "Átján sendingar í senn": "18send",
+
+      //
+      "Átján Skólabræður": "18skolab",
+      "Andrarímur og Hallgrímsrímur": "andra",
+      "Bergþór Bláfellingur": "blafell",
+
+      "Bakkastaður": "bakka",
+      "Brytinn í Skálholti": "brytinn",
+      "Dansinn í Hruna": "hruna",
     };
-
-    if (categoryName === "Allt") {
-      categoryName = "all";
-    }
-
-    if (categoryName === "Tröll") {
-      categoryName = "troll";
-    }
-
-    if (categoryName === "Draugar") {
-      categoryName = "draugar";
-    }
-
-    if (categoryName === "alfar-og-huldufolk") {
-      categoryName = "alfa";
-    }
-
-    if (categoryName === "Helgisögur") {
-      categoryName = "ur-efra-og-nedra-helgisogur";
-    }
-
-    if (e === "Að hverjum andskotanum ertu að leita?") {
-      e = "leita";
-    }
-
-    if (e === "Arnljótur huldumaður") {
-      e = "arnljot"
-    }
-
-    if (e === "Álfadrottning í álögum") {
-      e = "alfa-dr"
-    }
 
     const storyCategories = categoryNavigations[categoryName] || categoryName;
     const categoryStories = storyNavigations[e] || e;
 
-    // console.log(console.log("Category name", categoryName));
     navigate(`/stories/${storyCategories}/${categoryStories}`);
   };
 
