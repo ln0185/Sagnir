@@ -55,21 +55,14 @@ export const StoriesPage = () => {
 
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
-<<<<<<< HEAD
       const res = await fetch(
         `https://m4groupproject.onrender.com/${clickedCategory}`
       );
       const data = await res.json();
       console.log(data);
-=======
       const res = await fetch(`http://localhost:8080/${clickedCategory}`);
       const data: StoryInterface = await res.json();
->>>>>>> 7ffa6ed99e7fae0df6cd06efe4b472affa39f9ad
       setSelectedStories(data);
-    };
-
-    getClickedCategoryStories(clickedCategory);
-  }, [clickedCategory]);
 
   return (
     <div>
@@ -85,5 +78,6 @@ export const StoriesPage = () => {
       ) : null}
       <Searchbar />
     </div>
-  );
-};
+  )
+}
+

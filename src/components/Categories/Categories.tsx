@@ -2,7 +2,7 @@ import React from "react";
 
 type CategoriesType = {
     data: string[],
-    setClickedCategory: React.Dispatch<React.SetStateAction<string>>; 
+    setClickedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const Categories = ({data, setClickedCategory}: CategoriesType) => {
@@ -30,7 +30,7 @@ export const Categories = ({data, setClickedCategory}: CategoriesType) => {
     }
 
     console.log("Category test", clickedCategory);
-    
+
     setClickedCategory(clickedCategory)
   }
 
