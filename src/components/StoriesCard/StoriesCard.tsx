@@ -20,28 +20,42 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   let navigate = useNavigate();
 
   const handleStoryClick = (e: string, categoryName: string) => {
-    if (categoryName === "Allt") {
-      categoryName = "all";
-    }
 
-    if (categoryName === "Tröll") {
-      categoryName = "troll";
-    }
+    //The new category sorting for single story page
+    const categoryNavigations: Record<string, string> = {
+      Allt: "all",
+      Tröll: "troll",
+      Draugar: "draugar",
+      "alfar-og-huldufolk": "alfa",
+      Helgisögur: "ur-efra-og-nedra-helgisogur",
+    };
 
-    if (categoryName === "Draugar") {
-      categoryName = "draugar";
-    }
+    //The new category story sorting for single story page
+    const storyNavigations: Record<string, string> = {
+      //alfa
+      "Að hverjum andskotanum ertu að leita?": "leita",
+      "Arnljótur huldumaður": "arnljot",
+      "Álfadrottning í álögum": "alfa-dr",
 
-    if (categoryName === "alfar-og-huldufolk") {
-      categoryName = "alfa";
-    }
+      //draugar
+      "Ábæjar-Skotta": "skotta3",
+      "Átján draugar úr Blöndu": "18draug",
+      "Átján sendingar í senn": "18send",
 
-    if (categoryName === "Helgisögur") {
-      categoryName = "ur-efra-og-nedra-helgisogur";
-    }
+      //
+      "Átján Skólabræður": "18skolab",
+      "Andrarímur og Hallgrímsrímur": "andra",
+      "Bergþór Bláfellingur": "blafell",
 
-    // console.log(console.log("Category name", categoryName));
-    navigate(`/stories/${categoryName}/${e}`);
+      "Bakkastaður": "bakka",
+      "Brytinn í Skálholti": "brytinn",
+      "Dansinn í Hruna": "hruna",
+    };
+
+    const storyCategories = categoryNavigations[categoryName] || categoryName;
+    const categoryStories = storyNavigations[e] || e;
+
+    navigate(`/stories/${storyCategories}/${categoryStories}`);
   };
 
   return (
