@@ -97,7 +97,7 @@ const markers: MarkerData[] = [
   {
     id: 9,
     position: [64.5194429, -21.9365519],
-    title: "Reynistaðarkirkja",
+    title: "Reynisstaðarkirkja",
     category: "Draugar",
     description:
       "Um haustið 1780 sendi Halldór Bjarnason, er þá hélt Reynistaðarklaustur, son sinn tvítugan, er Bjarni hét, og mann með, er Jón hét og var kallaður Austmann, suður um land til fjárkaupa því fyrirfarandi ár hafði mjög fallið fé á Norðurlandi. Síðar um haustið sendi og Halldór yngri son sinn suður, er Einar hét, ellefu ára að aldri, og mann með honum, er Sigurður hét, og áttu þeir að hjálpa hinum til að reka féð norður er þeir höfðu keypt. Það er mælt að Einar hafi nauðugur farið þessa för og hafi sagt að hann mundi ekki aftur heim koma.",
@@ -140,8 +140,40 @@ const Map: React.FC = () => {
     if (category === "Tröll") {
       category = "troll";
     }
-    let StoryTitle = item.toLowerCase();
-    navigate(`/stories/${category}/${StoryTitle}`);
+    if (item === "Geirfuglasker") {
+      item = "geirfugl";
+    }
+    if (item === "Loðmundarfjörður") {
+      item = "a-lodmfj";
+    }
+    if (item === "Melstaðarkirkja") {
+      item = "jonas";
+    }
+    if (item === "Skaftafell") {
+      item = "einar-sk";
+    }
+    if (item === "Jórukleif") {
+      item = "jora";
+    }
+    if (item === "Eyvindarmúli") {
+      item = "gudm-eyv";
+    }
+    if (item === "Rafnkelsstaðir") {
+      item = "flugan";
+    }
+    if (item === "Snjóholt") {
+      item = "setta2";
+    }
+    if (item === "Reynisstaðarkirkja") {
+      item = "reynis";
+    }
+    if (item === "Húnavatnssýsla") {
+      item = "sat-nafn";
+    }
+    if (item === "Hruni") {
+      item = "hruna";
+    }
+    navigate(`/stories/${category}/${item}`);
   }
 
   // Geolocation logic
