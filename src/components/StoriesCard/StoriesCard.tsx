@@ -20,6 +20,21 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   let navigate = useNavigate();
 
   const handleStoryClick = (e: string, categoryName: string) => {
+
+    const categoryNavigations: Record<string, string> = {
+      Allt: "all",
+      Tröll: "troll",
+      Draugar: "draugar",
+      "alfar-og-huldufolk": "alfa",
+      Helgisögur: "ur-efra-og-nedra-helgisogur",
+    };
+
+    const storyNavigations: Record<string, string> = {
+      "Að hverjum andskotanum ertu að leita?": "leita",
+      "Arnljótur huldumaður": "arnljot",
+      "Álfadrottning í álögum": "alfa-dr",
+    };
+
     if (categoryName === "Allt") {
       categoryName = "all";
     }
@@ -40,8 +55,23 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       categoryName = "ur-efra-og-nedra-helgisogur";
     }
 
+    if (e === "Að hverjum andskotanum ertu að leita?") {
+      e = "leita";
+    }
+
+    if (e === "Arnljótur huldumaður") {
+      e = "arnljot"
+    }
+
+    if (e === "Álfadrottning í álögum") {
+      e = "alfa-dr"
+    }
+
+    const storyCategories = categoryNavigations[categoryName] || categoryName;
+    const categoryStories = storyNavigations[e] || e;
+
     // console.log(console.log("Category name", categoryName));
-    navigate(`/stories/${categoryName}/${e}`);
+    navigate(`/stories/${storyCategories}/${categoryStories}`);
   };
 
   return (
