@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../hooks/useFetch";
 import ArrowButton from "../components/ArrowButton/ArrowButton";
+import ArrowLeft from "../components/ArrowLeft/ArrowLeft";
 
 export const SingleStoryPage = () => {
   const { storyName, categoryName } = useParams();
@@ -12,11 +13,12 @@ export const SingleStoryPage = () => {
 
   return (
     <div className="bg-sagnir-100">
-      <ArrowButton onClick={() => goback()}></ArrowButton>
+      <ArrowLeft onClick={() => goback()}></ArrowLeft>
 
 
       
-      <div>
+      <div
+      className="flex-col flex items-center mb-12">
 
         {/* Story Image */}
         <img
@@ -28,21 +30,22 @@ export const SingleStoryPage = () => {
 
         {/* Story Title */}
         <h2
-          className="font-serifExtra text-36 text-sagnir-200">{data?.title }
+          className="font-serifExtra text-36 text-sagnir-200 p-8">{data?.title }
         </h2>
 
         {/* Listen Button */}
-        <button>
+        
           <img
             src="/src/assets/resources/listen icon dark mode.svg"
-            alt="Listen icon">
+            alt="Listen icon"
+            className="w-8 h-8">
           </img>
-        </button>
+        
 
       
         {/* Story body */}
         <p
-          className="font-glare text-16 text-sagnir-200">{data?.body}
+          className="font-glare text-16 text-sagnir-200 flex-col justify-center p-8">{data?.body}
         </p>
 
       </div>
