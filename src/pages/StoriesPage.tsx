@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch"
+import { useFetch } from "../hooks/useFetch";
 import { StoriesHeader } from "../components/StoriesHeader/StoriesHeader";
 import { Categories } from "../components/Categories/Categories";
 import { StoriesCard } from "../components/StoriesCard/StoriesCard";
@@ -20,7 +20,9 @@ export const StoriesPage = () => {
   const [clickedCategory, setClickedCategory] = useState<string>('');
   const [selectedStories, setSelectedStories] = useState<StoryInterface | null>();
 
-  const { data, isLoading, error } = useFetch("http://localhost:8080/");
+  const { data, isLoading, error } = useFetch(
+    "https://m4groupproject.onrender.com/"
+  );
 
   useEffect(() => {
     const storyCategories: StoriesCategoryArrayInterface[] = [];
@@ -29,7 +31,7 @@ export const StoriesPage = () => {
       
     }
     setCategories(storyCategories);
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
     const icelandicNamesArray = [...categories];
@@ -49,24 +51,33 @@ export const StoriesPage = () => {
     const icelandicCategories = Object.values(categoryObjects);
 
     setIcelandicCategoryNames(icelandicCategories);
-  }, [categories])
+  }, [categories]);
 
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
+      const res = await fetch(
+        `https://m4groupproject.onrender.com/${clickedCategory}`
+      );
+      const data = await res.json();
+      console.log(data);
       const res = await fetch(`http://localhost:8080/${clickedCategory}`);
       const data: StoryInterface = await res.json();
       setSelectedStories(data);
-    }
-
-    getClickedCategoryStories(clickedCategory);
-  }, [clickedCategory])
 
   return (
     <div>
       <StoriesHeader />
-      {icelandicCategoryNames.length > 0 && !isLoading && !error ? <Categories data={icelandicCategoryNames} setClickedCategory={setClickedCategory}/> : null}
-      {selectedStories ? <StoriesCard data={selectedStories} categoryName={clickedCategory}/> : null}
-     <Searchbar />
+      {icelandicCategoryNames.length > 0 && !isLoading && !error ? (
+        <Categories
+          data={icelandicCategoryNames}
+          setClickedCategory={setClickedCategory}
+        />
+      ) : null}
+      {selectedStories ? (
+        <StoriesCard data={selectedStories} categoryName={clickedCategory} />
+      ) : null}
+      <Searchbar />
     </div>
   )
 }
+

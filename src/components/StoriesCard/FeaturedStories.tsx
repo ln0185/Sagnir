@@ -1,26 +1,25 @@
 import { useNavigate } from "react-router-dom";
 
-let photo1 = "../../../images/huldu1 1.png";
-let photo2 = "../../../images/krissi_05249_Ghosts_and_Hauntings_Deacon_of_Myrka_draugar_more__e2276cf9-66cf-41b0-9836-0dd3c3a0ef3b 1.png";
-let photo3 = "../../../images/huldufolk 1.png"
+let photo1 = "../../../src/assets/resources/huldu1 1.png";
+let photo2 = "../../../src/assets/resources/krissi_05249_Ghosts_and_Hauntings_Deacon_of_Myrka_draugar_more__e2276cf9-66cf-41b0-9836-0dd3c3a0ef3b 1.png";
+let photo3 = "../../../src/assets/resources/huldufolk 1.png"
 let photo4
 
 
 export const FeaturedStories = ({ item, categoryName }) => {
-
   let navigate = useNavigate();
   console.log(item);
 
   const handleStoryClick = (e: string, categoryName: string) => {
     if (categoryName === "Allt") {
-      categoryName = "all"
+      categoryName = "all";
     }
     if (categoryName === "Tröll") {
-      categoryName = "troll"
+      categoryName = "troll";
     }
 
     if (categoryName === "Draugar") {
-      categoryName = "draugar"
+      categoryName = "draugar";
     }
 
     if (categoryName === "alfar-og-huldufolk") {
@@ -28,15 +27,17 @@ export const FeaturedStories = ({ item, categoryName }) => {
     }
 
     if (categoryName === "Helgisögur") {
-      categoryName = "ur-efra-og-nedra-helgisogur"
+      categoryName = "ur-efra-og-nedra-helgisogur";
     }
     navigate(`/stories/${categoryName}/${e}`);
-  }
+  };
 
   return (
     <div className="relative text-center">
       <img src={getRandomPhoto()} alt={item} />
-      <h2 onClick={(e) => handleStoryClick(e.target.innerText, categoryName)}>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
+      <h2 onClick={(e) => handleStoryClick(e.target.innerText, categoryName)}>
+        {item == "categories" ? null : item.replace(/[/]/g, "")}
+      </h2>
     </div>
   );
 };

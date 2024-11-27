@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useNavigate } from "react-router-dom";
+import "./map.css";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
@@ -123,6 +125,25 @@ const Map: React.FC = () => {
     null
   );
 
+  //fetching stories
+  let navigate = useNavigate();
+  function handleStoryClick(item: string, category: string) {
+    if (category === "Huldufólk") {
+      category = "alfa";
+    }
+    if (category === "Helgisögur") {
+      category = "efra";
+    }
+    if (category === "Draugar") {
+      category = "draug";
+    }
+    if (category === "Tröll") {
+      category = "troll";
+    }
+    let StoryTitle = item.toLowerCase();
+    navigate(`/stories/${category}/${StoryTitle}`);
+  }
+
   // Geolocation logic
   useEffect(() => {
     if (navigator.geolocation) {
@@ -162,14 +183,27 @@ const Map: React.FC = () => {
             icon={customIcon} // Use the custom icon for each marker
           >
             <Popup className="custom-popup">
-              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none !m-1">
-                <h2 className="!text-xl !font-serifExtra">{marker.title}</h2>
-                <h3 className="!text-sagnir-200 !text-md !font-glare !inline-block">
+              <div
+                onClick={() => handleStoryClick(marker.title, marker.category)}
+                className="!bg-sagnir-100 !text-sagnir-200 !rounded-none !w-[18rem] !h-auto !shadow-none m-1 p-2"
+              >
+                <h2 className="!bg-sagnir-100 !text-xl !font-serifExtra p-1 m-1">
+                  {marker.title}
+                </h2>
+                <h3 className="!bg-sagnir-100 !text-sagnir-200 !text-md !font-glare !inline-block p-1 m-1">
                   {marker.category}
                 </h3>
-                <p className="!text-sagnir-200 !font-glare">
+                <p className=" !bg-sagnir-100 !text-sagnir-200 !font-glare !p-1 m-1">
                   {marker.description}
                 </p>
+                <button
+                  className="!text-sagnir-200 !font-glare !text-sm m-1"
+                  onClick={() =>
+                    handleStoryClick(marker.title, marker.category)
+                  }
+                >
+                  Read More &#8594;
+                </button>
               </div>
             </Popup>
           </Marker>
@@ -178,8 +212,8 @@ const Map: React.FC = () => {
         {userPosition && (
           <Marker position={userPosition} icon={geolocationIcon}>
             <Popup className="custom-popup">
-              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-auto !h-auto !p-0.5 !shadow-none">
-                <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
+              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[10rem] !h-auto !p-0.5 !shadow-none">
+                <h3 className="!text-sagnir-200 !text-xl text-center !font-glare !inline-block">
                   Þú ert her !
                 </h3>
               </div>
