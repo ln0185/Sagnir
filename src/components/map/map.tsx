@@ -140,8 +140,40 @@ const Map: React.FC = () => {
     if (category === "Tröll") {
       category = "troll";
     }
-    let StoryTitle = item.toLowerCase();
-    navigate(`/stories/${category}/${StoryTitle}`);
+    if (item === "Geirfuglasker") {
+      item = "geirfugl";
+    }
+    if (item === "Loðmundarfjörður") {
+      item = "a-lodmfj";
+    }
+    if (item === "Melstaðarkirkja") {
+      item = "jonas";
+    }
+    if (item === "Skaftafell") {
+      item = "einar-sk";
+    }
+    if (item === "Jórukleif") {
+      item = "jora";
+    }
+    if (item === "Eyvindarmúli") {
+      item = "gudm-eyv";
+    }
+    if (item === "Rafnkelsstaðir") {
+      item = "flugan";
+    }
+    if (item === "Snjóholt") {
+      item = "setta2";
+    }
+    if (item === "Reynisstaðarkirkja") {
+      item = "reynis";
+    }
+    if (item === "Húnavatnssýsla") {
+      item = "sat-nafn";
+    }
+    if (item === "Hruni") {
+      item = "hruna";
+    }
+    navigate(`/stories/${category}/${item}`);
   }
 
   // Geolocation logic
