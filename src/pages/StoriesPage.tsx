@@ -10,15 +10,20 @@ interface StoryInterface {
 }
 
 interface StoriesCategoryArrayInterface {
-  category: string,
-  stories: StoryInterface
+  category: string;
+  stories: StoryInterface;
 }
 
 export const StoriesPage = () => {
-  const [categories, setCategories] = useState<StoriesCategoryArrayInterface[]>([]);
-  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<string[]>([]);
-  const [clickedCategory, setClickedCategory] = useState<string>('');
-  const [selectedStories, setSelectedStories] = useState<StoryInterface | null>();
+  const [categories, setCategories] = useState<StoriesCategoryArrayInterface[]>(
+    []
+  );
+  const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<
+    string[]
+  >([]);
+  const [clickedCategory, setClickedCategory] = useState<string>("");
+  const [selectedStories, setSelectedStories] =
+    useState<StoryInterface | null>();
 
   const { data, isLoading, error } = useFetch(
     "https://m4groupproject.onrender.com/"
@@ -28,7 +33,6 @@ export const StoriesPage = () => {
     const storyCategories: StoriesCategoryArrayInterface[] = [];
     if (data) {
       storyCategories.push(data[0], data[1], data[4], data[5]);
-      
     }
     setCategories(storyCategories);
   }, [data]);
@@ -36,12 +40,15 @@ export const StoriesPage = () => {
   useEffect(() => {
     const icelandicNamesArray = [...categories];
 
-    const categoryObjects = icelandicNamesArray.reduce((acc: Record<string, string>, item, index) => {
-      if (item && item.category) {
-        acc[`category_${index}`] = item.category;
-      }
-      return acc;
-    }, {});
+    const categoryObjects = icelandicNamesArray.reduce(
+      (acc: Record<string, string>, item, index) => {
+        if (item && item.category) {
+          acc[`category_${index}`] = item.category;
+        }
+        return acc;
+      },
+      {}
+    );
 
     categoryObjects.category_0 = "Álfar og huldufólk";
     categoryObjects.category_1 = "Draugar";
@@ -55,16 +62,11 @@ export const StoriesPage = () => {
 
   useEffect(() => {
     const getClickedCategoryStories = async (clickedCategory: string) => {
-<<<<<<< HEAD
       const res = await fetch(
         `https://m4groupproject.onrender.com/${clickedCategory}`
       );
       const data = await res.json();
       console.log(data);
-=======
-      const res = await fetch(`http://localhost:8080/${clickedCategory}`);
-      const data: StoryInterface = await res.json();
->>>>>>> 7ffa6ed99e7fae0df6cd06efe4b472affa39f9ad
       setSelectedStories(data);
     };
 
