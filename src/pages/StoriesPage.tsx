@@ -40,7 +40,7 @@ export const StoriesPage = () => {
       }
       return acc;
     }, {});
-    
+
     categoryObjects.category_0 = "Álfar og huldufólk";
     categoryObjects.category_1 = "Draugar";
     categoryObjects.category_2 = "Tröll";
@@ -57,10 +57,10 @@ export const StoriesPage = () => {
       const data: StoryInterface = await res.json();
       setSelectedStories(data);
     }
-    
+
     getClickedCategoryStories(clickedCategory);
   }, [clickedCategory])
-  
+
   return (
     <div>
       <StoriesHeader />
