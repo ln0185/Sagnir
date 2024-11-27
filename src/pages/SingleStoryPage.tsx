@@ -22,8 +22,9 @@ export const SingleStoryPage = () => {
         <img
           src="/images/huldufolk 1.png"
           alt="Huldufolk"
-          className="w-full h-full"
-        ></img>
+          className="w-full h-full p-5">
+        </img>
+
 
         {/* Story Title */}
         <h2 className="font-serifExtra text-36 text-sagnir-200 p-8">
