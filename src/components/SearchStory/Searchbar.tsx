@@ -29,7 +29,7 @@ export const Searchbar = () => {
 
     useEffect(() => {
         const getStoriesData = async () => {
-            const res = await fetch("http://localhost:8080/all");
+            const res = await fetch("http://localhost:https://m4groupproject.onrender.com/all");
             const data = await res.json();
             console.log("Stories Array", data);
             const stories = data?.map((item: StoriesInterface) => {
