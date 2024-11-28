@@ -26,8 +26,8 @@ export const SingleStoryPage = () => {
 
 
         {/* Story Title */}
-        <h2 className="font-glare text-sagnir-200 pb-4 lowercase text-4xl">
-          {data?.title}
+        <h2 className="font-glare text-center text-sagnir-200 pb-4 text-4xl">
+          {data?.title[0]+data?.title.slice(1).toLowerCase()}
         </h2>
 
 
