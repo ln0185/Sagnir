@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SearchedStories } from "../SearchedStories/SearchedStories";
+import { StoriesCard } from "../StoriesCard/StoriesCard";
 
 interface StoriesInterface {
   category: string;
@@ -31,37 +31,58 @@ export const Searchbar = () => {
     const getStoriesData = async () => {
       const res = await fetch("https://m4groupproject.onrender.com/all");
       const data = await res.json();
-      console.log("Stories Array", data);
+      // console.log("Searchbar Items", data);
       const stories = data?.map((item: StoriesInterface) => {
+        
         let allStories = item.stories;
-        return Object.keys(allStories.stories);
+        console.log("Searchbar items", allStories);
+        let allTheStories = Object.values(allStories);
+        // console.log("All stories", allTheStories);
+        return allTheStories
       });
-      setAllStories(stories);
+      setAllStories(stories.flat());
     };
     getStoriesData();
   }, [searchResult]);
 
   useEffect(() => {
-    allStories.map((item) => {
-      const filteredStories = (arr, query: string) => {
-        return arr.filter((el) => el.includes(query));
-      };
-
-      let stories = filteredStories(item, searchResult);
-
-      if (stories.length <= 0) {
-        stories.push("No stories found");
-      }
-
-      setSearchedStories(stories);
+    console.log("Searched stories", allStories);
+  
+    let searchStories = allStories.map((item) => {
+      let storiesArray = Object.values(item);
+  
+      return storiesArray.map((story) => story);
     });
-  }, [allStories, searchResult]);
+  
+    searchStories = searchStories.flat();
+    setSearchedStories(searchStories);
+  
+  }, [allStories]);
+
+  useEffect(() => {
+    console.log(searchedStories);
+  }, [searchedStories])
+
+  // useEffect(() => {
+  //   allStories.map((item) => {
+  //     const filteredStories = (arr, query: string) => {
+  //       return arr.filter((el) => el.includes(query));
+  //     };
+
+  //     let stories = filteredStories(item, searchResult);
+
+  //     if (stories.length <= 0) {
+  //       stories.push("No stories found");
+  //     }
+
+  //     setSearchedStories(stories);
+  //   });
+  // }, [allStories, searchResult]);
 
   return (
     <>
       {isSearchOpen ? (
         <>
-          {" "}
           <div className="bg-slate-900 flex items-center mx-7">
             <input
               className="border-solid border-2 border-indigo-600"
@@ -71,10 +92,7 @@ export const Searchbar = () => {
               id="searchbar"
             />
             <div>
-              <p>Search Result:</p>
-              {searchedStories ? (
-                <SearchedStories data={searchedStories} />
-              ) : null}
+              <p className="text-white">{searchedStories ? searchedStories : null}</p>
             </div>
           </div>
         </>
