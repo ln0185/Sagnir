@@ -67,7 +67,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
         return (
           <figure key={item}>
             <header>
-              <h2
+              <h2 className="text-white"
                 onClick={(e) =>
                   handleStoryClick(e.target.innerText, categoryName)
                 }
