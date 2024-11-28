@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SearchedStories } from "../SearchedStories/SearchedStories";
+import { StoriesCard } from "../StoriesCard/StoriesCard";
 
 interface StoriesInterface {
   category: string;
@@ -11,14 +11,15 @@ export const Searchbar = () => {
   const [searchResult, setSearchResult] = useState("");
   const [allStories, setAllStories] = useState([]);
   const [searchedStories, setSearchedStories] = useState([]);
+  const [searchedCategoryStory, setSearchedCategoryStory] = useState([]);
 
   useEffect(() => {
     setSearchedStory("");
+    setSearchedCategoryStory([]);
   }, []);
 
   useEffect(() => {
     const searchDelayDebounce = setTimeout(() => {
-      console.log(searchedStory);
       if (searchedStory != "") {
         setSearchResult(searchedStory.toLowerCase());
       }
@@ -31,38 +32,48 @@ export const Searchbar = () => {
     const getStoriesData = async () => {
       const res = await fetch("https://m4groupproject.onrender.com/all");
       const data = await res.json();
-      console.log("Stories Array", data);
       const stories = data?.map((item: StoriesInterface) => {
+        
         let allStories = item.stories;
-        return Object.keys(allStories.stories);
+        let allTheStories = Object.values(allStories);
+        return allTheStories
       });
-      setAllStories(stories);
+      setAllStories(stories.flat());
     };
     getStoriesData();
   }, [searchResult]);
 
   useEffect(() => {
-    allStories.map((item) => {
-      const filteredStories = (arr, query: string) => {
-        return arr.filter((el) => el.includes(query));
-      };
-
-      let stories = filteredStories(item, searchResult);
-
-      if (stories.length <= 0) {
-        stories.push("No stories found");
-      }
-
-      setSearchedStories(stories);
+    let searchStories = allStories.map((item) => {
+      let storiesArray = Object.values(item);
+  
+      return storiesArray.map((story) => story);
     });
-  }, [allStories, searchResult]);
+  
+    searchStories = searchStories.flat();
+    setSearchedStories(searchStories);
+  
+  }, [allStories]);
+
+  useEffect(() => {
+    let allStories = [...searchedStories]
+
+    if (!searchedStory) {
+      setSearchedCategoryStory([]);
+      return;
+    }
+
+    const filteredStories = allStories.filter((story: string) =>
+      story.toLowerCase().includes(searchedStory.toLowerCase())
+    );
+    setSearchedCategoryStory(filteredStories);
+  }, [searchedStories, searchedStory])
 
   return (
-    <>
+    <section className="flex flex-col gap-2">
       {isSearchOpen ? (
         <>
-          {" "}
-          <div className="bg-slate-900 flex items-center mx-7">
+          <div className="bg-slate-900 flex flex-col items-center mx-7">
             <input
               className="border-solid border-2 border-indigo-600"
               onChange={(e) => setSearchedStory(e.target.value)}
@@ -70,19 +81,16 @@ export const Searchbar = () => {
               name="searchbar"
               id="searchbar"
             />
-            <div>
-              <p>Search Result:</p>
-              {searchedStories ? (
-                <SearchedStories data={searchedStories} />
-              ) : null}
-            </div>
           </div>
+          <div className="flex flex-col text-center bg-slate-900 mx-7">
+              {searchedCategoryStory ? <StoriesCard data={searchedCategoryStory}/> : null}
+            </div>
         </>
       ) : null}
       {/*Temp button for testing  */}
       <button onClick={() => setIsSearchOpen((prev) => !prev)}>
         Open Search
       </button>
-    </>
+    </section>
   );
 };
