@@ -11,6 +11,7 @@ export const Searchbar = () => {
   const [searchResult, setSearchResult] = useState("");
   const [allStories, setAllStories] = useState([]);
   const [searchedStories, setSearchedStories] = useState([]);
+  const [searchedCategoryStory, setSearchedCategoryStory] = useState([]);
 
   useEffect(() => {
     setSearchedStory("");
@@ -60,30 +61,18 @@ export const Searchbar = () => {
   }, [allStories]);
 
   useEffect(() => {
-    console.log(searchedStories);
-  }, [searchedStories])
-
-  // useEffect(() => {
-  //   allStories.map((item) => {
-  //     const filteredStories = (arr, query: string) => {
-  //       return arr.filter((el) => el.includes(query));
-  //     };
-
-  //     let stories = filteredStories(item, searchResult);
-
-  //     if (stories.length <= 0) {
-  //       stories.push("No stories found");
-  //     }
-
-  //     setSearchedStories(stories);
-  //   });
-  // }, [allStories, searchResult]);
+    let allStories = [...searchedStories]
+    console.log(allStories);
+    let searchResult = allStories.filter((word) => word == searchedStory);
+    console.log(searchResult);
+    setSearchedCategoryStory(searchResult);
+  }, [searchedStories, searchedStory])
 
   return (
     <>
       {isSearchOpen ? (
         <>
-          <div className="bg-slate-900 flex items-center mx-7">
+          <div className="bg-slate-900 flex flex-col items-center mx-7">
             <input
               className="border-solid border-2 border-indigo-600"
               onChange={(e) => setSearchedStory(e.target.value)}
@@ -91,10 +80,10 @@ export const Searchbar = () => {
               name="searchbar"
               id="searchbar"
             />
-            <div>
-              <p className="text-white">{searchedStories ? searchedStories : null}</p>
-            </div>
           </div>
+          <div className="flex items-center bg-slate-900 mx-7">
+              <p className="text-white">{searchedCategoryStory ? searchedCategoryStory : null}</p>
+            </div>
         </>
       ) : null}
       {/*Temp button for testing  */}
