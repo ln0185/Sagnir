@@ -73,9 +73,18 @@ export const Searchbar = () => {
   }, [searchedStories, searchedStory])
 
   const handleStoryClick = (storyName: string) => {
-    console.log(storyName);
-    let storyname = storyName.toLowerCase();
-    navigate(`/stories/${undefined}/${storyname}`)
+    //TODO compare string with database to find story
+    // const storyTitle = storyName.toLowerCase().replace(/\s+/g, "-");
+    // console.log(storyTitle);
+    console.log("Story title", storyName);
+    console.log("All stories", allStories);
+    allStories.map((item) => {
+      console.log(item);
+      const match = Object.entries(item).find(([key, value]) => value === storyName);
+      console.log(match);
+    })
+
+    // navigate(`/stories/${undefined}/${storyTitle}`)
   }
 
   return (
@@ -92,11 +101,11 @@ export const Searchbar = () => {
             />
           </div>
           <div className="flex flex-col text-center bg-slate-900 mx-7">
-              {searchedCategoryStory ? searchedCategoryStory.map((item) => {
+              {searchedCategoryStory.length > 0 ? searchedCategoryStory.map((item) => {
                 return (
                   <p key={item} onClick={(e) => handleStoryClick((e.target as HTMLElement).innerText)} className="text-white">{item}</p>
                 )
-              }) : null}
+              }) : <p className="text-white">No stories</p>}
             </div>
         </>
       ) : null}
