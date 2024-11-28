@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
-import ArrowButton from "../components/ArrowButton/ArrowButton";
 import ArrowLeft from "../components/ArrowLeft/ArrowLeft";
 
 export const SingleStoryPage = () => {
@@ -11,7 +10,7 @@ export const SingleStoryPage = () => {
   );
 
   console.log(data);
-  const goback = () => {};
+  const goback = () => {}
 
   return (
     <div className="bg-sagnir-100">
@@ -20,7 +19,7 @@ export const SingleStoryPage = () => {
       <div className="flex-col flex items-center mb-12">
         {/* Story Image */}
         <img
-          src="/images/huldufolk 1.png"
+          src="../../src/assets/resources/huldufolk 1.png"
           alt="Huldufolk"
           className="w-full h-full p-5"
         ></img>
@@ -31,12 +30,20 @@ export const SingleStoryPage = () => {
         </h2>
 
         {/* Listen Button */}
-
+        
         <img
           src="/src/assets/resources/listen icon dark mode.svg"
           alt="Listen icon"
           className="w-8 h-8"
         ></img>
+
+        <p className="text-sagnir-200 font-glare text-12">Listen</p>
+
+
+        <hr className="h-0.010 w-full my-5 bg-sagnir-200 border-1"></hr>
+
+
+        
 
         {/* Story body */}
 
