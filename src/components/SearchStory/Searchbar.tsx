@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
+import { useNavigate } from "react-router-dom";
 
 interface StoriesInterface {
   category: string;
@@ -13,13 +14,15 @@ export const Searchbar = () => {
   const [searchedStories, setSearchedStories] = useState([]);
   const [searchedCategoryStory, setSearchedCategoryStory] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setSearchedStory("");
+    setSearchedCategoryStory([]);
   }, []);
 
   useEffect(() => {
     const searchDelayDebounce = setTimeout(() => {
-      console.log(searchedStory);
       if (searchedStory != "") {
         setSearchResult(searchedStory.toLowerCase());
       }
@@ -32,13 +35,10 @@ export const Searchbar = () => {
     const getStoriesData = async () => {
       const res = await fetch("https://m4groupproject.onrender.com/all");
       const data = await res.json();
-      // console.log("Searchbar Items", data);
       const stories = data?.map((item: StoriesInterface) => {
         
         let allStories = item.stories;
-        console.log("Searchbar items", allStories);
         let allTheStories = Object.values(allStories);
-        // console.log("All stories", allTheStories);
         return allTheStories
       });
       setAllStories(stories.flat());
@@ -47,8 +47,6 @@ export const Searchbar = () => {
   }, [searchResult]);
 
   useEffect(() => {
-    console.log("Searched stories", allStories);
-  
     let searchStories = allStories.map((item) => {
       let storiesArray = Object.values(item);
   
@@ -62,7 +60,7 @@ export const Searchbar = () => {
 
   useEffect(() => {
     let allStories = [...searchedStories]
-    
+
     if (!searchedStory) {
       setSearchedCategoryStory([]);
       return;
@@ -74,8 +72,14 @@ export const Searchbar = () => {
     setSearchedCategoryStory(filteredStories);
   }, [searchedStories, searchedStory])
 
+  const handleStoryClick = (storyName: string) => {
+    console.log(storyName);
+    let storyname = storyName.toLowerCase();
+    navigate(`/stories/${undefined}/${storyname}`)
+  }
+
   return (
-    <>
+    <section className="flex flex-col gap-2">
       {isSearchOpen ? (
         <>
           <div className="bg-slate-900 flex flex-col items-center mx-7">
@@ -87,8 +91,12 @@ export const Searchbar = () => {
               id="searchbar"
             />
           </div>
-          <div className="flex items-center bg-slate-900 mx-7">
-              <p className="text-white">{searchedCategoryStory ? searchedCategoryStory : null}</p>
+          <div className="flex flex-col text-center bg-slate-900 mx-7">
+              {searchedCategoryStory ? searchedCategoryStory.map((item) => {
+                return (
+                  <p key={item} onClick={(e) => handleStoryClick((e.target as HTMLElement).innerText)} className="text-white">{item}</p>
+                )
+              }) : null}
             </div>
         </>
       ) : null}
@@ -96,6 +104,6 @@ export const Searchbar = () => {
       <button onClick={() => setIsSearchOpen((prev) => !prev)}>
         Open Search
       </button>
-    </>
+    </section>
   );
 };
