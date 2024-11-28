@@ -47,7 +47,7 @@ export const SingleStoryPage = () => {
 
         {/* Story body */}
 
-        <p className="font-glare text-xs text-sagnir-200 flex-col justify-center p-8 pt-5">
+        <p className="font-glare text-[16px] text-sagnir-200 flex-col justify-center p-8 pt-5">
           {data?.body}</p>
           
       </div>
