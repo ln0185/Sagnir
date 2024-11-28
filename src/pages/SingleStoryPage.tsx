@@ -10,7 +10,7 @@ export const SingleStoryPage = () => {
   );
 
   console.log(data);
-  const goback = () => {};
+  const goback = () => {}
 
   return (
     <div className="bg-sagnir-100">
@@ -21,9 +21,8 @@ export const SingleStoryPage = () => {
         <img
           src="../../src/assets/resources/huldufolk 1.png"
           alt="Huldufolk"
-          className="w-full h-full p-5">
-        </img>
-
+          className="w-full h-full p-5"
+        ></img>
 
         {/* Story Title */}
         <h2 className="font-serifExtra text-36 text-sagnir-200 p-8">
