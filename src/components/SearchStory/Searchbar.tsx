@@ -62,10 +62,16 @@ export const Searchbar = () => {
 
   useEffect(() => {
     let allStories = [...searchedStories]
-    console.log(allStories);
-    let searchResult = allStories.filter((word) => word == searchedStory);
-    console.log(searchResult);
-    setSearchedCategoryStory(searchResult);
+    
+    if (!searchedStory) {
+      setSearchedCategoryStory([]);
+      return;
+    }
+
+    const filteredStories = allStories.filter((story: string) =>
+      story.toLowerCase().includes(searchedStory.toLowerCase())
+    );
+    setSearchedCategoryStory(filteredStories);
   }, [searchedStories, searchedStory])
 
   return (
