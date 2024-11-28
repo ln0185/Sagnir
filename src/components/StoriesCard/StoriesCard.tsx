@@ -2,7 +2,7 @@ import { FeaturedStories } from "./FeaturedStories";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 let photo1 = "../../../src/assets/resources/huldufolk 1.png";
 let photo2 = "../../../src/assets/resources/huldu 1.png";
-let photo3 = "../../../src/assets/resources/photoBW.svg"
+let photo3 = "../../../src/assets/resources/photoBW.svg";
 
 interface StoriesCardInterface {
   [key: string]: string;
@@ -23,7 +23,6 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   let navigate = useNavigate();
 
   const handleStoryClick = (e: string, categoryName: string) => {
-
     //The new category sorting for single story page
     const categoryNavigations: Record<string, string> = {
       Allt: "all",
@@ -50,7 +49,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       "Andrarímur og Hallgrímsrímur": "andra",
       "Bergþór Bláfellingur": "blafell",
 
-      "Bakkastaður": "bakka",
+      Bakkastaður: "bakka",
       "Brytinn í Skálholti": "brytinn",
       "Dansinn í Hruna": "hruna",
     };
