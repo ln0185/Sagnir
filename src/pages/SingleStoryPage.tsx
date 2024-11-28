@@ -16,40 +16,40 @@ export const SingleStoryPage = () => {
     <div className="bg-sagnir-100">
       <ArrowLeft onClick={() => goback()}></ArrowLeft>
 
+
       <div className="flex-col flex items-center mb-12">
+
+
         {/* Story Image */}
-        <img
-          src="../../src/assets/resources/huldufolk 1.png"
-          alt="Huldufolk"
-          className="w-full h-full p-5"
-        ></img>
+        <img src="../../src/assets/resources/huldufolk 1.png" alt="Huldufolk" className="w-full h-full p-3"></img>
+
+
 
         {/* Story Title */}
-        <h2 className="font-serifExtra text-36 text-sagnir-200 p-8">
+        <h2 className="font-glare text-sagnir-200 pb-4 lowercase text-4xl">
           {data?.title}
         </h2>
 
+
         {/* Listen Button */}
         
-        <img
-          src="/src/assets/resources/listen icon dark mode.svg"
-          alt="Listen icon"
-          className="w-8 h-8"
-        ></img>
+        <img src="/src/assets/resources/listen icon dark mode.svg" alt="Listen icon" className="w-10 h-10"></img>
 
-        <p className="text-sagnir-200 font-glare text-12">Listen</p>
+        <p className="text-sagnir-200 font-glare text-xs pt-4 pb-3 ">Listen</p>
 
 
-        <hr className="h-0.010 w-full my-5 bg-sagnir-200 border-1"></hr>
 
+        {/* horizontal line */}
+
+        <hr className="h-0.010 w-full bg-sagnir-200 border-"></hr>
 
         
 
         {/* Story body */}
 
-        <p className="font-glare text-16 text-sagnir-200 flex-col justify-center p-8">
-          {data?.body}
-        </p>
+        <p className="font-glare text-xs text-sagnir-200 flex-col justify-center p-8 pt-5">
+          {data?.body}</p>
+          
       </div>
     </div>
   );
