@@ -12,7 +12,7 @@ interface StoriesCardInterface {
 }
 
 // type StoriesCardType = {
-//   data: StoriesCardInterface;
+//   data: StoriesCardInterface
 //   categoryName: string | NavigateOptions;
 // };
 
