@@ -1,8 +1,7 @@
-import { FeaturedStories } from "./FeaturedStories";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 let photo1 = "../../../src/assets/resources/huldufolk 1.png";
-let photo2 = "../../../src/assets/resources/huldu 1.png";
-let photo3 = "../../../src/assets/resources/photoBW.svg";
+let photo2 = "../../../src/assets/resources/huldu1 1.png";
+let photo3 = "../../../src/assets/resources/photoBW.svg"
 
 interface StoriesCardInterface {
   [key: string]: string;
@@ -23,6 +22,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   let navigate = useNavigate();
 
   const handleStoryClick = (e: string, categoryName: string) => {
+
     //The new category sorting for single story page
     const categoryNavigations: Record<string, string> = {
       Allt: "all",
@@ -49,7 +49,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       "Andrarímur og Hallgrímsrímur": "andra",
       "Bergþór Bláfellingur": "blafell",
 
-      Bakkastaður: "bakka",
+      "Bakkastaður": "bakka",
       "Brytinn í Skálholti": "brytinn",
       "Dansinn í Hruna": "hruna",
     };
@@ -57,26 +57,34 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     const storyCategories = categoryNavigations[categoryName] || categoryName;
     const categoryStories = storyNavigations[e] || e;
 
-    navigate(`/stories/${storyCategories}/${categoryStories}`);
+    navigate(/stories/${storyCategories}/${categoryStories});
   };
-
-  return (
-    <>
-      {stories?.slice(0, 3).map((item) => {
-        return (
-          <figure key={item}>
-            <header>
-              <h2
-                onClick={(e) =>
-                  handleStoryClick(e.target.innerText, categoryName)
-                }
-              >
-                {item == "categories" ? null : item.replace(/[/]/g, "")}
-              </h2>
-            </header>
-          </figure>
-        );
-      })}
-    </>
-  );
+  console.log(photo2)
+  const photos = [photo1, photo2, photo3];
+return (
+  <>
+    {stories?.slice(0, 3).map((item, index) => {
+      return (
+        <figure
+          key={item}
+          className="flex-col flex items-center mb-4"
+        >
+          <header className="relative">
+            <img
+              src={photos[index]}
+            ></img>
+            <h2
+              className="absolute bottom-0"
+              onClick={(e) =>
+                handleStoryClick(e.target.innerText, categoryName)
+              }
+            >
+              {item == "categories" ? null : item.replace(/[/]/g, "")}
+            </h2>
+          </header>
+        </figure>
+      );
+    })}
+  </>
+);
 };
