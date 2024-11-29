@@ -21,7 +21,7 @@ export const SingleStoryPage = () => {
         <img
           src="../../src/assets/resources/huldufolk 1.png"
           alt="Huldufolk"
-          className="w-full h-full p-3"
+          className="w-full h-full"
         ></img>
 
         {/* Story Title */}
@@ -41,7 +41,7 @@ export const SingleStoryPage = () => {
 
         {/* horizontal line */}
 
-        <hr className="h-0.010 w-full bg-sagnir-200 border-"></hr>
+        <hr className="h-0.010 w-full bg-sagnir-200"></hr>
 
         {/* Story body */}
 
