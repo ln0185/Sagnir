@@ -94,7 +94,7 @@ export const StoriesPage = () => {
       ) : null}
 
       {/* Content that scrolls */}
-      <div className="mt-4 overflow-y-auto">
+      <div className="mt-4 overflow-y-auto pb-9 overflow-hidden">
         {/* Stories */}
         {selectedStories ? (
           <StoriesCard data={selectedStories} categoryName={clickedCategory} />
