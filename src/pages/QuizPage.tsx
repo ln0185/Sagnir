@@ -14,7 +14,7 @@ export const QuizPage = () => {
       questionNumber: 1,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Lagarfljót?",
-      imageSrc: "/src/assets/resources/lagarfljotid.svg", // Add image path
+      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg", // Add image path
       options: [
         { label: "A", text: "Hólmavík" },
         { label: "B", text: "Egilsstaðir" },
@@ -66,7 +66,7 @@ export const QuizPage = () => {
       questionNumber: 5,
       totalQuestions: 5,
       questionText: "Hvað heitir kerlingin sem vann ullina?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      imageSrc: "/src/assets/resources/ullin.svg",
       options: [
         { label: "A", text: "Grýla" },
         { label: "B", text: "Gilitrutt" },

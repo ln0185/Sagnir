@@ -10,7 +10,7 @@ export const StoriesHeader = () => {
       <h1 className="font-glare text-4xl text-sagnir-200 mb-5 md:text-5xl md:text-center">
         SÖGUR
       </h1>
-      <p className="font-glare text-sagnir-200 text-sm md:text-lg md:text-center">
+      <p className="font-glare text-sagnir-200 text-sm md:text-2xl md:text-center">
         Sökkvum okkur ofan í íslenskar þjóðsögur
       </p>
     </header>
