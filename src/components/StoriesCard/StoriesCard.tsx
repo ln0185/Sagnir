@@ -34,6 +34,9 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       photo7,
       photo8,
       photo9,
+      photo4,
+      photo6,
+      photo7,
     ],
     troll: [photo4, photo6, photo5],
     draug: [photo7, photo4, photo3],
@@ -99,7 +102,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   return (
     <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
       {categoryStories
-        .slice(0, isAllStories ? categoryStories.length : 3)
+        .slice(0, categoryName === "all" ? 12 : 3) // Show only 12 stories for "Allt"
         .map((story, index) => {
           // Ensure fallback title and photo
           const title = story?.replace(/[/]/g, "") || "Untitled";
