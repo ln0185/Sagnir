@@ -1,4 +1,3 @@
-import { FeaturedStories } from "./FeaturedStories";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 let photo1 = "../../../src/assets/resources/huldufolk 1.png";
 let photo2 = "../../../src/assets/resources/huldu 1.png";
@@ -8,16 +7,34 @@ interface StoriesCardInterface {
   [key: string]: string;
 }
 
+// type StoriesCardType = {
+//   data: StoriesCardInterface;
+//   categoryName: string | NavigateOptions;
+// };
+
 type StoriesCardType = {
-  data: StoriesCardInterface;
+  data: {
+    category: string;
+    stories: Record<string, string>;
+  };
   categoryName: string | NavigateOptions;
-};
+}
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   let stories;
   console.log(data);
-  if (data) {
-    stories = Object.values(data?.stories || data);
+  if (categoryName == "all") {
+    stories = data?.flatMap((item) => {
+      let catStories = Object.values(item?.stories.stories);
+      let allStories = catStories.flatMap((item) => item);
+      return allStories;
+    })
+    console.log("Testing", stories);
+    
+  } else if (data.category !== "all") {
+    stories = Object.values(data?.stories || {});
+    console.log("Not this plea");
+    
   }
 
   let navigate = useNavigate();
@@ -60,6 +77,9 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     navigate(`/stories/${storyCategories}/${categoryStories}`);
   };
 
+  console.log("All stories", stories);
+  
+
   return (
     <>
       {stories?.slice(0, 3).map((item) => {
@@ -71,7 +91,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
                   handleStoryClick(e.target.innerText, categoryName)
                 }
               >
-                {item == "categories" ? null : item.replace(/[/]/g, "")}
+                {item == "categories" && item ? null : item.replace(/[/]/g, "")}
               </h2>
             </header>
           </figure>

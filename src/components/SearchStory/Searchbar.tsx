@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
 
-interface StoriesInterface {
-  category: string;
+
+interface StoryInterface {
+  [key: string]: string;
+}
+
+interface StoriesArrayInterface {
+  category: string,
+  stories: StoryInterface
 }
 
 export const Searchbar = () => {
@@ -10,8 +16,8 @@ export const Searchbar = () => {
   const [searchedStory, setSearchedStory] = useState<string>("");
   const [searchResult, setSearchResult] = useState("");
   const [allStories, setAllStories] = useState([]);
-  const [searchedStories, setSearchedStories] = useState([]);
-  const [searchedCategoryStory, setSearchedCategoryStory] = useState([]);
+  const [searchedStories, setSearchedStories] = useState<string[]>([]);
+  const [searchedCategoryStory, setSearchedCategoryStory] = useState<string[]>([]);
 
   useEffect(() => {
     setSearchedStory("");
@@ -32,8 +38,7 @@ export const Searchbar = () => {
     const getStoriesData = async () => {
       const res = await fetch("https://m4groupproject.onrender.com/all");
       const data = await res.json();
-      const stories = data?.map((item: StoriesInterface) => {
-        
+      const stories = data?.map((item: StoriesArrayInterface) => {
         let allStories = item.stories;
         let allTheStories = Object.values(allStories);
         return allTheStories
@@ -44,13 +49,14 @@ export const Searchbar = () => {
   }, [searchResult]);
 
   useEffect(() => {
-    let searchStories = allStories.map((item) => {
+    let searchStories: string[] = allStories.map((item) => {
       let storiesArray = Object.values(item);
   
       return storiesArray.map((story) => story);
     });
   
     searchStories = searchStories.flat();
+    
     setSearchedStories(searchStories);
   
   }, [allStories]);
