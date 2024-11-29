@@ -9,7 +9,7 @@ export const SearchedStories = ({data}: SearchedStoriesType) => {
             return (
                 <figure key={item}>
                     <header>
-                        <h2>{item.replace(/[/]/g, "")}</h2>
+                        <h2 className="text-white">{item.replace(/[/]/g, "")}</h2>
                     </header>
                 </figure>
             )

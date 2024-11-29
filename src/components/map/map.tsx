@@ -65,7 +65,7 @@ const markers: MarkerData[] = [
   {
     id: 5,
     position: [64.1540458, -21.2815924],
-    title: "Jorukleif",
+    title: "Jórukleif",
     category: "Tröll",
     description:
       "Jórunn hét stúlka ein; hún var bóndadóttir einhvers staðar úr Sandvíkurhrepp í Flóanum; ung var hún og efnileg, en heldur þótti hún skapstór. Hún var matselja hjá föður sínum. Einhvern dag bar svo við, að hestaat var haldið skammt frá bæ Jórunnar; átti faðir hennar annan hestinn, er etja skyldi, og hafði Jórunn miklar mætur á honum. Hún var viðstödd hestaatið og fleiri konur; en er atið byrjaði, sá hún, að hestur föður hennar fór heldur halloka fyrir.",

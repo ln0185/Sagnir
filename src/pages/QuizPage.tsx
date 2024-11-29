@@ -14,7 +14,7 @@ export const QuizPage = () => {
       questionNumber: 1,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Lagarfljót?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg", // Add image path
+      imageSrc: "/src/assets/resources/lagarfljotid.svg", // Add image path
       options: [
         { label: "A", text: "Hólmavík" },
         { label: "B", text: "Egilsstaðir" },
@@ -26,8 +26,8 @@ export const QuizPage = () => {
     {
       questionNumber: 2,
       totalQuestions: 5,
-      questionText: "Hvað á grýla mörg börn?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      questionText: "Hvað á grýla gamla mörg börn?",
+      imageSrc: "/src/assets/resources/grylaa.svg",
       options: [
         { label: "A", text: "Þrjátíu" },
         { label: "B", text: "Fimm" },
@@ -40,7 +40,7 @@ export const QuizPage = () => {
       questionNumber: 3,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Skessuhellir?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      imageSrc: "/src/assets/resources/quizhellir.svg",
       options: [
         { label: "A", text: "Húsagili" },
         { label: "B", text: "Vestfjörðum" },
@@ -53,7 +53,7 @@ export const QuizPage = () => {
       questionNumber: 4,
       totalQuestions: 5,
       questionText: "Hví segir Djákninn Garún?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      imageSrc: "/src/assets/resources/djakninn.svg",
       options: [
         { label: "A", text: "Hún hét Garún" },
         { label: "B", text: "Hann gat ekki sagt guðrún" },
