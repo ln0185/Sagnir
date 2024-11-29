@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 let photo1 = "../../../src/assets/resources/huldufolk 1.png";
 let photo2 = "../../../src/assets/resources/huldu 1.png";
@@ -21,21 +22,32 @@ type StoriesCardType = {
 }
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
-  let stories;
+  const [stories, setStories] = useState<string[]>([]);
   console.log(data);
-  if (categoryName == "all") {
-    stories = data?.flatMap((item) => {
-      let catStories = Object.values(item?.stories.stories);
-      let allStories = catStories.flatMap((item) => item);
-      return allStories;
-    })
-    console.log("Testing", stories);
+
+  useEffect(() => {
+    if (categoryName === "all" && data) {
+    let allStories = [];
+
+    if (Array.isArray(data)) {
+      allStories = data.flatMap((item) => {
+        let catStories = Object.values(item?.stories.stories);
+        let allStories = catStories.flatMap((item) => item);
+        return allStories;
+      }
+      );
+    }
+    else {
+      allStories = Object.values(data?.stories || {});
+    }
+    console.log("All the stories", allStories);
     
-  } else if (data.category !== "all") {
-    stories = Object.values(data?.stories || {});
-    console.log("Not this plea");
-    
-  }
+    } else if (data.category !== "all") {
+      const catStories = Object.values(data?.stories || {});
+      console.log(catStories);
+      setStories(catStories);
+    }
+  }, [data, categoryName])
 
   let navigate = useNavigate();
 
@@ -76,9 +88,6 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
     navigate(`/stories/${storyCategories}/${categoryStories}`);
   };
-
-  console.log("All stories", stories);
-  
 
   return (
     <>
