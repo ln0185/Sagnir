@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 import photo1 from "../../assets/resources/huldufolk 1.png";
 import photo2 from "../../assets/resources/huldu1 1.png";
@@ -10,13 +11,52 @@ interface StoriesCardInterface {
   [key: string]: string;
 }
 
+// type StoriesCardType = {
+//   data: StoriesCardInterface;
+//   categoryName: string | NavigateOptions;
+// };
+
 type StoriesCardType = {
-  data: StoriesCardInterface;
+  data: {
+    category: string;
+    stories: Record<string, string>;
+  };
   categoryName: string | NavigateOptions;
-};
+}
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
+  const [categoryStories, setCategoryStories] = useState<string[]>([]);
+  const [isAllStories, setIsAllStories] = useState<boolean>(false);
+  console.log(data);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (categoryName === "all" && data) {
+    let allStories = [];
+
+    if (Array.isArray(data)) {
+      allStories = data.flatMap((item) => {
+        let catStories = Object.values(item?.stories.stories);
+        let allStories = catStories.flatMap((item) => item);
+        return allStories;
+      }
+      );
+    }
+    else {
+      allStories = Object.values(data?.stories || {});
+    }
+    console.log("All the stories", allStories);
+    setIsAllStories(true);
+    setCategoryStories(allStories);
+    
+    } else if (data.category !== "all") {
+      const catStories = Object.values(data?.stories || {});
+      console.log(catStories);
+      setIsAllStories(false);
+      setCategoryStories(catStories);
+    }
+  }, [data, categoryName])
 
   // Mapping of categories to their respective image arrays
   const categoryPhotos: Record<string, string[]> = {
@@ -32,7 +72,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       ? categoryPhotos[categoryName.toLowerCase()] || categoryPhotos.default
       : categoryPhotos.default;
 
-  let stories = data ? Object.values(data?.stories || data) : [];
+  // let stories = data ? Object.values(data?.stories || data) : [];
 
   const handleStoryClick = (story: string, category: string) => {
     const categoryNavigations: Record<string, string> = {
@@ -64,7 +104,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     navigate(`/stories/${storyCategory}/${storySlug}`);
   };
 
-  if (!stories || stories.length === 0) {
+  if (!categoryStories || categoryStories.length === 0) {
     return (
       <p className="text-center">No stories available for this category.</p>
     );
@@ -72,7 +112,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   return (
     <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
-      {stories.slice(0, 3).map((story, index) => (
+      {categoryStories.slice(0, isAllStories ? categoryStories.length : 3).map((story, index) => (
         <figure key={story} className="flex flex-col items-center w-full">
           <header className="relative w-full">
             <img
