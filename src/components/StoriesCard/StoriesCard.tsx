@@ -22,7 +22,7 @@ type StoriesCardType = {
     stories: Record<string, string>;
   };
   categoryName: string | NavigateOptions;
-}
+};
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
@@ -33,34 +33,44 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   useEffect(() => {
     if (categoryName === "all" && data) {
-    let allStories = [];
+      let allStories = [];
 
-    if (Array.isArray(data)) {
-      allStories = data.flatMap((item) => {
-        let catStories = Object.values(item?.stories.stories);
-        let allStories = catStories.flatMap((item) => item);
-        return allStories;
+      if (Array.isArray(data)) {
+        allStories = data.flatMap((item) => {
+          let catStories = Object.values(item?.stories.stories);
+          let allStories = catStories.flatMap((item) => item);
+          return allStories;
+        });
+      } else {
+        allStories = Object.values(data?.stories || {});
       }
-      );
-    }
-    else {
-      allStories = Object.values(data?.stories || {});
-    }
-    console.log("All the stories", allStories);
-    setIsAllStories(true);
-    setCategoryStories(allStories);
-    
+      console.log("All the stories", allStories);
+      setIsAllStories(true);
+      setCategoryStories(allStories);
     } else if (data.category !== "all") {
       const catStories = Object.values(data?.stories || {});
       console.log(catStories);
       setIsAllStories(false);
       setCategoryStories(catStories);
     }
-  }, [data, categoryName])
+  }, [data, categoryName]);
 
   // Mapping of categories to their respective image arrays
   const categoryPhotos: Record<string, string[]> = {
-    default: [photo1, photo2, photo3],
+    default: [
+      photo1,
+      photo2,
+      photo3,
+      photo4,
+      photo5,
+      photo6,
+      photo1,
+      photo3,
+      photo4,
+      photo5,
+      photo2,
+      photo6,
+    ],
     troll: [photo4, photo5, photo6],
     draugar: [photo1, photo4, photo3],
     alfa: [photo4, photo6, photo5],
@@ -112,26 +122,28 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   return (
     <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
-      {categoryStories.slice(0, isAllStories ? categoryStories.length : 3).map((story, index) => (
-        <figure key={story} className="flex flex-col items-center w-full">
-          <header className="relative w-full">
-            <img
-              src={selectedPhotos[index] || "default-photo-path.svg"}
-              alt={`Story ${story}`}
-              className="w-full h-auto rounded-lg"
-            />
-            <h2
-              className="absolute bottom-2 left-2 text-sagnir-200 font-serifExtra text-2xl md:text-5xl px-2 py-1 rounded-md cursor-pointer"
-              onClick={() =>
-                typeof categoryName === "string" &&
-                handleStoryClick(story, categoryName)
-              }
-            >
-              {story !== "categories" ? story.replace(/[/]/g, "") : ""}
-            </h2>
-          </header>
-        </figure>
-      ))}
+      {categoryStories
+        .slice(0, isAllStories ? categoryStories.length : 3)
+        .map((story, index) => (
+          <figure key={story} className="flex flex-col items-center w-full">
+            <header className="relative w-full">
+              <img
+                src={selectedPhotos[index] || "default-photo-path.svg"}
+                alt={`Story ${story}`}
+                className="w-full h-auto rounded-lg"
+              />
+              <h2
+                className="absolute bottom-2 left-2 text-sagnir-200 font-serifExtra text-2xl md:text-5xl px-2 py-1 rounded-md cursor-pointer"
+                onClick={() =>
+                  typeof categoryName === "string" &&
+                  handleStoryClick(story, categoryName)
+                }
+              >
+                {story !== "categories" ? story.replace(/[/]/g, "") : ""}
+              </h2>
+            </header>
+          </figure>
+        ))}
     </div>
   );
 };
