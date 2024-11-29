@@ -26,6 +26,7 @@ type StoriesCardType = {
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
+  const [isAllStories, setIsAllStories] = useState<boolean>(false);
   console.log(data);
 
   const navigate = useNavigate();
@@ -46,11 +47,13 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       allStories = Object.values(data?.stories || {});
     }
     console.log("All the stories", allStories);
+    setIsAllStories(true);
     setCategoryStories(allStories);
     
     } else if (data.category !== "all") {
       const catStories = Object.values(data?.stories || {});
       console.log(catStories);
+      setIsAllStories(false);
       setCategoryStories(catStories);
     }
   }, [data, categoryName])
@@ -109,7 +112,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
 
   return (
     <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
-      {categoryStories.slice(0, 3).map((story, index) => (
+      {categoryStories.slice(0, isAllStories ? categoryStories.length : 3).map((story, index) => (
         <figure key={story} className="flex flex-col items-center w-full">
           <header className="relative w-full">
             <img
