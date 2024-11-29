@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 import photo1 from "../../assets/resources/huldufolk 1.png";
 import photo2 from "../../assets/resources/huldu1 1.png";
-import photo3 from "../../assets/resources/photoBW.svg";
-import photo4 from "../../assets/resources/Brian-pilkington-troll2.jpg";
-import photo5 from "../../assets/resources/Elves.jpg";
-import photo6 from "../../assets/resources/Swan-Mythology.webp";
+import photo3 from "../../assets/resources/MYND4.png";
+import photo4 from "../../assets/resources/MYND3.png";
+import photo5 from "../../assets/resources/MYND2.png";
+import photo6 from "../../assets/resources/MYND1.png";
 
 interface StoriesCardInterface {
   [key: string]: string;
@@ -49,7 +49,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     console.log("All the stories", allStories);
     setIsAllStories(true);
     setCategoryStories(allStories);
-    
+
     } else if (data.category !== "all") {
       const catStories = Object.values(data?.stories || {});
       console.log(catStories);
