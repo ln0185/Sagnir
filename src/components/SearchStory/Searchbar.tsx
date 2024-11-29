@@ -50,6 +50,7 @@ export const Searchbar = () => {
 
   useEffect(() => {
     let searchStories: string[] = allStories.map((item) => {
+      
       let storiesArray = Object.values(item);
   
       return storiesArray.map((story) => story);
@@ -57,6 +58,8 @@ export const Searchbar = () => {
   
     searchStories = searchStories.flat();
     
+    console.log("Items", searchStories);
+
     setSearchedStories(searchStories);
   
   }, [allStories]);
