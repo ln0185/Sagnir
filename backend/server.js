@@ -122,8 +122,8 @@ app.get("/all", (req, res) => {
       ]);
 
       const combinedData = [
-        { category: "Troll", stories: data1 },
-        { category: "Draugar", stories: data2 },
+        { category: "troll", stories: data1 },
+        { category: "draug", stories: data2 },
         { category: "alfa", stories: data3 },
         { category: "efra", stories: data4 },
       ];
