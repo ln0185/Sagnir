@@ -99,9 +99,6 @@ export const StoriesPage = () => {
         {selectedStories ? (
           <StoriesCard data={selectedStories} categoryName={clickedCategory} />
         ) : null}
-
-        {/* Search bar */}
-        <Searchbar />
       </div>
     </div>
   );
