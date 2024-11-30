@@ -17,7 +17,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full h-2 bg-[#626262] rounded overflow-hidden">
+      <div className="w-full h-2 bg-sagnir-300 rounded overflow-hidden">
         <div
           className="h-full bg-sagnir-200"
           style={{ width: `${progress}%` }} // Dynamic progress width

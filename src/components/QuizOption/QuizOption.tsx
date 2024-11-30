@@ -21,7 +21,7 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 }) => {
   return (
     <button
-      className={`w-full py-3 px-6 flex items-center text-left border rounded-lg transition ${
+      className={`w-full py-3 px-6 flex items-center text-left border rounded-lg transition-all duration-200 ${
         showCorrectAnswer
           ? "bg-sagnir-200 border-sagnir-200 text-sagnir-100" // Highlight correct answer
           : isIncorrect
@@ -61,7 +61,22 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 
       {/* Icons for Correct/Incorrect */}
       {isIncorrect && (
-        <span className="font-sans ml-auto text-[#F1ECDE]">✗</span>
+        <span className="font-sans ml-auto text-sagnir-200">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 7L17 17M17 7L7 17"
+              stroke="#F0ECDD"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
       )}
       {showCorrectAnswer && (
         <span className="ml-auto">
