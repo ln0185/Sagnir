@@ -80,7 +80,7 @@ export const StoriesPage = () => {
 
       {/* Fixed categories */}
       {icelandicCategoryNames.length > 0 && !isLoading && !error ? (
-        <div className="sticky top-[200px] z-30 bg-sagnir-100">
+        <div className="sticky top-[190px] z-30 bg-sagnir-100">
           <Categories
             data={icelandicCategoryNames}
             setClickedCategory={setClickedCategory}
@@ -89,7 +89,7 @@ export const StoriesPage = () => {
       ) : null}
 
       {/* Scrollable Content */}
-      <div className="mt-4 pt-20 pb-9 overflow-hidden">
+      <div className="pt-2 pb-9 overflow-hidden">
         {selectedStories ? (
           <StoriesCard data={selectedStories} categoryName={clickedCategory} />
         ) : null}

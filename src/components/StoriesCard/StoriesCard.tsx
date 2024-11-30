@@ -37,7 +37,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       photo8,
       photo9,
       photo10,
-      photo7,
+      photo2,
       photo11,
     ],
     troll: [photo4, photo6, photo5],
