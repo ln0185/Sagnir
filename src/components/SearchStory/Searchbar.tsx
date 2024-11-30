@@ -14,21 +14,20 @@ export const Searchbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [searchedStory, setSearchedStory] = useState<string>("");
   const [searchResult, setSearchResult] = useState("");
-  const [allStories, setAllStories] = useState<string[]>([]); // Declare as string[] to hold flat array
+  const [allStories, setAllStories] = useState([]);
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
-  const [searchedCategoryStory, setSearchedCategoryStory] = useState<{
-    category: string;
-    stories: Record<string, string>;
-  } | null>(null); // We will store the search results in this format
+  const [searchedCategoryStory, setSearchedCategoryStory] = useState<string[]>(
+    []
+  );
 
   useEffect(() => {
     setSearchedStory("");
-    setSearchedCategoryStory(null); // Reset the search results
+    setSearchedCategoryStory([]);
   }, []);
 
   useEffect(() => {
     const searchDelayDebounce = setTimeout(() => {
-      if (searchedStory !== "") {
+      if (searchedStory != "") {
         setSearchResult(searchedStory.toLowerCase());
       }
     }, 1500);
@@ -43,47 +42,39 @@ export const Searchbar = () => {
       const stories = data?.map((item: StoriesArrayInterface) => {
         let allStories = item.stories;
         let allTheStories = Object.values(allStories);
-        return allTheStories; // This returns an array of arrays
+        return allTheStories;
       });
-      setAllStories(stories.flat()); // Flatten the nested arrays to get a single array of strings
+      setAllStories(stories.flat());
     };
     getStoriesData();
   }, [searchResult]);
 
   useEffect(() => {
     let searchStories: string[] = allStories.map((item) => {
-      return item;
+      let storiesArray = Object.values(item);
+
+      return storiesArray.map((story) => story);
     });
 
-    searchStories = searchStories.flat(); // Ensure it's flat (if needed)
+    searchStories = searchStories.flat();
 
     console.log("Items", searchStories);
+
     setSearchedStories(searchStories);
   }, [allStories]);
 
   useEffect(() => {
+    let allStories = [...searchedStories];
+
     if (!searchedStory) {
-      setSearchedCategoryStory(null); // Reset when no search term is entered
+      setSearchedCategoryStory([]);
       return;
     }
 
-    const filteredStories = searchedStories.filter((story: string) =>
+    const filteredStories = allStories.filter((story: string) =>
       story.toLowerCase().includes(searchedStory.toLowerCase())
     );
-
-    // Convert the filtered stories array to Record<string, string>
-    const storiesRecord: Record<string, string> = filteredStories.reduce(
-      (acc: Record<string, string>, story, index) => {
-        acc[`story_${index + 1}`] = story; // Assign a unique key for each story
-        return acc;
-      },
-      {} as Record<string, string> // Explicitly declare the type of the accumulator
-    );
-
-    setSearchedCategoryStory({
-      category: "Search Results", // Set a category name for the search results
-      stories: storiesRecord, // Pass the converted Record<string, string>
-    });
+    setSearchedCategoryStory(filteredStories);
   }, [searchedStories, searchedStory]);
 
   return (
@@ -101,15 +92,12 @@ export const Searchbar = () => {
           </div>
           <div className="flex flex-col text-center bg-slate-900 mx-7">
             {searchedCategoryStory ? (
-              <StoriesCard
-                data={searchedCategoryStory} // Now passing the correct format
-                categoryName="searchResults" // You can set the category name here as needed
-              />
+              <StoriesCard data={searchedCategoryStory} />
             ) : null}
           </div>
         </>
       ) : null}
-      {/* Temp button for testing */}
+      {/*Temp button for testing  */}
       <button onClick={() => setIsSearchOpen((prev) => !prev)}>
         Open Search
       </button>
