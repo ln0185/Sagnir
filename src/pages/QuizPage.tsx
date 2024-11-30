@@ -66,7 +66,7 @@ export const QuizPage = () => {
       questionNumber: 5,
       totalQuestions: 5,
       questionText: "Hvað heitir kerlingin sem vann ullina?",
-      imageSrc: "/src/assets/resources/ullin.svg",
+      imageSrc: "/src/assets/resources/quizalfarsvg.svg",
       options: [
         { label: "A", text: "Grýla" },
         { label: "B", text: "Gilitrutt" },
