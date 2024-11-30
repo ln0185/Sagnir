@@ -1,94 +1,77 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
 
-interface StoryInterface {
-  [key: string]: string;
-}
+export const Searchbar = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [searchedStory, setSearchedStory] = useState<string>("");
+  const [allStories, setAllStories] = useState<any[]>([]);
+  const [filteredStories, setFilteredStories] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-interface StoriesArrayInterface {
-  category: string;
-  stories: StoryInterface;
-}
-
-interface SearchbarProps {
-  isSearchOpen: boolean;
-  setIsSearchOpen: (value: boolean) => void;
-}
-
-export const Searchbar: React.FC<SearchbarProps> = ({
-  isSearchOpen,
-  setIsSearchOpen,
-}) => {
-  const [searchedStory, setSearchedStory] = useState<string>(""); // User input
-  const [allStories, setAllStories] = useState<string[]>([]); // All fetched stories
-  const [filteredStories, setFilteredStories] = useState<string[]>([]); // Filtered stories
-
-  // Fetch stories from API
+  // Fetch all stories when the component mounts
   useEffect(() => {
-    const fetchStories = async () => {
-      try {
-        const res = await fetch("https://m4groupproject.onrender.com/all");
-        const data: StoriesArrayInterface[] = await res.json();
-
-        // Flatten stories into an array of strings
-        const stories = data.flatMap((item) => Object.values(item.stories));
-
-        setAllStories(stories);
-      } catch (error) {
-        console.error("Error fetching stories:", error);
-      }
+    const getAllStories = async () => {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:8080/all"); // Replace with your actual server URL
+      const data = await response.json();
+      setAllStories(data);
+      setFilteredStories(data); // Initially show all stories
+      setIsLoading(false);
     };
 
-    fetchStories();
+    getAllStories();
   }, []);
 
-  // Filter stories based on user input
-  useEffect(() => {
-    if (!searchedStory.trim()) {
-      setFilteredStories([]);
+  // Handle search input changes
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase();
+    setSearchedStory(query);
+
+    // If there's no search term, reset to show all stories
+    if (query === "") {
+      setFilteredStories(allStories);
       return;
     }
 
-    const lowerCasedQuery = searchedStory.toLowerCase();
-    const results = allStories.filter((story) =>
-      story.toLowerCase().includes(lowerCasedQuery)
-    );
+    // Filter categories and stories based on search term
+    const result = allStories
+      .map((category: any) => ({
+        ...category,
+        stories: category.stories.filter((story: string) =>
+          story.toLowerCase().includes(query)
+        ),
+      }))
+      .filter((category: any) => category.stories.length > 0); // Only keep categories that have matching stories
 
-    setFilteredStories(results);
-  }, [searchedStory, allStories]);
+    setFilteredStories(result);
+  };
 
   return (
-    <div
-      className={`fixed inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center transition-opacity duration-300 ${
-        isSearchOpen ? "opacity-100 z-50" : "opacity-0 pointer-events-none"
-      }`}
-    >
-      <button
-        onClick={() => setIsSearchOpen(false)}
-        className="absolute top-4 right-4 text-white"
-      >
-        Close
+    <section className="flex flex-col gap-2">
+      {isSearchOpen && (
+        <>
+          <div className="bg-slate-900 flex flex-col items-center mx-7">
+            <input
+              className="border-solid border-2 border-indigo-600"
+              type="text"
+              placeholder="Search stories..."
+              value={searchedStory}
+              onChange={handleSearch}
+            />
+          </div>
+          <div className="flex flex-col text-center bg-slate-900 mx-7">
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <StoriesCard data={filteredStories} categoryName="all" />
+            )}
+          </div>
+        </>
+      )}
+
+      <button onClick={() => setIsSearchOpen((prev) => !prev)}>
+        Open Search
       </button>
-      <div className="bg-white p-6 rounded-md shadow-lg w-11/12 max-w-lg">
-        <input
-          className="border border-gray-300 p-2 rounded-md w-full"
-          type="text"
-          placeholder="Search stories..."
-          value={searchedStory}
-          onChange={(e) => setSearchedStory(e.target.value)}
-        />
-        <div className="mt-4">
-          {filteredStories.length > 0 ? (
-            <StoriesCard data={filteredStories} />
-          ) : (
-            <p className="text-gray-500">
-              {searchedStory.trim()
-                ? "No results found."
-                : "Start typing to search."}
-            </p>
-          )}
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };

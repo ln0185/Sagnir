@@ -101,10 +101,10 @@ export const QuizPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-sagnir-100 text-sagnir-200 h-screen w-full">
+    <div className="flex items-center justify-center bg-sagnir-100 text-sagnir-200 h-auto w-screen">
       <div className="flex flex-col w-full max-w-4xl">
         {/* Progress Bar */}
-        <div className="flex-none mx-8 mt-12 mb-6">
+        <div className="flex-none mx-8 mt-12 mb-6 md:mt-15">
           <ProgressBar
             questionNumber={currentQuestion.questionNumber}
             totalQuestions={currentQuestion.totalQuestions}
@@ -121,12 +121,12 @@ export const QuizPage = () => {
           <img
             src={currentQuestion.imageSrc}
             alt={`Question ${currentQuestion.questionNumber}`}
-            className="pt-5 w-full h-[300px] md:w-full"
+            className="pt-5 w-full justify-center h-[300px] md:w-[950px] md:h-[480px]"
           />
         </div>
 
         {/* Options */}
-        <div className="w-full px-8 mb-16 mt-5 grid grid-cols-1 gap-4">
+        <div className="w-full justify-content px-8 mb-16 mt-5 grid grid-cols-1 gap-4">
           {currentQuestion.options.map((option) => (
             <QuizOption
               key={option.label}
@@ -148,7 +148,7 @@ export const QuizPage = () => {
         </div>
         {/* Next Arrow Button */}
         {isAnswered && (
-          <div className="absolute bottom-[2.55rem] right-6 md:right-45">
+          <div className="absolute bottom-[3rem] right-[1rem] md:right-[21rem] md:bottom-[3.5rem]">
             <ArrowButton onClick={handleNextQuestion} />
           </div>
         )}
