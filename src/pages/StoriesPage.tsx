@@ -79,7 +79,7 @@ export const StoriesPage = () => {
   }, [clickedCategory]);
 
   return (
-    <div className="z-10">
+    <div className="z-10 bg-sagnir-100 pb-8 overflow-hidden">
       {/* Fixed header */}
       <StoriesHeader />
 
