@@ -1030,6 +1030,10 @@ video {
 
 .pb-4 {
   padding-bottom: 1rem;
+
+.pt-10 {
+  padding-top: 2.5rem;
+
 }
 
 .pb-6 {
@@ -1060,6 +1064,7 @@ video {
   padding-top: 2rem;
 }
 
+
 .text-left {
   text-align: left;
 }
@@ -1082,10 +1087,16 @@ video {
 
 .font-sans {
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.font-sans {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .font-serifExtra {
   font-family: PPFragment-SerifExtrabold, serif;
+
 }
 
 .\!text-sm {
