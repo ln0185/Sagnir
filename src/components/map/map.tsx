@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useNavigate } from "react-router-dom";
+import "./map.css";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
@@ -63,7 +65,7 @@ const markers: MarkerData[] = [
   {
     id: 5,
     position: [64.1540458, -21.2815924],
-    title: "Jorukleif",
+    title: "Jórukleif",
     category: "Tröll",
     description:
       "Jórunn hét stúlka ein; hún var bóndadóttir einhvers staðar úr Sandvíkurhrepp í Flóanum; ung var hún og efnileg, en heldur þótti hún skapstór. Hún var matselja hjá föður sínum. Einhvern dag bar svo við, að hestaat var haldið skammt frá bæ Jórunnar; átti faðir hennar annan hestinn, er etja skyldi, og hafði Jórunn miklar mætur á honum. Hún var viðstödd hestaatið og fleiri konur; en er atið byrjaði, sá hún, að hestur föður hennar fór heldur halloka fyrir.",
@@ -95,7 +97,7 @@ const markers: MarkerData[] = [
   {
     id: 9,
     position: [64.5194429, -21.9365519],
-    title: "Reynistaðarkirkja",
+    title: "Reynisstaðarkirkja",
     category: "Draugar",
     description:
       "Um haustið 1780 sendi Halldór Bjarnason, er þá hélt Reynistaðarklaustur, son sinn tvítugan, er Bjarni hét, og mann með, er Jón hét og var kallaður Austmann, suður um land til fjárkaupa því fyrirfarandi ár hafði mjög fallið fé á Norðurlandi. Síðar um haustið sendi og Halldór yngri son sinn suður, er Einar hét, ellefu ára að aldri, og mann með honum, er Sigurður hét, og áttu þeir að hjálpa hinum til að reka féð norður er þeir höfðu keypt. Það er mælt að Einar hafi nauðugur farið þessa för og hafi sagt að hann mundi ekki aftur heim koma.",
@@ -122,6 +124,57 @@ const Map: React.FC = () => {
   const [userPosition, setUserPosition] = useState<[number, number] | null>(
     null
   );
+
+  //fetching stories
+  let navigate = useNavigate();
+  function handleStoryClick(item: string, category: string) {
+    if (category === "Huldufólk") {
+      category = "alfa";
+    }
+    if (category === "Helgisögur") {
+      category = "efra";
+    }
+    if (category === "Draugar") {
+      category = "draug";
+    }
+    if (category === "Tröll") {
+      category = "troll";
+    }
+    if (item === "Geirfuglasker") {
+      item = "geirfugl";
+    }
+    if (item === "Loðmundarfjörður") {
+      item = "a-lodmfj";
+    }
+    if (item === "Melstaðarkirkja") {
+      item = "jonas";
+    }
+    if (item === "Skaftafell") {
+      item = "einar-sk";
+    }
+    if (item === "Jórukleif") {
+      item = "jora";
+    }
+    if (item === "Eyvindarmúli") {
+      item = "gudm-eyv";
+    }
+    if (item === "Rafnkelsstaðir") {
+      item = "flugan";
+    }
+    if (item === "Snjóholt") {
+      item = "setta2";
+    }
+    if (item === "Reynisstaðarkirkja") {
+      item = "reynis";
+    }
+    if (item === "Húnavatnssýsla") {
+      item = "sat-nafn";
+    }
+    if (item === "Hruni") {
+      item = "hruna";
+    }
+    navigate(`/stories/${category}/${item}`);
+  }
 
   // Geolocation logic
   useEffect(() => {
@@ -162,14 +215,27 @@ const Map: React.FC = () => {
             icon={customIcon} // Use the custom icon for each marker
           >
             <Popup className="custom-popup">
-              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[19rem] !h-auto !p-2 !shadow-none !m-1">
-                <h2 className="!text-xl !font-serifExtra">{marker.title}</h2>
-                <h3 className="!text-sagnir-200 !text-md !font-glare !inline-block">
+              <div
+                onClick={() => handleStoryClick(marker.title, marker.category)}
+                className="!bg-sagnir-100 !text-sagnir-200 !rounded-none !w-[18rem] !h-auto !shadow-none m-1 p-2"
+              >
+                <h2 className="!bg-sagnir-100 !text-xl !font-serifExtra p-1 m-1">
+                  {marker.title}
+                </h2>
+                <h3 className="!bg-sagnir-100 !text-sagnir-200 !text-md !font-glare !inline-block p-1 m-1">
                   {marker.category}
                 </h3>
-                <p className="!text-sagnir-200 !font-glare">
+                <p className=" !bg-sagnir-100 !text-sagnir-200 !font-glare !p-1 m-1">
                   {marker.description}
                 </p>
+                <button
+                  className="!text-sagnir-200 !font-glare !text-sm m-1"
+                  onClick={() =>
+                    handleStoryClick(marker.title, marker.category)
+                  }
+                >
+                  Read More &#8594;
+                </button>
               </div>
             </Popup>
           </Marker>
@@ -178,8 +244,8 @@ const Map: React.FC = () => {
         {userPosition && (
           <Marker position={userPosition} icon={geolocationIcon}>
             <Popup className="custom-popup">
-              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-auto !h-auto !p-0.5 !shadow-none">
-                <h3 className="!text-sagnir-200 !text-lg !font-glare !inline-block">
+              <div className="!bg-sagnir-100 !text-sagnir-200 !border-sagnir-200 !rounded-none !w-[10rem] !h-auto !p-0.5 !shadow-none">
+                <h3 className="!text-sagnir-200 !text-xl text-center !font-glare !inline-block">
                   Þú ert her !
                 </h3>
               </div>

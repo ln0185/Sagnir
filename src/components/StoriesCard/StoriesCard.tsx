@@ -1,70 +1,136 @@
-import { FeaturedStories } from "./FeaturedStories";
+import { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
-
-interface StoriesCardInterface {
-  name: string;
-  stories: string[];
-}
+import photo1 from "../../assets/resources/huldufolk 1.png";
+import photo2 from "../../assets/resources/huldu1 1.png";
+import photo3 from "../../assets/resources/MYND4.png";
+import photo4 from "../../assets/resources/MYND3.png";
+import photo5 from "../../assets/resources/MYND2.png";
+import photo6 from "../../assets/resources/MYND1.png";
+import photo7 from "../../assets/resources/ghosts.png";
+import photo8 from "../../assets/resources/hidden people.svg";
+import photo9 from "../../assets/resources/hidden people 2.svg";
 
 type StoriesCardType = {
-  data: StoriesCardInterface;
-  categoryName: string | NavigateOptions,
+  data: {
+    category: string;
+    stories: Record<string, string>;
+  };
+  categoryName: string | NavigateOptions;
 };
 
-export const StoriesCard = ({data, categoryName}: StoriesCardType) => {
-  let stories;
-  console.log(data);
-  if (data) {
-    stories = Object.keys(data?.stories || data);
-  }
+export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
+  const [categoryStories, setCategoryStories] = useState<string[]>([]);
+  const [isAllStories, setIsAllStories] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  let navigate = useNavigate();
+  const categoryPhotos: Record<string, string[]> = {
+    default: [
+      photo1,
+      photo2,
+      photo3,
+      photo4,
+      photo5,
+      photo6,
+      photo7,
+      photo8,
+      photo9,
+      photo4,
+      photo6,
+      photo7,
+    ],
+    troll: [photo4, photo6, photo5],
+    draug: [photo7, photo4, photo3],
+    alfa: [photo1, photo9, photo8],
+    efra: [photo2, photo3, photo6],
+  };
 
-  const handleStoryClick = (e: string, categoryName: string) => {
-    if (categoryName === "Allt") {
-      categoryName = "all"
+  const selectedPhotos =
+    typeof categoryName === "string"
+      ? categoryPhotos[categoryName.toLowerCase()] || categoryPhotos.default
+      : categoryPhotos.default;
+
+  useEffect(() => {
+    if (categoryName === "all" && data) {
+      const allStories = Array.isArray(data)
+        ? data.flatMap((item) => Object.values(item?.stories.stories).flat())
+        : Object.values(data?.stories || {});
+      setIsAllStories(true);
+      setCategoryStories(allStories);
+    } else if (data.category !== "all") {
+      const catStories = Object.values(data?.stories || {});
+      setIsAllStories(false);
+      setCategoryStories(catStories);
     }
+  }, [data, categoryName]);
 
-    if (categoryName === "Tröll") {
-      categoryName = "troll"
-    }
+  const handleStoryClick = (story: string, category: string) => {
+    const categoryNavigations: Record<string, string> = {
+      Allt: "all",
+      Tröll: "troll",
+      Draugar: "draugar",
+      "alfar-og-huldufolk": "alfa",
+      Helgisögur: "ur-efra-og-nedra-helgisogur",
+    };
 
-    if (categoryName === "Draugar") {
-      categoryName = "draugar"
-    }
+    const storyNavigations: Record<string, string> = {
+      "Að hverjum andskotanum ertu að leita?": "leita",
+      "Arnljótur huldumaður": "arnljot",
+      "Álfadrottning í álögum": "alfa-dr",
+      "Ábæjar-Skotta": "skotta3",
+      "Átján draugar úr Blöndu": "18draug",
+      "Átján sendingar í senn": "18send",
+      "Átján Skólabræður": "18skolab",
+      "Andrarímur og Hallgrímsrímur": "andra",
+      "Bergþór Bláfellingur": "blafell",
+      Bakkastaður: "bakka",
+      "Brytinn í Skálholti": "brytinn",
+      "Dansinn í Hruna": "hruna",
+    };
 
-    if (categoryName === "alfar-og-huldufolk") {
-      categoryName = "alfa";
-    }
+    const storyCategory = categoryNavigations[category] || category;
+    const storySlug = storyNavigations[story] || story;
 
-    if (categoryName === "Helgisögur") {
-      categoryName = "ur-efra-og-nedra-helgisogur"
-    }
+    navigate(`/stories/${storyCategory}/${storySlug}`);
+  };
 
-    // console.log(console.log("Category name", categoryName));
-    navigate(`/stories/${categoryName}/${e}`);
+  if (!categoryStories || categoryStories.length === 0) {
+    return (
+      <p className="text-center">No stories available for this category.</p>
+    );
   }
 
   return (
-    <>
-      {stories?.slice(0, 3).map((item) => {
-        return (
-          <figure key={item}>
-            <header>
-              <FeaturedStories item={item}></FeaturedStories>
-            </header>
-          </figure>
-        );
-      })}
-         {stories?.slice(0, 3).map((item) => {
+    <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
+      {categoryStories
+        .slice(0, categoryName === "all" ? 12 : 3) // Show only 12 stories for "Allt"
+        .map((story, index) => {
+          // Ensure fallback title and photo
+          const title = story?.replace(/[/]/g, "") || "Untitled";
+          const photo = selectedPhotos[index] || "default-photo-path.svg";
+
+          // Debugging outputs
+          console.log(`Story #${index + 1}:`, { title, photo });
+
           return (
-            <figure key={item}>
-              <header>
-                <h2 onClick={(e) => handleStoryClick(e.target.innerText, categoryName)}>{item == "categories" ? null : item.replace(/[/]/g, "")}</h2>
+            <figure key={index} className="flex flex-col items-center w-full">
+              <header className="relative w-full">
+                <img
+                  src={photo}
+                  alt={`Story ${title}`}
+                  className="w-full h-auto rounded-lg"
+                />
+                <h2
+                  className="absolute bottom-2 left-2 text-sagnir-200 font-serifExtra text-2xl md:text-5xl px-2 py-1 rounded-md cursor-pointer"
+                  onClick={() =>
+                    handleStoryClick(story, categoryName as string)
+                  }
+                >
+                  {title}
+                </h2>
               </header>
             </figure>
-          )
+          );
         })}
-    </>
+    </div>
   );
 };
