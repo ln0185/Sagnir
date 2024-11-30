@@ -21,15 +21,17 @@ export const StoriesPage = () => {
   const [icelandicCategoryNames, setIcelandicCategoryNames] = useState<
     string[]
   >([]);
-  const [clickedCategory, setClickedCategory] = useState<string>("");
-  const [selectedStories, setSelectedStories] =
-    useState<StoryInterface | null>();
+  const [clickedCategory, setClickedCategory] = useState<string>("all"); // Set default category to "all"
+  const [selectedStories, setSelectedStories] = useState<StoryInterface | null>(
+    null
+  );
 
   const { data, isLoading, error } = useFetch(
     "https://m4groupproject.onrender.com/"
   );
 
   useEffect(() => {
+    // Ensure we set the categories after fetching the data
     const storyCategories: StoriesCategoryArrayInterface[] = [];
     if (data) {
       storyCategories.push(data[0], data[1], data[4], data[5]);
@@ -38,8 +40,8 @@ export const StoriesPage = () => {
   }, [data]);
 
   useEffect(() => {
+    // Set Icelandic category names after categories are set
     const icelandicNamesArray = [...categories];
-
     const categoryObjects = icelandicNamesArray.reduce(
       (acc: Record<string, string>, item, index) => {
         if (item && item.category) {
@@ -49,14 +51,12 @@ export const StoriesPage = () => {
       },
       {}
     );
-
     categoryObjects.category_0 = "Álfar og huldufólk";
     categoryObjects.category_1 = "Draugar";
     categoryObjects.category_2 = "Tröll";
     categoryObjects.category_3 = "Helgisögur";
 
     const icelandicCategories = Object.values(categoryObjects);
-
     setIcelandicCategoryNames(icelandicCategories);
   }, [categories]);
 
@@ -67,31 +67,39 @@ export const StoriesPage = () => {
           `https://m4groupproject.onrender.com/${clickedCategory}`
         );
         const data: StoryInterface = await res.json();
-        console.log(data);
+        console.log("Fetched Stories:", data);
         setSelectedStories(data);
       } catch (error) {
         console.error("Error fetching category stories:", error);
       }
     };
 
-    if (clickedCategory) {
-      getClickedCategoryStories(clickedCategory);
-    }
+    // Fetch stories for the selected category (default is "all")
+    getClickedCategoryStories(clickedCategory);
   }, [clickedCategory]);
 
   return (
-    <div>
+    <div className="z-10">
+      {/* Fixed header */}
       <StoriesHeader />
+
+      {/* Fixed categories */}
       {icelandicCategoryNames.length > 0 && !isLoading && !error ? (
-        <Categories
-          data={icelandicCategoryNames}
-          setClickedCategory={setClickedCategory}
-        />
+        <div className="sticky top-[80px] z-10 bg-sagnir-100">
+          <Categories
+            data={icelandicCategoryNames}
+            setClickedCategory={setClickedCategory}
+          />
+        </div>
       ) : null}
-      {selectedStories ? (
-        <StoriesCard data={selectedStories} categoryName={clickedCategory} />
-      ) : null}
-      <Searchbar />
+
+      {/* Content that scrolls */}
+      <div className="mt-4 overflow-y-auto pb-9 overflow-hidden">
+        {/* Stories */}
+        {selectedStories ? (
+          <StoriesCard data={selectedStories} categoryName={clickedCategory} />
+        ) : null}
+      </div>
     </div>
   );
 };
