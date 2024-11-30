@@ -101,7 +101,7 @@ export const QuizPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-sagnir-100 text-sagnir-200 h-screenn">
+    <div className="flex items-center justify-center bg-sagnir-100 text-sagnir-200 h-screen w-full">
       <div className="flex flex-col w-full max-w-4xl">
         {/* Progress Bar */}
         <div className="flex-none mx-8 mt-12 mb-6">
@@ -121,7 +121,7 @@ export const QuizPage = () => {
           <img
             src={currentQuestion.imageSrc}
             alt={`Question ${currentQuestion.questionNumber}`}
-            className="pt-5 w-full h-[300px] md:h-[300px] object-contain"
+            className="pt-5 w-full h-[300px] md:w-full"
           />
         </div>
 
@@ -148,7 +148,7 @@ export const QuizPage = () => {
         </div>
         {/* Next Arrow Button */}
         {isAnswered && (
-          <div className="absolute bottom-16 right-6">
+          <div className="absolute bottom-[2.55rem] right-6 md:right-45">
             <ArrowButton onClick={handleNextQuestion} />
           </div>
         )}

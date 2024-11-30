@@ -28,8 +28,8 @@ const QuizOption: React.FC<QuizOptionProps> = ({
           ? "bg-sagnir-100 border-sagnir-200 text-sagnir-200" // Highlight wrong answer
           : isSelected
           ? isCorrect
-            ? "bg-sagnir-100 border-[#F1ECDE] text-sagnir-100" // Selected and correct (text turns black)
-            : "bg-sagnir-100 border-gray-700 text-sagnir-200" // Selected but not correct
+            ? "bg-sagnir-100 border-sagnir-200 text-sagnir-100" // Selected and correct (text turns black)
+            : "bg-sagnir-100 border-sagnir-100 text-sagnir-200" // Selected but not correct
           : "bg-sagnir-100 border-sagnir-200" // Default state
       }`}
       onClick={onClick}
@@ -61,7 +61,7 @@ const QuizOption: React.FC<QuizOptionProps> = ({
 
       {/* Icons for Correct/Incorrect */}
       {isIncorrect && (
-        <span className="font-sans ml-auto text-sagnir-200">
+        <span className="font-serifExtra ml-auto text-sagnir-200">
           <svg
             width="24"
             height="24"
@@ -86,7 +86,7 @@ const QuizOption: React.FC<QuizOptionProps> = ({
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="stroke-black"
+            className="text-sagnir-100"
           >
             <path
               d="M19 7L9.66667 16L5 11.5"
