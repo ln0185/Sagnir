@@ -26,8 +26,8 @@ export const QuizPage = () => {
     {
       questionNumber: 2,
       totalQuestions: 5,
-      questionText: "Hvað á grýla mörg börn?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      questionText: "Hvað á grýla gamla mörg börn?",
+      imageSrc: "/src/assets/resources/grylaa.svg",
       options: [
         { label: "A", text: "Þrjátíu" },
         { label: "B", text: "Fimm" },
@@ -39,8 +39,8 @@ export const QuizPage = () => {
     {
       questionNumber: 3,
       totalQuestions: 5,
-      questionText: "Hvar er Skessuhellir?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      questionText: "Hvar á landinu er Skessuhellir?",
+      imageSrc: "/src/assets/resources/quizhellir.svg",
       options: [
         { label: "A", text: "Húsagili" },
         { label: "B", text: "Vestfjörðum" },
@@ -52,21 +52,21 @@ export const QuizPage = () => {
     {
       questionNumber: 4,
       totalQuestions: 5,
-      questionText: "Hví segir Djákninn á Myrká Garún en ekki Guðrún?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      questionText: "Hví segir Djákninn Garún?",
+      imageSrc: "/src/assets/resources/djakninn.svg",
       options: [
         { label: "A", text: "Hún hét Garún" },
-        { label: "B", text: "Hann gat ekki sagt guð" },
+        { label: "B", text: "Hann gat ekki sagt guðrún" },
         { label: "C", text: "Hann var undir álögum" },
         { label: "D", text: "Ekkert að ofan" },
       ],
-      correctAnswer: "Hann gat ekki sagt guð",
+      correctAnswer: "Hann gat ekki sagt guðrún",
     },
     {
       questionNumber: 5,
       totalQuestions: 5,
       questionText: "Hvað heitir kerlingin sem vann ullina?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg",
+      imageSrc: "/src/assets/resources/quizalfarsvg.svg",
       options: [
         { label: "A", text: "Grýla" },
         { label: "B", text: "Gilitrutt" },
@@ -101,58 +101,61 @@ export const QuizPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-left justify-between bg-sagnir-100 text-sagnir-200 h-screen">
-      {/* Progress Bar */}
-      <div className="flex-none mx-8 mt-12 mb-6">
-        <ProgressBar
-          questionNumber={currentQuestion.questionNumber}
-          totalQuestions={currentQuestion.totalQuestions}
-        />
-      </div>
-
-      {/* Question Text */}
-      <h2 className="mx-8 font-glare text-4xl text-sagnir-200 text-left">
-        {currentQuestion.questionText}
-      </h2>
-
-      {/* Dynamic Image */}
-      <div className="w-full">
-        <img
-          src={currentQuestion.imageSrc}
-          alt={`Question ${currentQuestion.questionNumber}`}
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Options */}
-      <div className="w-full px-8 mb-16 mt-5 grid grid-cols-1 gap-4">
-        {currentQuestion.options.map((option) => (
-          <QuizOption
-            key={option.label}
-            label={option.label}
-            text={option.text}
-            isSelected={selectedAnswer === option.text}
-            isCorrect={option.text === currentQuestion.correctAnswer}
-            showCorrectAnswer={
-              isAnswered && option.text === currentQuestion.correctAnswer
-            }
-            isIncorrect={
-              isAnswered &&
-              selectedAnswer === option.text &&
-              option.text !== currentQuestion.correctAnswer
-            }
-            onClick={() => handleOptionClick(option.text)}
+    <div className="flex items-center justify-center bg-sagnir-100 text-sagnir-200 h-screenn">
+      <div className="flex flex-col w-full max-w-4xl">
+        {/* Progress Bar */}
+        <div className="flex-none mx-8 mt-12 mb-6">
+          <ProgressBar
+            questionNumber={currentQuestion.questionNumber}
+            totalQuestions={currentQuestion.totalQuestions}
           />
-        ))}
-      </div>
-      {/* Next Arrow Button */}
-      {isAnswered && (
-        <div className="absolute bottom-16 right-6">
-          <ArrowButton onClick={handleNextQuestion} />
         </div>
-      )}
-      {/* Reserve Space for Navbar */}
-      <div className="h-14"></div>
+
+        {/* Question Text */}
+        <h2 className="mx-8 font-glare text-4xl text-sagnir-200 text-left">
+          {currentQuestion.questionText}
+        </h2>
+
+        {/* Dynamic Image */}
+        <div className="w-full flex">
+          <img
+            src={currentQuestion.imageSrc}
+            alt={`Question ${currentQuestion.questionNumber}`}
+            className="pt-5 w-full h-[300px] md:h-[300px] object-contain"
+          />
+        </div>
+
+        {/* Options */}
+        <div className="w-full px-8 mb-16 mt-5 grid grid-cols-1 gap-4">
+          {currentQuestion.options.map((option) => (
+            <QuizOption
+              key={option.label}
+              label={option.label}
+              text={option.text}
+              isSelected={selectedAnswer === option.text}
+              isCorrect={option.text === currentQuestion.correctAnswer}
+              showCorrectAnswer={
+                isAnswered && option.text === currentQuestion.correctAnswer
+              }
+              isIncorrect={
+                isAnswered &&
+                selectedAnswer === option.text &&
+                option.text !== currentQuestion.correctAnswer
+              }
+              onClick={() => handleOptionClick(option.text)}
+            />
+          ))}
+        </div>
+        {/* Next Arrow Button */}
+        {isAnswered && (
+          <div className="absolute bottom-16 right-6">
+            <ArrowButton onClick={handleNextQuestion} />
+          </div>
+        )}
+
+        {/* Reserve Space for Navbar */}
+        <div className="h-20"></div>
+      </div>
 
       {/* Modal for Quiz Completion */}
       {isQuizCompleted && (
