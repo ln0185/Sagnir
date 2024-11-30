@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type CategoriesType = {
   data: string[];
@@ -6,30 +6,21 @@ type CategoriesType = {
 };
 
 export const Categories = ({ data, setClickedCategory }: CategoriesType) => {
+  const [activeCategory, setActiveCategory] = useState<string>("Allt");
+
   const handleCategory = (clickedCategory: string) => {
-    if (clickedCategory === "Allt") {
-      clickedCategory = "all";
-    }
+    let formattedCategory = clickedCategory;
 
-    if (clickedCategory === "Tröll") {
-      clickedCategory = "troll";
-    }
+    if (formattedCategory === "Allt") formattedCategory = "all";
+    if (formattedCategory === "Tröll") formattedCategory = "troll";
+    if (formattedCategory === "Draugar") formattedCategory = "draug";
+    if (formattedCategory === "Álfar og huldufólk") formattedCategory = "alfa";
+    if (formattedCategory === "Helgisögur") formattedCategory = "efra";
 
-    if (clickedCategory === "Draugar") {
-      clickedCategory = "draug";
-    }
+    console.log("Category test", formattedCategory);
 
-    if (clickedCategory === "Álfar og huldufólk") {
-      clickedCategory = "alfa";
-    }
-
-    if (clickedCategory === "Helgisögur") {
-      clickedCategory = "efra";
-    }
-
-    console.log("Category test", clickedCategory);
-
-    setClickedCategory(clickedCategory);
+    setActiveCategory(clickedCategory); // Set the active category
+    setClickedCategory(formattedCategory); // Update the parent state
   };
 
   return (
@@ -38,7 +29,11 @@ export const Categories = ({ data, setClickedCategory }: CategoriesType) => {
         {data.length > 0 ? (
           <li
             onClick={(e) => handleCategory((e.target as HTMLElement).innerText)}
-            className="pl-2"
+            className={`pl-2 cursor-pointer ${
+              activeCategory === "Allt"
+                ? "border-b-2 border-sagnir-200"
+                : "hover:border-b-2 hover:border-sagnir-200"
+            }`}
           >
             Allt
           </li>
@@ -48,7 +43,11 @@ export const Categories = ({ data, setClickedCategory }: CategoriesType) => {
               return (
                 <li
                   onClick={() => handleCategory(item)}
-                  className="flex-align text-nowrap"
+                  className={`flex-align text-nowrap cursor-pointer ${
+                    activeCategory === item
+                      ? "border-b-2 border-sagnir-200"
+                      : "hover:border-b-2 hover:border-sagnir-200"
+                  }`}
                   key={item}
                 >
                   {item}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import QuizOption from "../components/QuizOption/QuizOption";
 import ProgressBar from "../components/QuizProgressBar/ProgressBar";
 import ArrowButton from "../components/ArrowButton/ArrowButton";

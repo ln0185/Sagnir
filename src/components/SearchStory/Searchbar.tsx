@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
 
-
 interface StoryInterface {
   [key: string]: string;
 }
 
 interface StoriesArrayInterface {
-  category: string,
-  stories: StoryInterface
+  category: string;
+  stories: StoryInterface;
 }
 
 export const Searchbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [searchedStory, setSearchedStory] = useState<string>("");
   const [searchResult, setSearchResult] = useState("");
-  const [allStories, setAllStories] = useState([]);
+  const [allStories, setAllStories] = useState<string[]>([]); // Declare as string[] to hold flat array
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
-  const [searchedCategoryStory, setSearchedCategoryStory] = useState<string[]>([]);
+  const [searchedCategoryStory, setSearchedCategoryStory] = useState<{
+    category: string;
+    stories: Record<string, string>;
+  } | null>(null); // We will store the search results in this format
 
   useEffect(() => {
     setSearchedStory("");
-    setSearchedCategoryStory([]);
+    setSearchedCategoryStory(null); // Reset the search results
   }, []);
 
   useEffect(() => {
     const searchDelayDebounce = setTimeout(() => {
-      if (searchedStory != "") {
+      if (searchedStory !== "") {
         setSearchResult(searchedStory.toLowerCase());
       }
     }, 1500);
@@ -41,42 +43,48 @@ export const Searchbar = () => {
       const stories = data?.map((item: StoriesArrayInterface) => {
         let allStories = item.stories;
         let allTheStories = Object.values(allStories);
-        return allTheStories
+        return allTheStories; // This returns an array of arrays
       });
-      setAllStories(stories.flat());
+      setAllStories(stories.flat()); // Flatten the nested arrays to get a single array of strings
     };
     getStoriesData();
   }, [searchResult]);
 
   useEffect(() => {
     let searchStories: string[] = allStories.map((item) => {
-      
-      let storiesArray = Object.values(item);
-  
-      return storiesArray.map((story) => story);
+      return item;
     });
-  
-    searchStories = searchStories.flat();
-    
-    console.log("Items", searchStories);
 
+    searchStories = searchStories.flat(); // Ensure it's flat (if needed)
+
+    console.log("Items", searchStories);
     setSearchedStories(searchStories);
-  
   }, [allStories]);
 
   useEffect(() => {
-    let allStories = [...searchedStories]
-
     if (!searchedStory) {
-      setSearchedCategoryStory([]);
+      setSearchedCategoryStory(null); // Reset when no search term is entered
       return;
     }
 
-    const filteredStories = allStories.filter((story: string) =>
+    const filteredStories = searchedStories.filter((story: string) =>
       story.toLowerCase().includes(searchedStory.toLowerCase())
     );
-    setSearchedCategoryStory(filteredStories);
-  }, [searchedStories, searchedStory])
+
+    // Convert the filtered stories array to Record<string, string>
+    const storiesRecord: Record<string, string> = filteredStories.reduce(
+      (acc: Record<string, string>, story, index) => {
+        acc[`story_${index + 1}`] = story; // Assign a unique key for each story
+        return acc;
+      },
+      {} as Record<string, string> // Explicitly declare the type of the accumulator
+    );
+
+    setSearchedCategoryStory({
+      category: "Search Results", // Set a category name for the search results
+      stories: storiesRecord, // Pass the converted Record<string, string>
+    });
+  }, [searchedStories, searchedStory]);
 
   return (
     <section className="flex flex-col gap-2">
@@ -92,11 +100,16 @@ export const Searchbar = () => {
             />
           </div>
           <div className="flex flex-col text-center bg-slate-900 mx-7">
-              {searchedCategoryStory ? <StoriesCard data={searchedCategoryStory}/> : null}
-            </div>
+            {searchedCategoryStory ? (
+              <StoriesCard
+                data={searchedCategoryStory} // Now passing the correct format
+                categoryName="searchResults" // You can set the category name here as needed
+              />
+            ) : null}
+          </div>
         </>
       ) : null}
-      {/*Temp button for testing  */}
+      {/* Temp button for testing */}
       <button onClick={() => setIsSearchOpen((prev) => !prev)}>
         Open Search
       </button>
