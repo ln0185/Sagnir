@@ -45,13 +45,41 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     alfa: [photo1, photo9, photo8],
     efra: [photo2, photo3, photo10],
   };
+
   const selectedPhotos =
     typeof categoryName === "string"
       ? categoryPhotos[categoryName.toLowerCase()] || categoryPhotos.default
       : categoryPhotos.default;
 
+  // Define the available stories for each category, particularly "alfa"
+  const storyNavigations: Record<string, string> = {
+    "Álfadrottning í álögum": "alfa-dr",
+    "Álfafólkið í Loðmundarfirði": "a-lodmfj",
+    "Álfakóngurinn í Seley": "seley",
+    "Ábæjar-Skotta": "skotta3",
+    "Átján draugar úr Blöndu": "18draug",
+    "Átján sendingar í senn": "18send",
+    "Átján Skólabræður": "18skolab",
+    "Andrarímur og Hallgrímsrímur": "andra",
+    "Bergþór Bláfellingur": "blafell",
+    Bakkastaður: "bakka",
+    "Brytinn í Skálholti": "brytinn",
+    "Dansinn í Hruna": "hruna",
+  };
+
   useEffect(() => {
-    if (categoryName === "all" && data) {
+    if (categoryName === "alfa" && data) {
+      // Filter the stories for the "alfa" category
+      const alfaStories = Object.keys(storyNavigations).filter((story) =>
+        [
+          "Álfadrottning í álögum",
+          "Álfafólkið í Loðmundarfirði",
+          "Álfakóngurinn í Seley",
+        ].includes(story)
+      );
+      setCategoryStories(alfaStories);
+    } else if (categoryName === "all" && data) {
+      // Display all stories if category is "all"
       const allStories = Array.isArray(data)
         ? data.flatMap((item) => Object.values(item?.stories.stories).flat())
         : Object.values(data?.stories || {});
@@ -74,9 +102,9 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     };
 
     const storyNavigations: Record<string, string> = {
-      "Að hverjum andskotanum ertu að leita?": "leita",
-      "Arnljótur huldumaður": "arnljot",
       "Álfadrottning í álögum": "alfa-dr",
+      "Álfafólkið í Loðmundarfirði": "a-lodmfj",
+      "Álfakóngurinn í Seley": "seley",
       "Ábæjar-Skotta": "skotta3",
       "Átján draugar úr Blöndu": "18draug",
       "Átján sendingar í senn": "18send",
@@ -105,12 +133,10 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       {categoryStories
         .slice(0, categoryName === "all" ? 12 : 3) // Show only 12 stories for "Allt"
         .map((story, index) => {
-          // Ensure fallback title and photo
           const title = story?.replace(/[/]/g, "") || "Untitled";
-          const photo = selectedPhotos[index] || "default-photo-path.svg";
-
-          // Debugging outputs
-          console.log(`Story #${index + 1}:`, { title, photo });
+          const photo =
+            categoryPhotos[categoryName?.toLowerCase() as string]?.[index] ||
+            categoryPhotos.default[index];
 
           return (
             <figure key={index} className="flex flex-col items-center w-full">
