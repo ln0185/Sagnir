@@ -53,7 +53,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       </div>
 
       {/* Render search results */}
-      <div className="absolute bottom-14 left-4 right-4 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4">
+      <div className="absolute bottom-14 left-4 right-4 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
         <StoriesCard data={[]} />
       </div>
