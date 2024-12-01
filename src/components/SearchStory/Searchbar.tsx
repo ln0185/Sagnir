@@ -35,7 +35,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
 
           {/* Input Field */}
           <input
-            className="bg-sagnir-100 text-sagnir-200 pl-10 pr-10 py-2 rounded-md w-full border border-sagnir-200 focus:outline-none focus:ring-2 focus:ring-sagnir-300"
+            className="bg-sagnir-100 text-sagnir-200 font-glare pl-10 pr-10 py-2 rounded-md w-full border border-sagnir-200 focus:outline-none focus:ring-2 focus:ring-sagnir-300"
             type="text"
             placeholder="Search..."
             value={searchedStory}
