@@ -25,7 +25,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
         {/* Close button inside the search bar */}
         <button
           onClick={() => setIsSearchOpen(false)}
-          className="absolute top-0.5 right-1.5 text-sagnir-200"
+          className="absolute top-0.5 right-1 text-sagnir-200"
         >
           Close
         </button>
