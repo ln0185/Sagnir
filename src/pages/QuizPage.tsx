@@ -148,7 +148,7 @@ export const QuizPage = () => {
         </div>
         {/* Next Arrow Button */}
         {isAnswered && (
-          <div className="absolute bottom-[3rem] right-[1rem] md:right-[21rem] md:bottom-[3.5rem]">
+          <div className="absolute bottom-[3rem] right-[1.5rem] md:right-[21rem] md:bottom-[3.5rem]">
             <ArrowButton onClick={handleNextQuestion} />
           </div>
         )}
