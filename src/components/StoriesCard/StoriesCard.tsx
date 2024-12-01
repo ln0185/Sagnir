@@ -9,6 +9,8 @@ import photo6 from "../../assets/resources/MYND1.png";
 import photo7 from "../../assets/resources/ghosts.png";
 import photo8 from "../../assets/resources/hidden people.svg";
 import photo9 from "../../assets/resources/hidden people 2.svg";
+import photo10 from "../../assets/resources/MYND5.png";
+import photo11 from "../../assets/resources/gillitrut.png";
 
 type StoriesCardType = {
   data: {
@@ -34,16 +36,15 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
       photo7,
       photo8,
       photo9,
-      photo4,
-      photo6,
-      photo7,
+      photo10,
+      photo2,
+      photo11,
     ],
     troll: [photo4, photo6, photo5],
-    draug: [photo7, photo4, photo3],
+    draug: [photo7, photo3, photo11],
     alfa: [photo1, photo9, photo8],
-    efra: [photo2, photo3, photo6],
+    efra: [photo2, photo3, photo10],
   };
-
   const selectedPhotos =
     typeof categoryName === "string"
       ? categoryPhotos[categoryName.toLowerCase()] || categoryPhotos.default
