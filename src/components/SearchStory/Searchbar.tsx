@@ -21,7 +21,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       }`}
     >
       {/* Search Bar container */}
-      <div className="absolute bottom-16 inset-x-1/4 w-[400px] h-30 bg-sagnir-100 p-6 rounded-md shadow-lg">
+      <div className="absolute bottom-16 inset-x-18 md:inset-x-96 w-[400px] h-30 bg-sagnir-100 p-6 rounded-md shadow-lg">
         {/* Close button inside the search bar */}
         <button
           onClick={() => setIsSearchOpen(false)}
