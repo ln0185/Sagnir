@@ -11,7 +11,9 @@ import { SingleStoryPage } from "./pages/SingleStoryPage";
 function App() {
   return (
     <div className="h-full relative">
-      <Router>
+      <Router basename="/<repository-name>">
+        {" "}
+        {/* Set the basename */}
         {/* Routes for different pages */}
         <Routes>
           <Route path="/" element={<StoriesPage />} />
@@ -20,7 +22,12 @@ function App() {
             path="/stories/:categoryName/:storyName"
             element={<SingleStoryPage />}
           />
-          <Route path="/search" element={<Searchbar isSearchOpen={false} setIsSearchOpen={() => {}} />} />
+          <Route
+            path="/search"
+            element={
+              <Searchbar isSearchOpen={false} setIsSearchOpen={() => {}} />
+            }
+          />
           <Route path="/map" element={<MapPage />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>
