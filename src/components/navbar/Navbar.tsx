@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
               <img
                 src={active === "StoriesPage" ? StoriesIconActive : StoriesIcon}
                 alt="StoriesPage"
-                className="h-8 w-8"
+                className="h-7 w-7"
               />
             </Link>
           </li>
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
             <img
               src={SearchIcon}
               alt="Search"
-              className="h-8 w-8 cursor-pointer"
+              className="h-6 w-6 cursor-pointer"
             />
           </li>
 
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
               <img
                 src={active === "MapPage" ? LocationIconActive : LocationIcon}
                 alt="MapPage"
-                className="h-8 w-8"
+                className="h-6 w-6"
               />
             </Link>
           </li>
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
               <img
                 src={active === "QuizPage" ? QuizIconActive : QuizIcon}
                 alt="quizpage"
-                className="h-8 w-8"
+                className="h-7 w-7"
               />
             </Link>
           </li>
