@@ -20,7 +20,7 @@ function App() {
             path="/stories/:categoryName/:storyName"
             element={<SingleStoryPage />}
           />
-          <Route path="/search" element={<Searchbar />} />
+          <Route path="/search" element={<Searchbar isSearchOpen={false} setIsSearchOpen={() => {}} />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>

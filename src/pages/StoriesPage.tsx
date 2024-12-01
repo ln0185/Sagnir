@@ -5,7 +5,8 @@ import { Categories } from "../components/Categories/Categories";
 import { StoriesCard } from "../components/StoriesCard/StoriesCard";
 
 interface StoryInterface {
-  [key: string]: string;
+  category: string;
+  stories: Record<string, string>;
 }
 
 interface StoriesCategoryArrayInterface {

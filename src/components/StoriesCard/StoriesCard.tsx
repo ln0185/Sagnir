@@ -13,16 +13,18 @@ import photo10 from "../../assets/resources/MYND5.png";
 import photo11 from "../../assets/resources/gillitrut.png";
 
 type StoriesCardType = {
-  data: {
-    category: string;
-    stories: Record<string, string>;
-  };
+  data:
+    | {
+        category: string;
+        stories: Record<string, string>;
+      }
+    | { stories: { stories: Record<string, string> } }[];
   categoryName: string | NavigateOptions;
 };
 
 export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
-  const [isAllStories, setIsAllStories] = useState<boolean>(false);
+  const [, setIsAllStories] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const categoryPhotos: Record<string, string[]> = {
@@ -85,7 +87,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
         : Object.values(data?.stories || {});
       setIsAllStories(true);
       setCategoryStories(allStories);
-    } else if (data.category !== "all") {
+    } else if (!Array.isArray(data) && data.category !== "all") {
       const catStories = Object.values(data?.stories || {});
       setIsAllStories(false);
       setCategoryStories(catStories);
@@ -134,9 +136,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
         .slice(0, categoryName === "all" ? 12 : 3) // Show only 12 stories for "Allt"
         .map((story, index) => {
           const title = story?.replace(/[/]/g, "") || "Untitled";
-          const photo =
-            categoryPhotos[categoryName?.toLowerCase() as string]?.[index] ||
-            categoryPhotos.default[index];
+          const photo = selectedPhotos[index] || "default-photo-path.svg";
 
           return (
             <figure key={index} className="flex flex-col items-center w-full">
