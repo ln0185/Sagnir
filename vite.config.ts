@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "/M4GroupProject",
   build: {
-    outDir: "dist", // Ensure this is correct
+    outDir: "dist",
   },
 });
