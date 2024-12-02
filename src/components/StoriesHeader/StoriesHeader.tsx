@@ -1,9 +1,11 @@
+import headerImg from "../../assets/resources/Logo.svg"
+
 export const StoriesHeader = () => {
   return (
     <header className="w-full p-5 bg-sagnir-100 sticky top-0 z-30">
       <div className="flex flex-col md:flex md:flex-row md:justify-center">
         <div className="w-11 h-11 mb-7">
-          <img src="../../src/assets/resources/Logo.svg" alt="sagnir-logo" />
+          <img src={headerImg} />
         </div>
       </div>
 
