@@ -16,13 +16,13 @@ type StoriesCardType = {
   data:
     | {
         category: string;
-        stories: Record<string, string>;
+        stories: string[];
       }
     | { stories: { stories: Record<string, string> } }[];
   categoryName: string | NavigateOptions;
 };
 
-export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
+export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
   const [, setIsAllStories] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -122,6 +122,7 @@ export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
     const storySlug = storyNavigations[story] || story;
 
     navigate(`/stories/${storyCategory}/${storySlug}`);
+    
   };
 
   if (!categoryStories || categoryStories.length === 0) {
