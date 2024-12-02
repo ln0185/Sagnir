@@ -20,6 +20,8 @@ export const Searchbar: React.FC<SearchbarProps> = ({
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<string[]>([]);
 
+  const searchStories = ["Álfadrottning í álögum", "Álfafólkið í Loðmundarfirði", "Álfakóngurinn í Seley", "Ábæjar-Skotta", "Átján draugar úr Blöndu", "Átján sendingar í senn", "Átján Skólabræður", "Andrarímur og Hallgrímsrímur", "Bergþór Bláfellingur", "Bakkastaður", "Brytinn í Skálholti", "Dansinn í Hruna"]
+
   useEffect(() => {
     const getSearchedStories = async () => {
       const res = await fetch(`https://m4groupproject.onrender.com/all`);
@@ -31,7 +33,13 @@ export const Searchbar: React.FC<SearchbarProps> = ({
         return combinedStories.map((story) => story);
       });
 
-      setSearchedStories(allStories);
+      //Filters the stories to the category stories
+      const filteredStories = allStories.filter((story: string) => searchStories.includes(story));
+
+      console.log("filtered stories", filteredStories);
+      
+
+      setSearchedStories(filteredStories);
     }
     
     getSearchedStories();
@@ -42,6 +50,11 @@ export const Searchbar: React.FC<SearchbarProps> = ({
     console.log("All stories", searchedStories);
     
     if (!searchedStories.length) {
+      setSearchResult([]);
+      return;
+    }
+
+    if (searchedStory.trim() === "") {
       setSearchResult([]);
       return;
     }
