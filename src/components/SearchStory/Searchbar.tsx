@@ -20,7 +20,20 @@ export const Searchbar: React.FC<SearchbarProps> = ({
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<string[]>([]);
 
-  const searchStories = ["Álfadrottning í álögum", "Álfafólkið í Loðmundarfirði", "Álfakóngurinn í Seley", "Ábæjar-Skotta", "Átján draugar úr Blöndu", "Átján sendingar í senn", "Átján Skólabræður", "Andrarímur og Hallgrímsrímur", "Bergþór Bláfellingur", "Bakkastaður", "Brytinn í Skálholti", "Dansinn í Hruna"]
+  const searchStories = [
+    "Álfadrottning í álögum",
+    "Álfafólkið í Loðmundarfirði",
+    "Álfakóngurinn í Seley",
+    "Ábæjar-Skotta",
+    "Átján draugar úr Blöndu",
+    "Átján sendingar í senn",
+    "Átján Skólabræður",
+    "Andrarímur og Hallgrímsrímur",
+    "Bergþór Bláfellingur",
+    "Bakkastaður",
+    "Brytinn í Skálholti",
+    "Dansinn í Hruna",
+  ];
 
   useEffect(() => {
     const getSearchedStories = async () => {
@@ -33,21 +46,16 @@ export const Searchbar: React.FC<SearchbarProps> = ({
         return combinedStories.map((story) => story);
       });
 
-<<<<<<< HEAD
-      setSearchedStories(allStories);
-    };
-
-=======
       //Filters the stories to the category stories
-      const filteredStories = allStories.filter((story: string) => searchStories.includes(story));
+      const filteredStories = allStories.filter((story: string) =>
+        searchStories.includes(story)
+      );
 
       console.log("filtered stories", filteredStories);
-      
 
       setSearchedStories(filteredStories);
-    }
-    
->>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
+    };
+
     getSearchedStories();
   }, []);
 
@@ -59,18 +67,14 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       return;
     }
 
-<<<<<<< HEAD
-    const filteredStories = searchedStories.filter((word: string) =>
-      word.toLowerCase().includes(searchedStory.toLowerCase())
-    );
-=======
     if (searchedStory.trim() === "") {
       setSearchResult([]);
       return;
     }
 
-    const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));  
->>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
+    const filteredStories = searchedStories.filter((word: string) =>
+      word.toLowerCase().includes(searchedStory.toLowerCase())
+    );
 
     setSearchResult(filteredStories);
   }, [searchedStories, searchedStory]);
