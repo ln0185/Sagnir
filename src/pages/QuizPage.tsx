@@ -2,6 +2,11 @@ import { useState } from "react";
 import QuizOption from "../components/QuizOption/QuizOption";
 import ProgressBar from "../components/QuizProgressBar/ProgressBar";
 import ArrowButton from "../components/ArrowButton/ArrowButton";
+import Quiz1 from "../assets/resources/Quizpic-lagarfljot.svg";
+import Quiz2 from "../assets/resources/grylaa.svg";
+import Quiz3 from "../assets/resources/quizhellir.svg";
+import Quiz4 from "../assets/resources/djakninn.svg";
+import Quiz5 from "/src/assets/resources/quizalfarsvg.svg";
 
 export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -14,7 +19,7 @@ export const QuizPage = () => {
       questionNumber: 1,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Lagarfljót?",
-      imageSrc: "/src/assets/resources/Quizpic-lagarfljot.svg", // Add image path
+      imageSrc: Quiz1, // Add image path
       options: [
         { label: "A", text: "Hólmavík" },
         { label: "B", text: "Egilsstaðir" },
@@ -27,7 +32,7 @@ export const QuizPage = () => {
       questionNumber: 2,
       totalQuestions: 5,
       questionText: "Hvað á grýla gamla mörg börn?",
-      imageSrc: "/src/assets/resources/grylaa.svg",
+      imageSrc: Quiz2,
       options: [
         { label: "A", text: "Þrjátíu" },
         { label: "B", text: "Fimm" },
@@ -40,7 +45,7 @@ export const QuizPage = () => {
       questionNumber: 3,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Skessuhellir?",
-      imageSrc: "/src/assets/resources/quizhellir.svg",
+      imageSrc: Quiz3,
       options: [
         { label: "A", text: "Húsagili" },
         { label: "B", text: "Vestfjörðum" },
@@ -53,7 +58,7 @@ export const QuizPage = () => {
       questionNumber: 4,
       totalQuestions: 5,
       questionText: "Hví segir Djákninn Garún?",
-      imageSrc: "/src/assets/resources/djakninn.svg",
+      imageSrc: Quiz4,
       options: [
         { label: "A", text: "Hún hét Garún" },
         { label: "B", text: "Hann gat ekki sagt guðrún" },
@@ -66,7 +71,7 @@ export const QuizPage = () => {
       questionNumber: 5,
       totalQuestions: 5,
       questionText: "Hvað heitir kerlingin sem vann ullina?",
-      imageSrc: "/src/assets/resources/quizalfarsvg.svg",
+      imageSrc: Quiz5,
       options: [
         { label: "A", text: "Grýla" },
         { label: "B", text: "Gilitrutt" },

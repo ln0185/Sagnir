@@ -1,5 +1,5 @@
 import NavBar from "./components/navbar/Navbar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import "./output.css";
 import { StoriesPage } from "./pages/StoriesPage";
