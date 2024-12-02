@@ -38,7 +38,6 @@ export const StoriesPage = () => {
     setCategories(storyCategories);
   }, [data]);
 
-  // this code is unclear. It should also be handled outside of a useEffect
   useEffect(() => {
     const icelandicNamesArray = [...categories];
     const categoryObjects = icelandicNamesArray.reduce(
