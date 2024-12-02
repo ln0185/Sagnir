@@ -24,10 +24,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
     const getSearchedStories = async () => {
       const res = await fetch(`https://m4groupproject.onrender.com/all`);
       const data = await res.json();
-
-      console.log("data", data);
-      
-
+    
       const allStories = data?.flatMap((item: StoryInterface) => {
         const combinedStories = Object.values(item.stories.stories);
         console.log("Stories", combinedStories);
@@ -49,7 +46,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       return;
     }
 
-    const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));
+    const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));  
 
     setSearchResult(filteredStories);
     
@@ -96,7 +93,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       {/* Render search results */}
       <div className="absolute bottom-24 left-4 right-4 mb-8 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
-        {searchResult && searchResult.length ? <StoriesCard data={{ category: "", stories: searchResult}} searching categoryName={""} /> : null}
+        {searchResult && searchResult.length ? <StoriesCard data={{ category: "", stories: searchResult}} categoryName={"all"} /> : null}
       </div>
     </div>
   );

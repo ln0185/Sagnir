@@ -20,10 +20,9 @@ type StoriesCardType = {
       }
     | { stories: { stories: Record<string, string> } }[];
   categoryName: string | NavigateOptions;
-  searching: boolean
 };
 
-export const StoriesCard = ({ data, categoryName, searching }: StoriesCardType) => {
+export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
   const [, setIsAllStories] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -71,11 +70,6 @@ export const StoriesCard = ({ data, categoryName, searching }: StoriesCardType) 
   };
 
   useEffect(() => {
-    if (searching) {
-      setCategoryStories(data.stories);
-      return;
-    }
-    
     if (categoryName === "alfa" && data) {
       // Filter the stories for the "alfa" category
       const alfaStories = Object.keys(storyNavigations).filter((story) =>
@@ -128,6 +122,7 @@ export const StoriesCard = ({ data, categoryName, searching }: StoriesCardType) 
     const storySlug = storyNavigations[story] || story;
 
     navigate(`/stories/${storyCategory}/${storySlug}`);
+    
   };
 
   if (!categoryStories || categoryStories.length === 0) {
