@@ -42,7 +42,7 @@ export const StoriesPage = () => {
     const icelandicNamesArray = [...categories];
     const categoryObjects = icelandicNamesArray.reduce(
       (acc: Record<string, string>, item, index) => {
-        if (item && item.category) {
+        if (item?.category) {
           acc[`category_${index}`] = item.category;
         }
         return acc;
@@ -84,7 +84,7 @@ export const StoriesPage = () => {
         <div className="sticky top-[190px] z-30 bg-sagnir-100">
           <Categories
             data={icelandicCategoryNames}
-            setClickedCategory={setClickedCategory}
+            setClickedCategory={setClickedCategory} // Use an onClickHandler
           />
         </div>
       ) : null}

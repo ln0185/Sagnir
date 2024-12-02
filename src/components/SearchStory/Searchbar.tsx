@@ -5,7 +5,7 @@ import { StoriesCard } from "../StoriesCard/StoriesCard";
 
 interface StoryInterface {
   category: string;
-  stories: Record<string, string>
+  stories: Record<string, string>;
 }
 interface SearchbarProps {
   isSearchOpen: boolean;
@@ -14,7 +14,7 @@ interface SearchbarProps {
 
 export const Searchbar: React.FC<SearchbarProps> = ({
   isSearchOpen,
-  setIsSearchOpen
+  setIsSearchOpen,
 }) => {
   const [searchedStory, setSearchedStory] = useState<string>("");
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
@@ -26,13 +26,18 @@ export const Searchbar: React.FC<SearchbarProps> = ({
     const getSearchedStories = async () => {
       const res = await fetch(`https://m4groupproject.onrender.com/all`);
       const data = await res.json();
-    
+
       const allStories = data?.flatMap((item: StoryInterface) => {
         const combinedStories = Object.values(item.stories.stories);
         console.log("Stories", combinedStories);
         return combinedStories.map((story) => story);
       });
 
+<<<<<<< HEAD
+      setSearchedStories(allStories);
+    };
+
+=======
       //Filters the stories to the category stories
       const filteredStories = allStories.filter((story: string) => searchStories.includes(story));
 
@@ -42,28 +47,33 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       setSearchedStories(filteredStories);
     }
     
+>>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
     getSearchedStories();
-    
-  }, [])
+  }, []);
 
   useEffect(() => {
     console.log("All stories", searchedStories);
-    
+
     if (!searchedStories.length) {
       setSearchResult([]);
       return;
     }
 
+<<<<<<< HEAD
+    const filteredStories = searchedStories.filter((word: string) =>
+      word.toLowerCase().includes(searchedStory.toLowerCase())
+    );
+=======
     if (searchedStory.trim() === "") {
       setSearchResult([]);
       return;
     }
 
     const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));  
+>>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
 
     setSearchResult(filteredStories);
-    
-  }, [searchedStories, searchedStory])
+  }, [searchedStories, searchedStory]);
 
   return (
     <div
@@ -74,7 +84,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       }`}
     >
       {/* Search Bar container */}
-      <div className="absolute bottom-12 inset-x-4 mb-2 md:inset-x-96 w-[400px] bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
+      <div className="absolute bottom-12 inset-x-4 mb-2 md:inset-x-96 w-[350px] bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
         {/* Search Input with Icons */}
         <div className="relative flex items-center w-full">
           {/* Search Icon */}
@@ -104,9 +114,14 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       </div>
 
       {/* Render search results */}
-      <div className="absolute bottom-24 left-4 right-4 mb-8 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
+      <div className="absolute bottom-24 left-4 right-4 mb-8 md:left-96 md:right-96 w-[350px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
-        {searchResult && searchResult.length ? <StoriesCard data={{ category: "", stories: searchResult}} categoryName={"all"} /> : null}
+        {searchResult && searchResult.length ? (
+          <StoriesCard
+            data={{ category: "", stories: searchResult }}
+            categoryName={"all"}
+          />
+        ) : null}
       </div>
     </div>
   );
