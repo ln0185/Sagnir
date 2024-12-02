@@ -20,7 +20,20 @@ export const Searchbar: React.FC<SearchbarProps> = ({
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<string[]>([]);
 
-  const searchStories = ["Álfadrottning í álögum", "Álfafólkið í Loðmundarfirði", "Álfakóngurinn í Seley", "Ábæjar-Skotta", "Átján draugar úr Blöndu", "Átján sendingar í senn", "Átján Skólabræður", "Andrarímur og Hallgrímsrímur", "Bergþór Bláfellingur", "Bakkastaður", "Brytinn í Skálholti", "Dansinn í Hruna"]
+  const searchStories = [
+    "Álfadrottning í álögum",
+    "Álfafólkið í Loðmundarfirði",
+    "Álfakóngurinn í Seley",
+    "Ábæjar-Skotta",
+    "Átján draugar úr Blöndu",
+    "Átján sendingar í senn",
+    "Átján Skólabræður",
+    "Andrarímur og Hallgrímsrímur",
+    "Bergþór Bláfellingur",
+    "Bakkastaður",
+    "Brytinn í Skálholti",
+    "Dansinn í Hruna",
+  ];
 
   useEffect(() => {
     const getSearchedStories = async () => {
@@ -33,21 +46,16 @@ export const Searchbar: React.FC<SearchbarProps> = ({
         return combinedStories.map((story) => story);
       });
 
-<<<<<<< HEAD
-      setSearchedStories(allStories);
-    };
-
-=======
       //Filters the stories to the category stories
-      const filteredStories = allStories.filter((story: string) => searchStories.includes(story));
+      const filteredStories = allStories.filter((story: string) =>
+        searchStories.includes(story)
+      );
 
       console.log("filtered stories", filteredStories);
-      
 
       setSearchedStories(filteredStories);
-    }
-    
->>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
+    };
+
     getSearchedStories();
   }, []);
 
@@ -59,18 +67,14 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       return;
     }
 
-<<<<<<< HEAD
-    const filteredStories = searchedStories.filter((word: string) =>
-      word.toLowerCase().includes(searchedStory.toLowerCase())
-    );
-=======
     if (searchedStory.trim() === "") {
       setSearchResult([]);
       return;
     }
 
-    const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));  
->>>>>>> 6956d100395147afb57daa6a59977dbd58d7169d
+    const filteredStories = searchedStories.filter((word: string) =>
+      word.toLowerCase().includes(searchedStory.toLowerCase())
+    );
 
     setSearchResult(filteredStories);
   }, [searchedStories, searchedStory]);
@@ -84,7 +88,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       }`}
     >
       {/* Search Bar container */}
-      <div className="absolute bottom-12 inset-x-4 mb-2 md:inset-x-96 w-[350px] bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
+      <div className="absolute bottom-12 inset-x-4 mb-2 md:inset-x-96 w-[350px] md:w-[465px]  bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
         {/* Search Input with Icons */}
         <div className="relative flex items-center w-full">
           {/* Search Icon */}
@@ -96,7 +100,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
 
           {/* Input Field */}
           <input
-            className="bg-sagnir-100 text-sagnir-200 font-glare pl-10 pr-10 py-2 rounded-md w-full border border-sagnir-200 focus:outline-none focus:ring-2 focus:ring-sagnir-300"
+            className="bg-sagnir-100 text-sagnir-200 font-glare px-10 py-2 rounded-md w-full border border-sagnir-200 focus:outline-none focus:ring-2 focus:ring-sagnir-300"
             type="text"
             placeholder="Search..."
             value={searchedStory}
@@ -114,7 +118,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       </div>
 
       {/* Render search results */}
-      <div className="absolute bottom-24 left-4 right-4 mb-8 md:left-96 md:right-96 w-[350px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
+      <div className="absolute bottom-24 left-4 right-4 mb-2 -z-10 md:left-96 md:right-96 w-[350px] md:w-[465px] text-sagnir-200 bg-sagnir-100 rounded-lg shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
         {searchResult && searchResult.length ? (
           <StoriesCard
