@@ -16,7 +16,7 @@ type StoriesCardType = {
   data:
     | {
         category: string;
-        stories: string[];
+        stories: string[] | Record<string, string>;
       }
     | { stories: { stories: Record<string, string> } }[];
   categoryName: string | NavigateOptions;
