@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import searchIcon from "../../assets/resources/search icon dark mode.svg";
 import crossIcon from "../../assets/resources/cross dark mode.svg";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
@@ -13,6 +13,45 @@ export const Searchbar: React.FC<SearchbarProps> = ({
   setIsSearchOpen,
 }) => {
   const [searchedStory, setSearchedStory] = useState<string>("");
+  const [searchedStories, setSearchedStories] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<string[]>([]);
+
+  useEffect(() => {
+    const getSearchedStories = async () => {
+      const res = await fetch(`https://m4groupproject.onrender.com/all`);
+      const data = await res.json();
+
+      const allStories = data?.flatMap((item) => {
+        console.log("Start", item);
+        const combinedStories = Object.values(item.stories.stories);
+        console.log("Stories", combinedStories);
+        return combinedStories.map((story) => story);
+      });
+
+      setSearchedStories(allStories);
+    }
+    
+    getSearchedStories();
+    
+  }, [searchedStory])
+
+  useEffect(() => {
+    console.log("All stories", searchedStories);
+    
+    if (!searchedStories.length) {
+      setSearchedStories([]);
+      return;
+    }
+
+    const filteredStories = searchedStories.filter((word: string) => word.toLowerCase().includes(searchedStory.toLowerCase()));
+
+    setSearchResult(filteredStories);
+    
+  }, [searchedStories, searchedStory])
+
+  useEffect(() => {
+    console.log("Searching", searchResult);
+  }, [searchResult])
 
   return (
     <div
@@ -55,7 +94,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       {/* Render search results */}
       <div className="absolute bottom-14 left-4 right-4 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
-        <StoriesCard data={{ category: "", stories: {} }} categoryName={""} />
+        {searchResult && searchResult.length ? <StoriesCard data={{ category: "", stories: searchResult}} searching categoryName={""} /> : null}
       </div>
     </div>
   );
