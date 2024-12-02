@@ -45,10 +45,10 @@ Make sure you have the following installed:
    git clone https://github.comln0185/M4GroupProject/.git
    cd M4GroupProject-app
 
-   1. Install dependencies:or
+   1. Install dependencies:
     
     ```bash
-    bash
+  
     
     npm install
     
