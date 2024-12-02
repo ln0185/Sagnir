@@ -7,7 +7,7 @@ import "./map.css";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
-  iconUrl: "/marker.svg", // Path to your custom SVG marker
+  iconUrl: "./marker.svg", // Path to your custom SVG marker
   iconSize: [32, 32], // Size of the icon
   iconAnchor: [16, 32], // Anchor point for the icon
   popupAnchor: [0, -32], // Popup positioning relative to the icon
@@ -15,7 +15,7 @@ const customIcon = new L.Icon({
 
 // Geolocation Custom Icon
 const geolocationIcon = L.icon({
-  iconUrl: "/geolocation.svg",
+  iconUrl: "./geolocation.svg",
   iconSize: [30, 30],
   iconAnchor: [15, 0],
 });
