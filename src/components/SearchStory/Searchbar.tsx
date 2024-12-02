@@ -3,6 +3,10 @@ import searchIcon from "../../assets/resources/search icon dark mode.svg";
 import crossIcon from "../../assets/resources/cross dark mode.svg";
 import { StoriesCard } from "../StoriesCard/StoriesCard";
 
+interface StoryInterface {
+  category: string;
+  stories: Record<string, string>
+}
 interface SearchbarProps {
   isSearchOpen: boolean;
   setIsSearchOpen: (value: boolean) => void;
@@ -10,7 +14,7 @@ interface SearchbarProps {
 
 export const Searchbar: React.FC<SearchbarProps> = ({
   isSearchOpen,
-  setIsSearchOpen,
+  setIsSearchOpen
 }) => {
   const [searchedStory, setSearchedStory] = useState<string>("");
   const [searchedStories, setSearchedStories] = useState<string[]>([]);
@@ -21,8 +25,10 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       const res = await fetch(`https://m4groupproject.onrender.com/all`);
       const data = await res.json();
 
-      const allStories = data?.flatMap((item) => {
-        console.log("Start", item);
+      console.log("data", data);
+      
+
+      const allStories = data?.flatMap((item: StoryInterface) => {
         const combinedStories = Object.values(item.stories.stories);
         console.log("Stories", combinedStories);
         return combinedStories.map((story) => story);
@@ -33,13 +39,13 @@ export const Searchbar: React.FC<SearchbarProps> = ({
     
     getSearchedStories();
     
-  }, [searchedStory])
+  }, [])
 
   useEffect(() => {
     console.log("All stories", searchedStories);
     
     if (!searchedStories.length) {
-      setSearchedStories([]);
+      setSearchResult([]);
       return;
     }
 
@@ -48,10 +54,6 @@ export const Searchbar: React.FC<SearchbarProps> = ({
     setSearchResult(filteredStories);
     
   }, [searchedStories, searchedStory])
-
-  useEffect(() => {
-    console.log("Searching", searchResult);
-  }, [searchResult])
 
   return (
     <div
@@ -62,7 +64,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       }`}
     >
       {/* Search Bar container */}
-      <div className="absolute bottom-24 inset-x-18 md:inset-x-96 w-[400px] bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
+      <div className="absolute bottom-12 inset-x-4 mb-2 md:inset-x-96 w-[400px] bg-sagnir-100 p-4 rounded-md shadow-lg flex items-center space-x-3">
         {/* Search Input with Icons */}
         <div className="relative flex items-center w-full">
           {/* Search Icon */}
@@ -92,7 +94,7 @@ export const Searchbar: React.FC<SearchbarProps> = ({
       </div>
 
       {/* Render search results */}
-      <div className="absolute bottom-14 left-4 right-4 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
+      <div className="absolute bottom-24 left-4 right-4 mb-8 md:left-96 md:right-96 w-[400px] text-sagnir-200 bg-sagnir-100 rounded-md shadow-md p-4 font-glare">
         {/* Replace with actual search results */}
         {searchResult && searchResult.length ? <StoriesCard data={{ category: "", stories: searchResult}} searching categoryName={""} /> : null}
       </div>
