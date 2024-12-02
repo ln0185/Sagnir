@@ -11,7 +11,7 @@ import { SingleStoryPage } from "./pages/SingleStoryPage";
 function App() {
   return (
     <div className="h-full relative">
-      <Router basename="/<M4GroupProject>">
+      <Router>
         {/* Set the basename */}
         {/* Routes for different pages */}
         <Routes>

@@ -1,4 +1,5 @@
 import React from "react";
+import arrowImg from "/src/assets/resources/arrow left dm.svg"
 
 interface ArrowLeftProps {
   onClick: () => void; // Function to handle button click
@@ -12,7 +13,7 @@ const ArrowLeft: React.FC<ArrowLeftProps> = ({ onClick }) => {
         className="w-38 h-21 flex items-center justify-center bg-transparent rounded-full hover:text-black transition"
         >
         <img
-          src="/src/assets/resources/arrow left dm.svg"
+          src={arrowImg}
           className="w-38 h-21">
         </img>
       </button>

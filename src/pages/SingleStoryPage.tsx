@@ -2,6 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import ArrowLeft from "../components/ArrowLeft/ArrowLeft";
 
+import image from "../../src/assets/resources/huldufolk 1.png"
+import listenImg from "/src/assets/resources/listen icon dark mode.svg"
+
 export const SingleStoryPage = () => {
   const { storyName, categoryName } = useParams();
   const navigate = useNavigate(); // Get the navigate function from useNavigate
@@ -35,7 +38,7 @@ export const SingleStoryPage = () => {
       <div className="flex-col flex items-center mb-12">
         {/* Story Image */}
         <img
-          src="../../src/assets/resources/huldufolk 1.png"
+          src={image}
           alt="Huldufolk"
           className="w-full h-full md:h-2/3 md:w-full"
         />
@@ -47,7 +50,7 @@ export const SingleStoryPage = () => {
 
         {/* Listen Button */}
         <img
-          src="/src/assets/resources/listen icon dark mode.svg"
+          src={listenImg}
           alt="Listen icon"
           className="w-10 h-10"
         />
