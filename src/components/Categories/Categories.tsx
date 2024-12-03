@@ -43,7 +43,7 @@ export const Categories = ({ data, setClickedCategory }: CategoriesType) => {
               return (
                 <li
                   onClick={() => handleCategory(item)}
-                  className={`flex-align text-nowrap cursor-pointer ${
+                  className={`flex-align font-glare text-md text-nowrap cursor-pointer ${
                     activeCategory === item
                       ? "border-b-2 border-sagnir-200"
                       : "hover:border-b-2 hover:border-sagnir-200"
