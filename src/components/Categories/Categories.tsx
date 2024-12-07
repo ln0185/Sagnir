@@ -19,8 +19,8 @@ export const Categories = ({ data, setClickedCategory }: CategoriesType) => {
 
     console.log("Category test", formattedCategory);
 
-    setActiveCategory(clickedCategory); // Set the active category
-    setClickedCategory(formattedCategory); // Update the parent state
+    setActiveCategory(clickedCategory);
+    setClickedCategory(formattedCategory);
   };
 
   return (

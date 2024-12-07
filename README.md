@@ -37,7 +37,7 @@ This project is an interactive application that brings Icelandic folklore to lif
 ### Prerequisites
 Make sure you have the following installed:
 - **Node.js**: [Download Node.js](https://nodejs.org/)
-- **npm** or **yarn**: Package manager
+- **npm**: Package manager
 
 ### Installation
 1. Clone the repository:
