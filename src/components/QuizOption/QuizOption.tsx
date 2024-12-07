@@ -1,7 +1,7 @@
 import React from "react";
 
 interface QuizOptionProps {
-  label: string; // "A", "B", "C", "D"
+  label: string;
   text: string;
   isSelected: boolean;
   isCorrect: boolean;
@@ -23,14 +23,14 @@ const QuizOption: React.FC<QuizOptionProps> = ({
     <button
       className={`w-full py-3 px-6 flex items-center text-left border rounded-lg transition-all duration-200 ${
         showCorrectAnswer
-          ? "bg-sagnir-200 border-sagnir-200 text-sagnir-100" // Highlight correct answer
+          ? "bg-sagnir-200 border-sagnir-200 text-sagnir-100"
           : isIncorrect
-          ? "bg-sagnir-100 border-sagnir-200 text-sagnir-200" // Highlight wrong answer
+          ? "bg-sagnir-100 border-sagnir-200 text-sagnir-200"
           : isSelected
           ? isCorrect
-            ? "bg-sagnir-100 border-sagnir-200 text-sagnir-100" // Selected and correct (text turns black)
-            : "bg-sagnir-100 border-sagnir-100 text-sagnir-200" // Selected but not correct
-          : "bg-sagnir-100 border-sagnir-200" // Default state
+            ? "bg-sagnir-100 border-sagnir-200 text-sagnir-100"
+            : "bg-sagnir-100 border-sagnir-100 text-sagnir-200"
+          : "bg-sagnir-100 border-sagnir-200"
       }`}
       onClick={onClick}
     >

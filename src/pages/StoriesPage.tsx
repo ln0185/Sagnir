@@ -84,7 +84,7 @@ export const StoriesPage = () => {
         <div className="sticky top-[190px] z-30 bg-sagnir-100">
           <Categories
             data={icelandicCategoryNames}
-            setClickedCategory={setClickedCategory} // Use an onClickHandler
+            setClickedCategory={setClickedCategory}
           />
         </div>
       ) : null}

@@ -32,7 +32,7 @@ export const SingleStoryPage = () => {
 
   return (
     <div className="bg-sagnir-100">
-      {/* ArrowLeft component triggers the goBack function */}
+      
       <ArrowLeft onClick={goback} />
 
       <div className="flex-col flex items-center mb-12">

@@ -22,7 +22,7 @@ type StoriesCardType = {
   categoryName: string | NavigateOptions;
 };
 
-export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
+export const StoriesCard = ({ data, categoryName }: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
   const [, setIsAllStories] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -53,7 +53,6 @@ export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
       ? categoryPhotos[categoryName.toLowerCase()] || categoryPhotos.default
       : categoryPhotos.default;
 
-  // Define the available stories for each category, particularly "alfa"
   const storyNavigations: Record<string, string> = {
     "Álfadrottning í álögum": "alfa-dr",
     "Álfafólkið í Loðmundarfirði": "a-lodmfj",
@@ -71,7 +70,6 @@ export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
 
   useEffect(() => {
     if (categoryName === "alfa" && data) {
-      // Filter the stories for the "alfa" category
       const alfaStories = Object.keys(storyNavigations).filter((story) =>
         [
           "Álfadrottning í álögum",
@@ -122,7 +120,6 @@ export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
     const storySlug = storyNavigations[story] || story;
 
     navigate(`/stories/${storyCategory}/${storySlug}`);
-    
   };
 
   if (!categoryStories || categoryStories.length === 0) {
@@ -134,7 +131,7 @@ export const StoriesCard = ({ data, categoryName}: StoriesCardType) => {
   return (
     <div className="bg-sagnir-100 flex flex-wrap flex-col justify-center w-full gap-4">
       {categoryStories
-        .slice(0, categoryName === "all" ? 12 : 3) // Show only 12 stories for "Allt"
+        .slice(0, categoryName === "all" ? 12 : 3)
         .map((story, index) => {
           const title = story?.replace(/[/]/g, "") || "Untitled";
           const photo = selectedPhotos[index] || "default-photo-path.svg";

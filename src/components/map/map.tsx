@@ -7,10 +7,10 @@ import "./map.css";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
-  iconUrl: "./marker.svg", // Path to your custom SVG marker
-  iconSize: [32, 32], // Size of the icon
-  iconAnchor: [16, 32], // Anchor point for the icon
-  popupAnchor: [0, -32], // Popup positioning relative to the icon
+  iconUrl: "./marker.svg",
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
 });
 
 // Geolocation Custom Icon
@@ -19,7 +19,7 @@ const geolocationIcon = L.icon({
   iconSize: [30, 30],
   iconAnchor: [15, 0],
 });
-// MarkerData interface for typing the markers
+
 interface MarkerData {
   id: number;
   position: [number, number];
@@ -28,7 +28,7 @@ interface MarkerData {
   description: string;
 }
 
-// List of markers to display on the map
+// List of markers
 const markers: MarkerData[] = [
   {
     id: 1,
@@ -198,8 +198,8 @@ const Map: React.FC = () => {
   return (
     <div className="relative w-full h-full">
       <MapContainer
-        center={[64.9631, -19.0208]} // Center of Iceland
-        zoom={6} // Zoom level
+        center={[64.9631, -19.0208]} 
+        zoom={6} 
         className="w-full h-full"
       >
         <TileLayer
@@ -209,11 +209,7 @@ const Map: React.FC = () => {
 
         {/* Render each marker */}
         {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            position={marker.position}
-            icon={customIcon} // Use the custom icon for each marker
-          >
+          <Marker key={marker.id} position={marker.position} icon={customIcon}>
             <Popup className="custom-popup">
               <div
                 onClick={() => handleStoryClick(marker.title, marker.category)}

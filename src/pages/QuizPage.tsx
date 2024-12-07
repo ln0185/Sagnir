@@ -19,7 +19,7 @@ export const QuizPage = () => {
       questionNumber: 1,
       totalQuestions: 5,
       questionText: "Hvar á landinu er Lagarfljót?",
-      imageSrc: Quiz1, // Add image path
+      imageSrc: Quiz1, 
       options: [
         { label: "A", text: "Hólmavík" },
         { label: "B", text: "Egilsstaðir" },

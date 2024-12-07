@@ -1,8 +1,8 @@
 import React from "react";
-import arrowImg from "/src/assets/resources/arrow left dm.svg"
+import arrowImg from "/src/assets/resources/arrow left dm.svg";
 
 interface ArrowLeftProps {
-  onClick: () => void; // Function to handle button click
+  onClick: () => void;
 }
 
 const ArrowLeft: React.FC<ArrowLeftProps> = ({ onClick }) => {
@@ -11,11 +11,8 @@ const ArrowLeft: React.FC<ArrowLeftProps> = ({ onClick }) => {
       <button
         onClick={onClick}
         className="w-38 h-21 flex items-center justify-center bg-transparent rounded-full hover:text-black transition"
-        >
-        <img
-          src={arrowImg}
-          className="w-38 h-21">
-        </img>
+      >
+        <img src={arrowImg} className="w-38 h-21"></img>
       </button>
     </div>
   );
