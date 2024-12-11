@@ -12,7 +12,7 @@ export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [isQuizCompleted, setIsQuizCompleted] = useState(false); // For modal
+  const [isQuizCompleted, setIsQuizCompleted] = useState(false); 
 
   const questions = [
     {
