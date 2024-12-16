@@ -42,8 +42,8 @@ Make sure you have the following installed:
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.comln0185/M4GroupProject/.git
-   cd M4GroupProject-app
+   git clone https://github.comln0185/Sagnir/.git
+   cd sagnir
 
 2. Install dependencies:
     

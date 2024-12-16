@@ -2,8 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import ArrowLeft from "../components/ArrowLeft/ArrowLeft";
 
-import image from "../../src/assets/resources/huldufolk 1.png"
-import listenImg from "/src/assets/resources/listen icon dark mode.svg"
+import image from "../../src/assets/resources/huldufolk 1.png";
+import listenImg from "/src/assets/resources/listen icon dark mode.svg";
 
 export const SingleStoryPage = () => {
   const { storyName, categoryName } = useParams();
@@ -32,7 +32,6 @@ export const SingleStoryPage = () => {
 
   return (
     <div className="bg-sagnir-100">
-      
       <ArrowLeft onClick={goback} />
 
       <div className="flex-col flex items-center mb-12">
@@ -49,11 +48,7 @@ export const SingleStoryPage = () => {
         </h2>
 
         {/* Listen Button */}
-        <img
-          src={listenImg}
-          alt="Listen icon"
-          className="w-10 h-10"
-        />
+        <img src={listenImg} alt="Listen icon" className="w-10 h-10" />
         <p className="text-sagnir-200 font-glare text-xs pt-4 pb-3 md:text-xl">
           Listen
         </p>
