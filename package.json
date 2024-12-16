@@ -1,8 +1,8 @@
 {
-  "name": "m4groupproject",
+  "name": "sagnir",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://ln0185.github.io/M4GroupProject/",
+  "homepage": "https://ln0185.github.io/Sagnir/",
   "type": "module",
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
