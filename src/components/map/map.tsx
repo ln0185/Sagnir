@@ -5,7 +5,7 @@ import L from "leaflet";
 import { useNavigate } from "react-router-dom";
 import "./map.css";
 
-// Custom Marker Icon
+
 const customIcon = new L.Icon({
   iconUrl: "./marker.svg",
   iconSize: [32, 32],
@@ -13,7 +13,7 @@ const customIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-// Geolocation Custom Icon
+
 const geolocationIcon = L.icon({
   iconUrl: "./geolocation.svg",
   iconSize: [30, 30],
@@ -28,7 +28,7 @@ interface MarkerData {
   description: string;
 }
 
-// List of markers
+
 const markers: MarkerData[] = [
   {
     id: 1,
@@ -125,7 +125,7 @@ const Map: React.FC = () => {
     null
   );
 
-  //fetching stories
+ 
   let navigate = useNavigate();
   function handleStoryClick(item: string, category: string) {
     if (category === "Huldufólk") {
@@ -176,7 +176,7 @@ const Map: React.FC = () => {
     navigate(`/stories/${category}/${item}`);
   }
 
-  // Geolocation logic
+ 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -207,7 +207,7 @@ const Map: React.FC = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
         />
 
-        {/* Render each marker */}
+       
         {markers.map((marker) => (
           <Marker key={marker.id} position={marker.position} icon={customIcon}>
             <Popup className="custom-popup">
@@ -236,7 +236,7 @@ const Map: React.FC = () => {
             </Popup>
           </Marker>
         ))}
-        {/* User's Geolocation Marker */}
+      
         {userPosition && (
           <Marker position={userPosition} icon={geolocationIcon}>
             <Popup className="custom-popup">
