@@ -12,8 +12,6 @@ function App() {
   return (
     <div className="h-full relative">
       <Router>
-        {/* Set the basename */}
-        {/* Routes for different pages */}
         <Routes>
           <Route path="/" element={<StoriesPage />} />
           <Route path="/stories" element={<StoriesPage />} />
@@ -30,7 +28,6 @@ function App() {
           <Route path="/map" element={<MapPage />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>
-        {/* Fixed Navbar */}
         <NavBar />
       </Router>
     </div>
