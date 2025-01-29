@@ -37,7 +37,7 @@ export const StoriesPage = () => {
   const categoryNames =
     allStories?.map(
       (category: StoriesCategoryArrayInterface) =>
-        categoryDisplayNames[category.category] || category.category // Display name mapping
+        categoryDisplayNames[category.category] || category.category 
     ) || [];
 
   const { data: selectedStories } = useQuery({
