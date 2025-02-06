@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
           <li
             onClick={() => {
               setActive("SearchPage");
-              setIsSearchOpen(true); // Open the search bar overlay
+              setIsSearchOpen(true);
             }}
           >
             <img
