@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
 
       <nav className="w-full bg-sagnir-100 fixed bottom-0 border-t border-s-sagnir-200">
         <ul className="flex justify-around items-center py-4">
-          {/* Stories Icon */}
+         
           <li onClick={() => setActive("StoriesPage")}>
             <Link to="/stories">
               <img
