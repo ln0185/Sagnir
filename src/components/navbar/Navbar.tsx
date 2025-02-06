@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Overlay Searchbar */}
+ 
       <Searchbar
         isSearchOpen={isSearchOpen}
         setIsSearchOpen={setIsSearchOpen}
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
 
-          {/* Search Icon */}
+          
           <li
             onClick={() => {
               setActive("SearchPage");
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
             />
           </li>
 
-          {/* Location Icon */}
+      
           <li onClick={() => setActive("MapPage")}>
             <Link to="/map">
               <img
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
 
-          {/* Quiz Icon */}
+         
           <li onClick={() => setActive("QuizPage")}>
             <Link to="/quiz">
               <img
