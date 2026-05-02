@@ -125,13 +125,13 @@ const Map = () => {
 
   function handleStoryClick(item: string, category: string) {
     if (category === "Huldufólk") {
-      category = "alfa";
+      category = "alfar-og-huldufolk";
     }
     if (category === "Helgisögur") {
-      category = "efra";
+      category = "ur-efra-og-nedra-helgisogur";
     }
     if (category === "Draugar") {
-      category = "draug";
+      category = "draugar";
     }
     if (category === "Tröll") {
       category = "troll";

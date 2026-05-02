@@ -1,6 +1,4 @@
-SAGNIR V2
-
-# Icelandic Folklore App
+# SAGNIR — Icelandic Folklore App
 
 This project is an interactive application that brings Icelandic folklore to life. Built using **React**, **NextJS**, **TypeScript**, and **Tailwind CSS**, the app includes a variety of features designed to immerse users in the rich tapestry of Iceland's mythical stories.
 
@@ -51,8 +49,8 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.comln0185/SagnirV2/.git
-   cd sagnirV2
+   git clone https://github.com/ln0185/Sagnir.git
+   cd sagnir
 
    ```
 
