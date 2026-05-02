@@ -1,8 +1,27 @@
 import fetch from "node-fetch";
 import { load } from "cheerio";
 
+/** Source index pages on Netútgáfan (static folklore HTML). */
+const THJOD_SOURCE_URLS = [
+  "https://netutgafan.snerpa.is/thjod/troll.htm",
+  "https://netutgafan.snerpa.is/thjod/draug.htm",
+  "https://netutgafan.snerpa.is/thjod/alfa.htm",
+  "https://netutgafan.snerpa.is/thjod/efra.htm",
+];
+
+/** Longer TTL: list changes rarely; reduces cold-load latency from 4 upstream fetches. */
+const CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+
 let cachedData = null;
-let cacheExpiration = Date.now();
+let cacheExpiration = 0;
+
+function extractCategoryPage(html) {
+  return load(html).extract({
+    category: { selector: "h1" },
+    stories: [{ selector: "a" }],
+    links: [{ selector: "a", value: "href" }],
+  });
+}
 
 export default async function handler(req, res) {
   if (cachedData && Date.now() < cacheExpiration) {
@@ -10,100 +29,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const [data1, data2, data3, data4] = await Promise.all([
-      fetch("https://netutgafan.snerpa.is/thjod/troll.htm")
-        .then((res) => res.text())
-        .then((html) => {
-          const json = load(html).extract({
-            category: {
-              selector: "h1",
-            },
-            stories: [
-              {
-                selector: "a",
-              },
-            ],
-            links: [
-              {
-                selector: "a",
-
-                value: "href",
-              },
-            ],
-          });
-
-          return json;
-        }),
-      fetch("https://netutgafan.snerpa.is/thjod/draug.htm")
-        .then((res) => res.text())
-        .then((html) => {
-          const json = load(html).extract({
-            category: {
-              selector: "h1",
-            },
-            stories: [
-              {
-                selector: "a",
-              },
-            ],
-            links: [
-              {
-                selector: "a",
-
-                value: "href",
-              },
-            ],
-          });
-
-          return json;
-        }),
-      fetch("https://netutgafan.snerpa.is/thjod/alfa.htm")
-        .then((res) => res.text())
-        .then((html) => {
-          const json = load(html).extract({
-            category: {
-              selector: "h1",
-            },
-            stories: [
-              {
-                selector: "a",
-              },
-            ],
-            links: [
-              {
-                selector: "a",
-
-                value: "href",
-              },
-            ],
-          });
-
-          return json;
-        }),
-      fetch("https://netutgafan.snerpa.is/thjod/efra.htm")
-        .then((res) => res.text())
-        .then((html) => {
-          const json = load(html).extract({
-            category: {
-              selector: "h1",
-            },
-            stories: [
-              {
-                selector: "a",
-              },
-            ],
-            links: [
-              {
-                selector: "a",
-
-                value: "href",
-              },
-            ],
-          });
-
-          return json;
-        }),
-    ]);
+    const [data1, data2, data3, data4] = await Promise.all(
+      THJOD_SOURCE_URLS.map((url) =>
+        fetch(url).then((r) => r.text()).then(extractCategoryPage)
+      )
+    );
 
     cachedData = [
       {
@@ -129,11 +59,13 @@ export default async function handler(req, res) {
       { category: "alfar-og-huldufolk", stories: data3 },
       { category: "ur-efra-og-nedra-helgisogur", stories: data4 },
     ];
-    cacheExpiration = Date.now() + 1000 * 60 * 5;
-    console.log("data1", data1);
-    res.status(200).json(cachedData);
+    cacheExpiration = Date.now() + CACHE_TTL_MS;
+    return res.status(200).json(cachedData);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error fetching data" });
+    console.error("[api/all]", error);
+    if (cachedData) {
+      return res.status(200).json(cachedData);
+    }
+    return res.status(500).json({ message: "Error fetching data" });
   }
 }
