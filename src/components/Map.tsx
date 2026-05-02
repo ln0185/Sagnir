@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import L from "leaflet";
 import { useRouter } from "next/navigation";
+import { mapMarkerStoryHref } from "../lib/storyUrls";
 
 const customIcon = new L.Icon({
   iconUrl: "/marker.svg",
@@ -123,53 +124,8 @@ const Map = () => {
   );
   const router = useRouter();
 
-  function handleStoryClick(item: string, category: string) {
-    if (category === "Huldufólk") {
-      category = "alfar-og-huldufolk";
-    }
-    if (category === "Helgisögur") {
-      category = "ur-efra-og-nedra-helgisogur";
-    }
-    if (category === "Draugar") {
-      category = "draugar";
-    }
-    if (category === "Tröll") {
-      category = "troll";
-    }
-    if (item === "Geirfuglasker") {
-      item = "geirfugl";
-    }
-    if (item === "Loðmundarfjörður") {
-      item = "a-lodmfj";
-    }
-    if (item === "Melstaðarkirkja") {
-      item = "jonas";
-    }
-    if (item === "Skaftafell") {
-      item = "einar-sk";
-    }
-    if (item === "Jórukleif") {
-      item = "jora";
-    }
-    if (item === "Eyvindarmúli") {
-      item = "gudm-eyv";
-    }
-    if (item === "Rafnkelsstaðir") {
-      item = "flugan";
-    }
-    if (item === "Snjóholt") {
-      item = "setta2";
-    }
-    if (item === "Reynisstaðarkirkja") {
-      item = "reynis";
-    }
-    if (item === "Húnavatnssýsla") {
-      item = "sat-nafn";
-    }
-    if (item === "Hruni") {
-      item = "hruna";
-    }
-    router.push(`/stories/${category}/${item}`);
+  function handleStoryClick(markerTitle: string, mapCategory: string) {
+    router.push(mapMarkerStoryHref(markerTitle, mapCategory));
   }
 
   useEffect(() => {
