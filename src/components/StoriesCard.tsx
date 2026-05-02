@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import photo1 from "../../public/resources/huldufolk 1.png";
 import photo2 from "../../public/resources/huldu1 1.png";
@@ -23,6 +23,35 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffledArray;
 };
 
+const storyNavigations: Record<string, string> = {
+  "Álfadrottning í álögum": "alfa-dr",
+  "Álfafólkið í Loðmundarfirði": "a-lodmfj",
+  "Álfakóngurinn í Seley": "seley",
+  "Ábæjar-Skotta": "skotta3",
+  "Átján draugar úr Blöndu": "18draug",
+  "Átján sendingar í senn": "18send",
+  "Átján Skólabræður": "18skolab",
+  "Andrarímur og Hallgrímsrímur": "andra",
+  "Bergþór Bláfellingur": "blafell",
+  Bakkastaður: "bakka",
+  "Brytinn í Skálholti": "brytinn",
+  "Dansinn í Hruna": "hruna",
+};
+
+const categoryNavigations: Record<string, string> = {
+  Allt: "all",
+  Tröll: "troll",
+  Draugar: "draugar",
+  "Álfar og Huldufólk": "alfa",
+  Helgisögur: "efra",
+};
+
+function storyHref(storyLink: string, categorySlug: string): string {
+  const categorySegment = categoryNavigations[categorySlug] || categorySlug;
+  const storySlug = storyNavigations[storyLink] || storyLink;
+  return `/stories/${categorySegment}/${storySlug}`;
+}
+
 type StoriesCardType = {
   data: {
     category: string;
@@ -44,7 +73,6 @@ type StoriesCardType = {
 export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
   const [categoryStories, setCategoryStories] = useState<string[]>([]);
   const [shuffledPhotos, setShuffledPhotos] = useState<StaticImageData[]>([]);
-  const router = useRouter();
   const visibleStories = categoryStories.length;
 
   const categoryPhotos: Record<string, StaticImageData[]> = {
@@ -61,21 +89,6 @@ export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
     setShuffledPhotos(shuffleArray(selectedPhotos));
   }, [categoryName, visibleStories]);
 
-  const storyNavigations: Record<string, string> = {
-    "Álfadrottning í álögum": "alfa-dr",
-    "Álfafólkið í Loðmundarfirði": "a-lodmfj",
-    "Álfakóngurinn í Seley": "seley",
-    "Ábæjar-Skotta": "skotta3",
-    "Átján draugar úr Blöndu": "18draug",
-    "Átján sendingar í senn": "18send",
-    "Átján Skólabræður": "18skolab",
-    "Andrarímur og Hallgrímsrímur": "andra",
-    "Bergþór Bláfellingur": "blafell",
-    Bakkastaður: "bakka",
-    "Brytinn í Skálholti": "brytinn",
-    "Dansinn í Hruna": "hruna",
-  };
-
   useEffect(() => {
     if (categoryName === "all" && data) {
       console.log(links);
@@ -85,22 +98,6 @@ export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
       setCategoryStories(catStories);
     }
   }, [data, categoryName]);
-
-  const handleStoryClick = (story: string, category: string) => {
-    const categoryNavigations: Record<string, string> = {
-      Allt: "all",
-      Tröll: "troll",
-      Draugar: "draugar",
-      "Álfar og Huldufólk": "alfa",
-      Helgisögur: "efra",
-    };
-
-    const storySlug = storyNavigations[story] || story;
-
-    router.push(
-      `/stories/${categoryNavigations[category] || category}/${storySlug}`
-    );
-  };
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   if (!categoryStories || categoryStories.length === 0) {
@@ -123,22 +120,25 @@ export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
             className="flex flex-col items-center w-full mx-auto"
           >
             <header className="relative w-full px-3">
-              <Image
-                src={photo}
-                alt={`Story ${title}`}
-                width={800}
-                height={500}
-                quality={isMobile ? 50 : 95}
-                priority={index === 0}
-                loading={"eager"}
-                className="w-full h-auto rounded-lg"
-              />
-              <h2
-                className="absolute bottom-2 left-4 text-sagnir-200 font-serifExtra text-2xl md:text-4xl xl:text-5xl px-2 py-1 rounded-md cursor-pointer"
-                onClick={() => handleStoryClick(links[index], categoryName)}
+              <Link
+                href={storyHref(links[index] ?? "", categoryName)}
+                className="relative block w-full cursor-pointer rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sagnir-200"
               >
-                {title}
-              </h2>
+                <Image
+                  src={photo}
+                  alt=""
+                  width={800}
+                  height={500}
+                  quality={isMobile ? 50 : 95}
+                  priority={index === 0}
+                  loading={"eager"}
+                  className="w-full h-auto rounded-lg"
+                  aria-hidden
+                />
+                <h2 className="absolute bottom-2 left-4 text-sagnir-200 font-serifExtra text-2xl md:text-4xl xl:text-5xl px-2 py-1 rounded-md">
+                  {title}
+                </h2>
+              </Link>
             </header>
           </figure>
         );
