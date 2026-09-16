@@ -13,6 +13,7 @@ import photo9 from "../../public/resources/hidden people 2.png";
 import photo10 from "../../public/resources/MYND5.png";
 import photo11 from "../../public/resources/gillitrut.png";
 import { useMediaQuery } from "../app/hooks/useMediaQuery";
+import { storyHref } from "../lib/storyUrls";
 
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffledArray = [...array];
@@ -22,35 +23,6 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   }
   return shuffledArray;
 };
-
-const storyNavigations: Record<string, string> = {
-  "Álfadrottning í álögum": "alfa-dr",
-  "Álfafólkið í Loðmundarfirði": "a-lodmfj",
-  "Álfakóngurinn í Seley": "seley",
-  "Ábæjar-Skotta": "skotta3",
-  "Átján draugar úr Blöndu": "18draug",
-  "Átján sendingar í senn": "18send",
-  "Átján Skólabræður": "18skolab",
-  "Andrarímur og Hallgrímsrímur": "andra",
-  "Bergþór Bláfellingur": "blafell",
-  Bakkastaður: "bakka",
-  "Brytinn í Skálholti": "brytinn",
-  "Dansinn í Hruna": "hruna",
-};
-
-const categoryNavigations: Record<string, string> = {
-  Allt: "all",
-  Tröll: "troll",
-  Draugar: "draugar",
-  "Álfar og Huldufólk": "alfa",
-  Helgisögur: "efra",
-};
-
-function storyHref(storyLink: string, categorySlug: string): string {
-  const categorySegment = categoryNavigations[categorySlug] || categorySlug;
-  const storySlug = storyNavigations[storyLink] || storyLink;
-  return `/stories/${categorySegment}/${storySlug}`;
-}
 
 type StoriesCardType = {
   data: {
@@ -91,7 +63,6 @@ export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
 
   useEffect(() => {
     if (categoryName === "all" && data) {
-      console.log(links);
       setCategoryStories(data.stories || []);
     } else if (!Array.isArray(data) && data.category !== "all") {
       const catStories = Object.values(data?.stories || {});
@@ -131,7 +102,7 @@ export const StoriesCard = ({ data, categoryName, links }: StoriesCardType) => {
                   height={500}
                   quality={isMobile ? 50 : 95}
                   priority={index === 0}
-                  loading={"eager"}
+                  loading={index === 0 ? "eager" : "lazy"}
                   className="w-full h-auto rounded-lg"
                   aria-hidden
                 />
