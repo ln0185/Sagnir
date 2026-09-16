@@ -143,7 +143,21 @@ const Map = () => {
         zoom={6}
         className="w-full h-full"
       >
-        <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+        <TileLayer
+          // CARTO dark tiles now require a free key, or they show "API key required".
+          // With NEXT_PUBLIC_CARTO_API_KEY: keep the old CARTO look.
+          // Without it: free Esri dark basemap (no key needed).
+          url={
+            process.env.NEXT_PUBLIC_CARTO_API_KEY
+              ? `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${process.env.NEXT_PUBLIC_CARTO_API_KEY}`
+              : "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+          }
+          attribution={
+            process.env.NEXT_PUBLIC_CARTO_API_KEY
+              ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              : "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ"
+          }
+        />
         {markers.map((marker) => (
           <Marker key={marker.id} position={marker.position} icon={customIcon}>
             <Popup className="custom-popup">
